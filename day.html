@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day Learning - FDE 30-Day Field Readiness</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="day-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">FDE 30-Day Field Readiness</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">ダッシュボード</a>
+                <a href="roadmap.html" class="nav-link">30日ロードマップ</a>
+                <a href="code-gym.html" class="nav-link">Code Reading Gym</a>
+                <a href="glossary.html" class="nav-link">用語集</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="day-container">
+        <div class="day-sidebar">
+            <div class="day-nav">
+                <h3>Day Navigation</h3>
+                <div class="day-nav-links" id="dayNavLinks"></div>
+            </div>
+            <div class="day-progress-box">
+                <h3>あなたの進捗</h3>
+                <div class="progress-circle-small">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" class="progress-bg"></circle>
+                        <circle cx="50" cy="50" r="45" class="progress-ring" id="sidebar-progress-ring"></circle>
+                    </svg>
+                    <div class="progress-percentage-small" id="sidebar-percentage">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="day-content" id="dayContent">
+            <!-- Content will be loaded dynamically -->
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="day-content.js"></script>
+    <script src="day.js"></script>
+</body>
+</html>

@@ -1,0 +1,545 @@
+/* IBM Design Language inspired styles */
+
+:root {
+    /* IBM Colors */
+    --ibm-blue: #0f62fe;
+    --ibm-blue-dark: #0043ce;
+    --ibm-blue-light: #4589ff;
+    --ibm-navy: #001d6c;
+    --ibm-gray-10: #f4f4f4;
+    --ibm-gray-20: #e0e0e0;
+    --ibm-gray-30: #c6c6c6;
+    --ibm-gray-50: #8d8d8d;
+    --ibm-gray-70: #525252;
+    --ibm-gray-90: #262626;
+    --ibm-gray-100: #161616;
+    
+    /* Semantic Colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f4f4f4;
+    --bg-tertiary: #e0e0e0;
+    --text-primary: #161616;
+    --text-secondary: #525252;
+    --text-tertiary: #8d8d8d;
+    --border: #e0e0e0;
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    
+    /* Typography */
+    --font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 1584px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+/* Navigation */
+.nav {
+    background: var(--ibm-gray-100);
+    border-bottom: 1px solid var(--ibm-gray-90);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1584px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+}
+
+.nav-brand {
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.16px;
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.nav-link {
+    color: var(--ibm-gray-30);
+    text-decoration: none;
+    font-size: 14px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.nav-link:hover {
+    color: white;
+    border-bottom-color: var(--ibm-blue);
+}
+
+.nav-link.active {
+    color: white;
+    border-bottom-color: var(--ibm-blue);
+}
+
+/* Hero */
+.hero {
+    background: linear-gradient(135deg, var(--ibm-navy) 0%, var(--ibm-blue-dark) 100%);
+    color: white;
+    padding: var(--spacing-2xl) 0;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 42px;
+    font-weight: 300;
+    margin-bottom: var(--spacing-md);
+    letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: var(--spacing-xl);
+    opacity: 0.9;
+}
+
+.hero-mission {
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 4px solid var(--ibm-blue-light);
+    padding: var(--spacing-lg);
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+/* Dashboard */
+.dashboard {
+    padding: var(--spacing-2xl) 0;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 400px;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.dashboard-section {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    padding: var(--spacing-lg);
+}
+
+.dashboard-section h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-primary);
+}
+
+.dashboard-section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Week Cards */
+.week-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.week-card {
+    background: var(--bg-secondary);
+    padding: var(--spacing-lg);
+    border-left: 4px solid var(--ibm-blue);
+    transition: all 0.2s;
+}
+
+.week-card:hover {
+    background: var(--bg-tertiary);
+    transform: translateX(4px);
+}
+
+.week-number {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ibm-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.16px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.week-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+
+.week-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--ibm-gray-20);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--ibm-blue);
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.week-link {
+    color: var(--ibm-blue);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    transition: color 0.2s;
+}
+
+.week-link:hover {
+    color: var(--ibm-blue-dark);
+}
+
+/* Today Card */
+.today-card {
+    background: var(--bg-secondary);
+    padding: var(--spacing-lg);
+    border-left: 4px solid var(--ibm-blue);
+    margin-bottom: var(--spacing-lg);
+}
+
+.today-day {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ibm-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.16px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.today-card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+
+.today-card p {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.today-goals {
+    background: white;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    border-left: 2px solid var(--ibm-blue-light);
+}
+
+.today-goals h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+
+.today-goals ul {
+    list-style: none;
+    padding: 0;
+}
+
+.today-goals li {
+    padding: var(--spacing-xs) 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.today-goals li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--ibm-blue);
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-family);
+}
+
+.btn-primary {
+    background: var(--ibm-blue);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--ibm-blue-dark);
+}
+
+/* Quick Actions */
+.quick-actions {
+    margin-top: var(--spacing-lg);
+}
+
+.quick-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+.quick-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+}
+
+.quick-link:hover {
+    background: var(--bg-tertiary);
+    border-left-color: var(--ibm-blue);
+}
+
+.quick-icon {
+    font-size: 24px;
+}
+
+/* Progress Section */
+.overall-progress {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.progress-circle {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto var(--spacing-md);
+    position: relative;
+}
+
+.progress-circle svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.progress-bg {
+    fill: none;
+    stroke: var(--ibm-gray-20);
+    stroke-width: 8;
+}
+
+.progress-ring {
+    fill: none;
+    stroke: var(--ibm-blue);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+.progress-percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ibm-blue);
+}
+
+.progress-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.stat-item {
+    text-align: center;
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+}
+
+.stat-number {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ibm-blue);
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.category-progress {
+    margin-top: var(--spacing-lg);
+}
+
+.category-item {
+    margin-bottom: var(--spacing-md);
+}
+
+.category-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Core Message */
+.core-message {
+    background: var(--bg-secondary);
+    padding: var(--spacing-2xl);
+    margin-top: var(--spacing-2xl);
+}
+
+.core-message h2 {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.message-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.message-card {
+    background: white;
+    padding: var(--spacing-lg);
+    border-left: 4px solid var(--ibm-blue);
+}
+
+.message-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    color: var(--ibm-blue);
+}
+
+.message-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Footer */
+.footer {
+    background: var(--ibm-gray-100);
+    color: var(--ibm-gray-30);
+    padding: var(--spacing-xl) 0;
+    text-align: center;
+    margin-top: var(--spacing-2xl);
+}
+
+.footer p {
+    font-size: 14px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer-note {
+    font-size: 12px;
+    color: var(--ibm-gray-50);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .message-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .hero-title {
+        font-size: 28px;
+    }
+    
+    .quick-links {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Made with Bob */

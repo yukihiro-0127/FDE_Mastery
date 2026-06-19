@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FDE 30-Day Field Readiness - IBM新人ブートキャンプ</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">FDE 30-Day Field Readiness</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">ダッシュボード</a>
+                <a href="roadmap.html" class="nav-link">30日ロードマップ</a>
+                <a href="code-gym.html" class="nav-link">Code Reading Gym</a>
+                <a href="glossary.html" class="nav-link">用語集</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="container">
+            <h1 class="hero-title">顧客課題を、技術論点と動く施策に変換する</h1>
+            <p class="hero-subtitle">IBM新人FDE・営業・アライアンス担当者向け 1ヶ月ブートキャンプ</p>
+            <div class="hero-mission">
+                <strong>"Turn ambiguity into working systems."</strong><br>
+                曖昧な顧客課題を、動く技術施策に変える。
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard">
+        <div class="container">
+            <div class="dashboard-grid">
+                <!-- 左: 30日ロードマップ -->
+                <div class="dashboard-section roadmap-preview">
+                    <h2>30日間の学習ロードマップ</h2>
+                    <div class="week-cards">
+                        <div class="week-card">
+                            <div class="week-number">Week 1</div>
+                            <h3>FDEの仕事と言語を理解する</h3>
+                            <div class="week-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="week1-progress" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text" id="week1-text">0/7 完了</span>
+                            </div>
+                            <a href="roadmap.html#week1" class="week-link">Week 1を見る →</a>
+                        </div>
+                        <div class="week-card">
+                            <div class="week-number">Week 2</div>
+                            <h3>コード読解の基礎</h3>
+                            <div class="week-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="week2-progress" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text" id="week2-text">0/7 完了</span>
+                            </div>
+                            <a href="roadmap.html#week2" class="week-link">Week 2を見る →</a>
+                        </div>
+                        <div class="week-card">
+                            <div class="week-number">Week 3</div>
+                            <h3>AI/RAG/データ連携の基礎</h3>
+                            <div class="week-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="week3-progress" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text" id="week3-text">0/7 完了</span>
+                            </div>
+                            <a href="roadmap.html#week3" class="week-link">Week 3を見る →</a>
+                        </div>
+                        <div class="week-card">
+                            <div class="week-number">Week 4</div>
+                            <h3>FDE実戦シミュレーション</h3>
+                            <div class="week-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="week4-progress" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text" id="week4-text">0/9 完了</span>
+                            </div>
+                            <a href="roadmap.html#week4" class="week-link">Week 4を見る →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 中央: 今日の学習 -->
+                <div class="dashboard-section today-learning">
+                    <h2>今日の学習</h2>
+                    <div class="today-card" id="today-card">
+                        <div class="today-day">Day 1</div>
+                        <h3>FDEとは何か</h3>
+                        <p>FDEの定義、役割、そして客先常駐コンサルとの違いを理解する。</p>
+                        <div class="today-goals">
+                            <h4>今日のゴール</h4>
+                            <ul>
+                                <li>FDEを一言で説明できる</li>
+                                <li>客先常駐コンサルとの違いを説明できる</li>
+                                <li>FDEが強くなる条件を理解する</li>
+                            </ul>
+                        </div>
+                        <a href="day.html?day=1" class="btn btn-primary">Day 1を始める</a>
+                    </div>
+
+                    <div class="quick-actions">
+                        <h3>クイックアクセス</h3>
+                        <div class="quick-links">
+                            <a href="code-gym.html" class="quick-link">
+                                <span class="quick-icon">📖</span>
+                                <span>Code Reading Gym</span>
+                            </a>
+                            <a href="fde-memo.html" class="quick-link">
+                                <span class="quick-icon">📝</span>
+                                <span>FDEメモ作成</span>
+                            </a>
+                            <a href="cases.html" class="quick-link">
+                                <span class="quick-icon">💼</span>
+                                <span>ケース演習</span>
+                            </a>
+                            <a href="glossary.html" class="quick-link">
+                                <span class="quick-icon">📚</span>
+                                <span>用語集</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右: 進捗とステータス -->
+                <div class="dashboard-section progress-section">
+                    <h2>あなたの進捗</h2>
+                    <div class="overall-progress">
+                        <div class="progress-circle">
+                            <svg viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" class="progress-bg"></circle>
+                                <circle cx="50" cy="50" r="45" class="progress-ring" id="overall-progress-ring"></circle>
+                            </svg>
+                            <div class="progress-percentage" id="overall-percentage">0%</div>
+                        </div>
+                        <p class="progress-label">全体進捗</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" id="completed-days">0</div>
+                            <div class="stat-label">完了日数</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="remaining-days">30</div>
+                            <div class="stat-label">残り日数</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="current-week">Week 1</div>
+                            <div class="stat-label">現在の週</div>
+                        </div>
+                    </div>
+
+                    <div class="category-progress">
+                        <h3>カテゴリ別進捗</h3>
+                        <div class="category-item">
+                            <span class="category-name">FDE理解</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="cat-fde" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="category-item">
+                            <span class="category-name">コード読解</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="cat-code" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="category-item">
+                            <span class="category-name">AI/RAG理解</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="cat-ai" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="category-item">
+                            <span class="category-name">実戦演習</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="cat-practice" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FDEの核心メッセージ -->
+            <div class="core-message">
+                <h2>このサイトで身につける核心</h2>
+                <div class="message-grid">
+                    <div class="message-card">
+                        <h3>FDEは、顧客先にいる人ではない</h3>
+                        <p>顧客の曖昧な課題を、技術で検証可能な成果に変え、自社のソリューションや再利用可能な勝ち筋に戻す人である。</p>
+                    </div>
+                    <div class="message-card">
+                        <h3>コードは、エンジニアになるためではない</h3>
+                        <p>顧客課題を技術論点に翻訳するために読む。完璧な実装者になる必要はない。</p>
+                    </div>
+                    <div class="message-card">
+                        <h3>1か月後のゴール</h3>
+                        <p>技術者・顧客・営業・パートナーの間で、論点を切り分けて会話できる新人FDEになること。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>FDE 30-Day Field Readiness - IBM新人ブートキャンプ</p>
+            <p class="footer-note">このサイトは教育目的で作成されています。機密情報は含まれていません。</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

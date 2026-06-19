@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用語集 - FDE Mastery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="glossary-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="glossary-header">
+        <div class="header-content">
+            <h1><i class="fas fa-book"></i> FDE用語集</h1>
+            <p>技術用語を営業・FDE視点で理解する</p>
+        </div>
+    </header>
+
+    <nav class="glossary-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i> ホーム</a>
+            <a href="roadmap.html" class="nav-link"><i class="fas fa-map"></i> ロードマップ</a>
+            <a href="code-gym.html" class="nav-link"><i class="fas fa-dumbbell"></i> Code Gym</a>
+            <a href="glossary.html" class="nav-link active"><i class="fas fa-book"></i> 用語集</a>
+        </div>
+    </nav>
+
+    <div class="glossary-container">
+        <aside class="glossary-sidebar">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="用語を検索...">
+            </div>
+
+            <div class="sidebar-section">
+                <h3>カテゴリー</h3>
+                <div class="category-filter">
+                    <button class="filter-btn active" data-category="all">すべて</button>
+                    <button class="filter-btn" data-category="ai">AI/機械学習</button>
+                    <button class="filter-btn" data-category="cloud">クラウド</button>
+                    <button class="filter-btn" data-category="data">データ</button>
+                    <button class="filter-btn" data-category="api">API/連携</button>
+                    <button class="filter-btn" data-category="security">セキュリティ</button>
+                    <button class="filter-btn" data-category="ibm">IBM製品</button>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>索引</h3>
+                <div class="alphabet-index">
+                    <button class="index-btn" data-letter="A">A</button>
+                    <button class="index-btn" data-letter="B">B</button>
+                    <button class="index-btn" data-letter="C">C</button>
+                    <button class="index-btn" data-letter="D">D</button>
+                    <button class="index-btn" data-letter="E">E</button>
+                    <button class="index-btn" data-letter="F">F</button>
+                    <button class="index-btn" data-letter="G">G</button>
+                    <button class="index-btn" data-letter="H">H</button>
+                    <button class="index-btn" data-letter="I">I</button>
+                    <button class="index-btn" data-letter="J">J</button>
+                    <button class="index-btn" data-letter="K">K</button>
+                    <button class="index-btn" data-letter="L">L</button>
+                    <button class="index-btn" data-letter="M">M</button>
+                    <button class="index-btn" data-letter="N">N</button>
+                    <button class="index-btn" data-letter="O">O</button>
+                    <button class="index-btn" data-letter="P">P</button>
+                    <button class="index-btn" data-letter="Q">Q</button>
+                    <button class="index-btn" data-letter="R">R</button>
+                    <button class="index-btn" data-letter="S">S</button>
+                    <button class="index-btn" data-letter="T">T</button>
+                    <button class="index-btn" data-letter="U">U</button>
+                    <button class="index-btn" data-letter="V">V</button>
+                    <button class="index-btn" data-letter="W">W</button>
+                    <button class="index-btn" data-letter="X">X</button>
+                    <button class="index-btn" data-letter="Y">Y</button>
+                    <button class="index-btn" data-letter="Z">Z</button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="glossary-main">
+            <div class="results-header">
+                <h2 id="results-title">すべての用語</h2>
+                <span id="results-count" class="results-count"></span>
+            </div>
+
+            <div id="terms-container" class="terms-container">
+                <!-- Terms will be dynamically loaded here -->
+            </div>
+
+            <div id="no-results" class="no-results" style="display: none;">
+                <i class="fas fa-search"></i>
+                <p>検索条件に一致する用語が見つかりませんでした。</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="glossary-data.js"></script>
+    <script src="glossary.js"></script>
+</body>
+</html>

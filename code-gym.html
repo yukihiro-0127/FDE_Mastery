@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Reading Gym - FDE Mastery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="code-gym-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="gym-header">
+        <div class="header-content">
+            <h1><i class="fas fa-dumbbell"></i> Code Reading Gym</h1>
+            <p>FDEに必要なコード読解力を鍛える</p>
+        </div>
+    </header>
+
+    <nav class="gym-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i> ホーム</a>
+            <a href="roadmap.html" class="nav-link"><i class="fas fa-map"></i> ロードマップ</a>
+            <a href="code-gym.html" class="nav-link active"><i class="fas fa-dumbbell"></i> Code Gym</a>
+            <a href="glossary.html" class="nav-link"><i class="fas fa-book"></i> 用語集</a>
+        </div>
+    </nav>
+
+    <div class="gym-container">
+        <aside class="gym-sidebar">
+            <div class="sidebar-section">
+                <h3>カテゴリー</h3>
+                <div class="category-list">
+                    <button class="category-btn active" data-category="json">
+                        <i class="fas fa-code"></i> JSON
+                    </button>
+                    <button class="category-btn" data-category="sql">
+                        <i class="fas fa-database"></i> SQL
+                    </button>
+                    <button class="category-btn" data-category="python">
+                        <i class="fab fa-python"></i> Python
+                    </button>
+                    <button class="category-btn" data-category="api">
+                        <i class="fas fa-plug"></i> API
+                    </button>
+                    <button class="category-btn" data-category="yaml">
+                        <i class="fas fa-file-code"></i> YAML
+                    </button>
+                    <button class="category-btn" data-category="logs">
+                        <i class="fas fa-file-alt"></i> Logs
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>難易度</h3>
+                <div class="difficulty-list">
+                    <label class="difficulty-option">
+                        <input type="checkbox" value="beginner" checked>
+                        <span>初級</span>
+                    </label>
+                    <label class="difficulty-option">
+                        <input type="checkbox" value="intermediate" checked>
+                        <span>中級</span>
+                    </label>
+                    <label class="difficulty-option">
+                        <input type="checkbox" value="advanced" checked>
+                        <span>上級</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>進捗</h3>
+                <div class="progress-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">完了した問題</span>
+                        <span class="stat-value" id="completed-count">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">正解率</span>
+                        <span class="stat-value" id="accuracy-rate">0%</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="gym-main">
+            <div class="exercise-header">
+                <h2 id="exercise-title">JSON読解演習</h2>
+                <div class="exercise-meta">
+                    <span class="difficulty-badge" id="difficulty-badge">初級</span>
+                    <span class="category-badge" id="category-badge">JSON</span>
+                </div>
+            </div>
+
+            <div class="exercise-content">
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-label">コード</span>
+                        <button class="btn-copy" onclick="copyCode()">
+                            <i class="fas fa-copy"></i> コピー
+                        </button>
+                    </div>
+                    <pre><code id="code-display"></code></pre>
+                </div>
+
+                <div class="question-section">
+                    <h3>問題</h3>
+                    <p id="question-text"></p>
+                </div>
+
+                <div class="answer-section">
+                    <h3>あなたの回答</h3>
+                    <textarea id="user-answer" rows="4" placeholder="ここに回答を入力してください..."></textarea>
+                    <div class="answer-buttons">
+                        <button class="btn-primary" onclick="checkAnswer()">
+                            <i class="fas fa-check"></i> 回答を確認
+                        </button>
+                        <button class="btn-secondary" onclick="showHint()">
+                            <i class="fas fa-lightbulb"></i> ヒント
+                        </button>
+                    </div>
+                </div>
+
+                <div class="feedback-section" id="feedback" style="display: none;"></div>
+
+                <div class="hint-section" id="hint" style="display: none;"></div>
+
+                <div class="explanation-section" id="explanation" style="display: none;">
+                    <h3>解説</h3>
+                    <div id="explanation-content"></div>
+                </div>
+            </div>
+
+            <div class="exercise-navigation">
+                <button class="btn-nav" onclick="previousExercise()">
+                    <i class="fas fa-arrow-left"></i> 前の問題
+                </button>
+                <button class="btn-nav" onclick="nextExercise()">
+                    次の問題 <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="code-gym-data.js"></script>
+    <script src="code-gym.js"></script>
+</body>
+</html>

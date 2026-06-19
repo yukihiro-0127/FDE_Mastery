@@ -1,0 +1,179 @@
+/* Roadmap Specific Styles */
+
+.roadmap-hero {
+    background: linear-gradient(135deg, var(--ibm-navy) 0%, var(--ibm-blue-dark) 100%);
+    color: white;
+    padding: var(--spacing-2xl) 0;
+    text-align: center;
+}
+
+.roadmap-hero h1 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+
+.roadmap-hero p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.roadmap-content {
+    padding: var(--spacing-2xl) 0;
+}
+
+.week-section {
+    margin-bottom: var(--spacing-2xl);
+    padding-bottom: var(--spacing-2xl);
+    border-bottom: 2px solid var(--border);
+}
+
+.week-section:last-child {
+    border-bottom: none;
+}
+
+.week-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--ibm-blue);
+}
+
+.week-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.week-meta {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.week-progress-text {
+    font-weight: 600;
+    color: var(--ibm-blue);
+}
+
+.day-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.day-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    padding: var(--spacing-lg);
+    transition: all 0.2s;
+    position: relative;
+}
+
+.day-card:hover {
+    border-color: var(--ibm-blue);
+    box-shadow: var(--shadow-md);
+}
+
+.day-card.completed {
+    background: var(--bg-secondary);
+    border-color: var(--ibm-blue);
+}
+
+.day-card.completed::after {
+    content: '✓';
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 32px;
+    height: 32px;
+    background: var(--ibm-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.day-number {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ibm-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.16px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.day-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+.day-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
+}
+
+.day-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.day-link {
+    color: var(--ibm-blue);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.day-link:hover {
+    color: var(--ibm-blue-dark);
+}
+
+.day-checkbox {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-secondary);
+    user-select: none;
+}
+
+.day-checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.day-checkbox:hover {
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+    .week-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+    
+    .day-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Made with Bob */

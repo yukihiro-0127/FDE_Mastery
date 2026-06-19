@@ -1,7 +1,7 @@
 // Day 1-30 Complete Content
 // 根源的理解と実践的洞察を重視
 
-const dayContents = {
+window.dayContents = {
     1: {
         title: 'FDEとは何か',
         subtitle: '職種名ではなく、能力セットとして理解する',
@@ -265,30 +265,444 @@ const dayContents = {
     
     4: {
         title: 'JSONを読む',
-        subtitle: 'API連携の基礎',
-        goals: ['JSONの構造を理解', 'APIレスポンスを読める', 'エラーの原因を特定できる'],
+        subtitle: 'データ交換フォーマットの歴史と実践',
+        goals: [
+            'JSONが生まれた歴史的背景を理解する',
+            'JSONの構造を完全に理解する',
+            'APIレスポンスを読んで問題を特定できる',
+            '実際のビジネスシーンでJSONを活用できる'
+        ],
         content: `
 <div class="content-section">
-    <h2>JSONの基本</h2>
-    <p>JSONは、APIのリクエスト・レスポンスで使われるデータ形式。</p>
-    <pre><code>{
-  "user_id": 12345,
+    <h2>JSONの歴史: なぜJSONが生まれたのか</h2>
+    
+    <div class="timeline-box">
+        <h3>データ交換の進化</h3>
+        <div class="timeline-item">
+            <h4>1990年代: XML全盛期</h4>
+            <p>Webサービスが登場した当初、データ交換にはXMLが使われていた。</p>
+            <pre><code><user>
+  <id>12345</id>
+  <name>山田太郎</name>
+  <tags>
+    <tag>VIP</tag>
+    <tag>企業顧客</tag>
+  </tags>
+</user></code></pre>
+            <p><strong>問題点:</strong> 冗長で読みにくい、パース（解析）が遅い、人間が書くのが大変</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2001年: JSONの誕生</h4>
+            <p>Douglas Crockfordが、JavaScriptのオブジェクト記法をデータ交換フォーマットとして提案。</p>
+            <pre><code>{
+  "id": 12345,
   "name": "山田太郎",
   "tags": ["VIP", "企業顧客"]
 }</code></pre>
+            <p><strong>革新点:</strong> シンプル、読みやすい、JavaScriptで直接扱える</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2010年代: JSON標準化</h4>
+            <p>REST APIの普及とともに、JSONがデファクトスタンダードに。</p>
+            <p><strong>理由:</strong> モバイルアプリの台頭で、軽量なデータ形式が必要になった</p>
+        </div>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 なぜJSONが勝ったのか</h4>
+        <p><strong>技術的理由:</strong> JavaScriptで直接扱える = Webブラウザで処理が速い</p>
+        <p><strong>ビジネス的理由:</strong> モバイルファーストの時代に、データ量が少ない = 通信コストが安い</p>
+        <p><strong>人間的理由:</strong> 読みやすい = デバッグが楽 = 開発速度が上がる</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>JSONの構造を完全理解する</h2>
+    
+    <h3>1. 基本データ型</h3>
+    <div class="code-explanation">
+        <pre><code>{
+  "文字列": "これは文字列です",
+  "数値": 12345,
+  "真偽値": true,
+  "null値": null,
+  "配列": [1, 2, 3],
+  "オブジェクト": {"key": "value"}
+}</code></pre>
+        <div class="explanation">
+            <p><strong>文字列:</strong> ダブルクォート必須（シングルクォート不可）</p>
+            <p><strong>数値:</strong> 整数も小数も同じ扱い</p>
+            <p><strong>真偽値:</strong> true/false（小文字のみ）</p>
+            <p><strong>null:</strong> 値が存在しないことを明示</p>
+        </div>
+    </div>
+    
+    <h3>2. 実際のAPIレスポンス例</h3>
+    <div class="code-explanation">
+        <pre><code>{
+  "status": "success",
+  "data": {
+    "user": {
+      "id": 12345,
+      "name": "山田太郎",
+      "email": "yamada@example.com",
+      "created_at": "2024-01-15T10:30:00Z",
+      "is_active": true,
+      "roles": ["admin", "editor"],
+      "profile": {
+        "company": "IBM",
+        "department": "FDE",
+        "projects": [
+          {
+            "id": 1,
+            "name": "顧客A RAG導入",
+            "status": "in_progress"
+          },
+          {
+            "id": 2,
+            "name": "顧客B PoC支援",
+            "status": "completed"
+          }
+        ]
+      }
+    }
+  },
+  "meta": {
+    "request_id": "abc-123",
+    "timestamp": "2024-01-20T15:45:00Z"
+  }
+}</code></pre>
+        <div class="explanation">
+            <h4>このJSONから読み取れること:</h4>
+            <ul>
+                <li><strong>status:</strong> APIリクエストが成功したか</li>
+                <li><strong>data.user.name:</strong> ユーザー名は「山田太郎」</li>
+                <li><strong>data.user.roles:</strong> 管理者権限と編集者権限を持つ</li>
+                <li><strong>data.user.profile.projects:</strong> 2つのプロジェクトに参加中</li>
+                <li><strong>meta.request_id:</strong> 問題発生時のトラブルシューティングに使用</li>
+            </ul>
+        </div>
+    </div>
+    
+    <h3>3. よくあるエラーパターン</h3>
+    <div class="error-patterns">
+        <div class="error-card">
+            <h4>❌ エラー1: カンマの位置</h4>
+            <pre><code>{
+  "name": "山田",
+  "age": 30,  ← 最後の要素にカンマは不要
+}</code></pre>
+            <p><strong>正解:</strong> 最後の要素の後にカンマを付けない</p>
+        </div>
+        
+        <div class="error-card">
+            <h4>❌ エラー2: シングルクォート</h4>
+            <pre><code>{
+  'name': 'yamada'  ← シングルクォートは使えない
+}</code></pre>
+            <p><strong>正解:</strong> 必ずダブルクォートを使う</p>
+        </div>
+        
+        <div class="error-card">
+            <h4>❌ エラー3: コメント</h4>
+            <pre><code>{
+  "name": "yamada"  // これはコメント ← コメントは書けない
+}</code></pre>
+            <p><strong>正解:</strong> JSONにはコメント機能がない</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>実践: FDEとしてJSONを読む</h2>
+    
+    <h3>シナリオ: 顧客のAPIエラーを調査</h3>
+    <div class="scenario-box">
+        <p><strong>状況:</strong> 顧客から「APIが動かない」と連絡が来た</p>
+        <p><strong>エラーレスポンス:</strong></p>
+        <pre><code>{
+  "status": "error",
+  "error": {
+    "code": "INVALID_TOKEN",
+    "message": "認証トークンが無効です",
+    "details": {
+      "token_expired_at": "2024-01-20T10:00:00Z",
+      "current_time": "2024-01-20T15:30:00Z"
+    }
+  },
+  "request_id": "xyz-789"
+}</code></pre>
+        
+        <div class="analysis">
+            <h4>FDEとしての読み方:</h4>
+            <ol>
+                <li><strong>status: "error"</strong> → APIリクエストが失敗している</li>
+                <li><strong>error.code: "INVALID_TOKEN"</strong> → 認証トークンの問題</li>
+                <li><strong>token_expired_at vs current_time</strong> → トークンが5時間30分前に期限切れ</li>
+                <li><strong>request_id: "xyz-789"</strong> → サポートに問い合わせる際に必要</li>
+            </ol>
+            
+            <h4>顧客への説明:</h4>
+            <p>「認証トークンの有効期限が切れています。トークンは10:00に期限切れになりましたが、現在15:30なので、新しいトークンを取得してください。」</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>JSONとビジネス</h2>
+    
+    <div class="business-context">
+        <h3>なぜFDEがJSONを読めないといけないのか</h3>
+        
+        <div class="reason-card">
+            <h4>理由1: API連携の設計</h4>
+            <p>顧客システムとIBM製品を連携させる際、どのデータをどう渡すかを設計する必要がある。</p>
+            <p><strong>例:</strong> 「顧客の既存システムから、ユーザー情報をどのJSON形式で受け取るか」</p>
+        </div>
+        
+        <div class="reason-card">
+            <h4>理由2: エラーの切り分け</h4>
+            <p>「動かない」と言われた時、JSONを読んでエラー原因を特定できる。</p>
+            <p><strong>例:</strong> 「認証エラーなのか、データ形式エラーなのか、サーバーエラーなのか」</p>
+        </div>
+        
+        <div class="reason-card">
+            <h4>理由3: 技術者との会話</h4>
+            <p>エンジニアと「このフィールドが必要」「この形式で返してほしい」と具体的に話せる。</p>
+            <p><strong>例:</strong> 「user.profile.company ではなく user.company_name で返してください」</p>
+        </div>
+    </div>
 </div>
         `,
-        quiz: [{question: 'JSONで配列を表すのは？', options: ['{ }', '[ ]', '( )', '< >'], correct: 1, explanation: 'JSONで配列は [ ] で表す。'}],
-        exercise: {title: 'JSONを読む', prompt: 'JSONからユーザー名を抽出せよ', sampleAnswer: '<div class="sample-answer"><p>data.user.name</p></div>'}
+        quiz: [
+            {
+                question: 'JSONが生まれた最大の理由は？',
+                options: [
+                    'XMLより見た目がきれいだから',
+                    'JavaScriptで直接扱えて、軽量だから',
+                    'Googleが推奨したから',
+                    'セキュリティが高いから'
+                ],
+                correct: 1,
+                explanation: 'JSONの最大の利点は、JavaScriptで直接扱える（パースが不要）ことと、XMLより軽量（データ量が少ない）こと。これがモバイル時代に重要だった。'
+            },
+            {
+                question: '次のJSONで、ユーザーの所属部署を取得するには？',
+                options: [
+                    'data.user.department',
+                    'data.user.profile.department',
+                    'user.profile.department',
+                    'profile.department'
+                ],
+                correct: 1,
+                explanation: 'JSONは階層構造なので、data → user → profile → department の順にアクセスする。'
+            },
+            {
+                question: 'APIエラーレスポンスで最初に確認すべきフィールドは？',
+                options: [
+                    'timestamp',
+                    'request_id',
+                    'status と error.code',
+                    'details'
+                ],
+                correct: 2,
+                explanation: '最初に status（成功/失敗）と error.code（エラーの種類）を確認することで、問題の大枠を把握できる。'
+            }
+        ],
+        exercise: {
+            title: '実践演習: 顧客にJSONエラーを説明する',
+            prompt: `顧客から以下のエラーが報告された。顧客に分かりやすく説明せよ。
+
+<pre><code>{
+  "status": "error",
+  "error": {
+    "code": "RATE_LIMIT_EXCEEDED",
+    "message": "API呼び出し回数の上限を超えました",
+    "details": {
+      "limit": 1000,
+      "used": 1523,
+      "reset_at": "2024-01-21T00:00:00Z"
+    }
+  }
+}</code></pre>`,
+            sampleAnswer: `
+<div class="sample-answer">
+    <h4>模範解答例</h4>
+    <p>「APIの呼び出し回数が上限を超えています。1日の上限は1000回ですが、現在1523回呼び出されています。上限は明日の0時にリセットされますので、それまでお待ちいただくか、上限の引き上げをご検討ください。」</p>
+    
+    <h4>技術者への説明</h4>
+    <p>「RATE_LIMIT_EXCEEDED エラーです。limit: 1000 に対して used: 1523 なので、523回オーバーしています。reset_at が明日0時なので、それまで待つか、リトライロジックを実装するか、プラン変更が必要です。」</p>
+</div>
+            `
+        },
+        nextSteps: [
+            'Code Gymで実際のAPIレスポンスを読む練習をする',
+            'Day 5でSQLを学び、データベースとAPIの関係を理解する',
+            '自分の担当案件で使われているAPIのドキュメントを読んでみる'
+        ]
     },
     
     5: {
         title: 'SQLを読む',
-        subtitle: 'データベース操作の理解',
-        goals: ['SELECT文を読める', 'JOIN操作を理解', 'WHERE条件を理解'],
-        content: `<div class="content-section"><h2>SQLの基本</h2><p>データベースからデータを取得するクエリ言語</p></div>`,
-        quiz: [{question: 'SQLでデータを取得するコマンドは？', options: ['GET', 'SELECT', 'FETCH', 'RETRIEVE'], correct: 1, explanation: 'SELECTでデータを取得する。'}],
-        exercise: {title: 'SQLを読む', prompt: 'SELECT文を解釈せよ', sampleAnswer: '<div class="sample-answer"><p>ユーザーテーブルから全データを取得</p></div>'}
+        subtitle: 'データベースの歴史から実践まで',
+        goals: [
+            'SQLが生まれた歴史的背景を理解する',
+            'SELECT、JOIN、WHEREを完全に理解する',
+            '実際のビジネスクエリを読んで意味を説明できる',
+            'パフォーマンス問題を発見できる'
+        ],
+        content: `
+<div class="content-section">
+    <h2>SQLの歴史: なぜSQLが生まれたのか</h2>
+    
+    <div class="timeline-box">
+        <h3>データベースの進化</h3>
+        <div class="timeline-item">
+            <h4>1960年代: ファイルシステム時代</h4>
+            <p>データは単純なファイルに保存されていた。</p>
+            <pre><code>user001.txt: 山田太郎,30,東京
+user002.txt: 佐藤花子,25,大阪</code></pre>
+            <p><strong>問題点:</strong> 検索が遅い、データの整合性が保てない、複数人で同時編集できない</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>1970年: リレーショナルモデルの誕生</h4>
+            <p>IBM研究員のEdgar F. Coddが、データを「表（テーブル）」で管理する概念を提案。</p>
+            <p><strong>革新点:</strong> データを構造化し、関係性（リレーション）で結びつける</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>1974年: SQLの誕生</h4>
+            <p>IBMがSEQUEL（後のSQL）を開発。「英語のような文法」でデータベースを操作できるように。</p>
+            <pre><code>SELECT name FROM users WHERE age > 25;</code></pre>
+            <p><strong>革新点:</strong> プログラマーでなくても、データを取得できる</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>1980年代〜現在: SQL標準化</h4>
+            <p>Oracle、MySQL、PostgreSQL、SQL Serverなど、様々なデータベースが登場。</p>
+            <p><strong>重要:</strong> 基本的なSQLは共通だが、各製品で方言（独自拡張）がある</p>
+        </div>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 なぜSQLが50年以上使われ続けているのか</h4>
+        <p><strong>技術的理由:</strong> リレーショナルモデルが、ビジネスデータの構造に最適</p>
+        <p><strong>ビジネス的理由:</strong> データの整合性を保証できる（お金の計算で重要）</p>
+        <p><strong>人間的理由:</strong> 英語のような文法で、非エンジニアでも理解しやすい</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>SQLの基本構造を完全理解する</h2>
+    
+    <h3>1. SELECT文の基本</h3>
+    <div class="code-explanation">
+        <pre><code>SELECT name, age, department
+FROM employees
+WHERE age >= 30
+ORDER BY age DESC
+LIMIT 10;</code></pre>
+        <div class="explanation">
+            <p><strong>SELECT:</strong> 取得したい列（カラム）を指定</p>
+            <p><strong>FROM:</strong> どのテーブルから取得するか</p>
+            <p><strong>WHERE:</strong> 条件を指定（フィルタリング）</p>
+            <p><strong>ORDER BY:</strong> 並び順を指定（DESC=降順、ASC=昇順）</p>
+            <p><strong>LIMIT:</strong> 取得する行数を制限</p>
+        </div>
+    </div>
+    
+    <h3>2. JOIN: テーブルを結合する</h3>
+    <div class="code-explanation">
+        <pre><code>SELECT
+    users.name,
+    orders.order_date,
+    orders.total_amount
+FROM users
+INNER JOIN orders ON users.id = orders.user_id
+WHERE orders.order_date >= '2024-01-01';</code></pre>
+        <div class="explanation">
+            <h4>このクエリの意味:</h4>
+            <p>「2024年1月1日以降に注文したユーザーの名前と、注文日、金額を取得」</p>
+            
+            <h4>JOINの種類:</h4>
+            <ul>
+                <li><strong>INNER JOIN:</strong> 両方のテーブルに存在するデータのみ</li>
+                <li><strong>LEFT JOIN:</strong> 左のテーブルは全て、右は一致するもののみ</li>
+                <li><strong>RIGHT JOIN:</strong> 右のテーブルは全て、左は一致するもののみ</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>実践: FDEとしてSQLを読む</h2>
+    
+    <h3>シナリオ: 顧客の業務クエリを理解する</h3>
+    <div class="scenario-box">
+        <p><strong>状況:</strong> 顧客が「このクエリが遅い」と相談してきた</p>
+        <pre><code>SELECT
+    c.customer_name,
+    COUNT(o.order_id) as order_count,
+    SUM(o.total_amount) as total_spent
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id
+WHERE o.order_date >= '2023-01-01'
+GROUP BY c.customer_id, c.customer_name
+HAVING SUM(o.total_amount) > 1000000
+ORDER BY total_spent DESC;</code></pre>
+        
+        <div class="analysis">
+            <h4>FDEとしての読み方:</h4>
+            <ol>
+                <li><strong>ビジネス的意味:</strong> 「2023年以降に100万円以上購入した顧客を、購入額の多い順に表示」</li>
+                <li><strong>パフォーマンス問題:</strong> WHERE句で order_date を使っているが、LEFT JOINなので全顧客をスキャン</li>
+                <li><strong>改善提案:</strong> INNER JOINに変更し、order_date にインデックスを追加</li>
+            </ol>
+        </div>
+    </div>
+</div>
+        `,
+        quiz: [
+            {
+                question: 'SQLが50年以上使われ続けている最大の理由は？',
+                options: [
+                    'IBMが作ったから',
+                    'リレーショナルモデルがビジネスデータに最適だから',
+                    '他に選択肢がないから',
+                    '学習コストが低いから'
+                ],
+                correct: 1,
+                explanation: 'リレーショナルモデル（表形式でデータを管理し、関係性で結びつける）が、ビジネスデータの構造に最適だったため、50年以上使われ続けている。'
+            },
+            {
+                question: '次のSQLの意味は？ SELECT COUNT(*) FROM users WHERE age >= 30;',
+                options: [
+                    '30歳以上のユーザーの名前を取得',
+                    '30歳以上のユーザーの数を取得',
+                    '30歳のユーザーを削除',
+                    '30歳以上のユーザーを更新'
+                ],
+                correct: 1,
+                explanation: 'COUNT(*) は行数をカウントする関数。WHERE age >= 30 で30歳以上に絞り込んでいるので、「30歳以上のユーザーの数」を取得する。'
+            }
+        ],
+        exercise: {
+            title: '実践演習: 顧客のSQLを読んで説明する',
+            prompt: '顧客から「このクエリの意味を教えてほしい」と言われた。ビジネス的な意味を説明せよ。',
+            sampleAnswer: `
+<div class="sample-answer">
+    <h4>模範解答例</h4>
+    <p>「このクエリは、2024年の売上トップ10商品を表示します。各商品について、販売個数と売上金額を集計し、売上金額の多い順に並べています。」</p>
+</div>
+            `
+        },
+        nextSteps: [
+            'Code GymでSQLクエリを読む練習をする',
+            'Day 6でPythonを学び、SQLとプログラミングの関係を理解する'
+        ]
     },
     
     6: {
@@ -302,11 +716,298 @@ const dayContents = {
     
     7: {
         title: 'Pythonを読む',
-        subtitle: 'AIコードの理解',
-        goals: ['Python基本構文', 'ライブラリの役割理解', 'エラーメッセージ解読'],
-        content: `<div class="content-section"><h2>Pythonの基本</h2><p>AI開発で最も使われる言語</p></div>`,
-        quiz: [{question: 'Pythonでリストを表すのは？', options: ['{ }', '[ ]', '( )', '< >'], correct: 1, explanation: 'Pythonでリストは [ ] で表す。'}],
-        exercise: {title: 'Pythonを読む', prompt: 'コードの動作を説明せよ', sampleAnswer: '<div class="sample-answer"><p>リストをループして処理</p></div>'}
+        subtitle: 'AI時代のプログラミング言語',
+        goals: [
+            'Pythonが生まれた歴史とAI時代に選ばれた理由を理解する',
+            'Python基本構文を完全に理解する',
+            'AIライブラリ（pandas, numpy）の役割を理解する',
+            '実際のAIコードを読んで説明できる'
+        ],
+        content: `
+<div class="content-section">
+    <h2>Pythonの歴史: なぜAI時代に選ばれたのか</h2>
+    
+    <div class="timeline-box">
+        <h3>Pythonの進化</h3>
+        <div class="timeline-item">
+            <h4>1991年: Pythonの誕生</h4>
+            <p>Guido van Rossumが、「読みやすく、書きやすい」言語として開発。</p>
+            <pre><code>print("Hello, World!")</code></pre>
+            <p><strong>設計思想:</strong> 「コードは書くより読まれることの方が多い」</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2000年代: 科学計算の台頭</h4>
+            <p>NumPy、SciPy、pandasなど、科学計算ライブラリが充実。</p>
+            <p><strong>理由:</strong> 研究者が使いやすい（C/C++より簡単、MATLABより安い）</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2010年代: 機械学習の標準言語に</h4>
+            <p>TensorFlow、PyTorch、scikit-learnなど、ML/AIライブラリが登場。</p>
+            <p><strong>決定的要因:</strong> Googleが TensorFlow をPythonで公開</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2020年代: AI時代の標準</h4>
+            <p>ChatGPT、LangChain、LlamaIndexなど、最新AI技術はPythonファースト。</p>
+            <p><strong>現状:</strong> AI開発者の90%以上がPythonを使用</p>
+        </div>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 なぜPythonがAI時代に選ばれたのか</h4>
+        <p><strong>技術的理由:</strong> 豊富なライブラリエコシステム（車輪の再発明不要）</p>
+        <p><strong>ビジネス的理由:</strong> 学習コストが低い = 人材確保が容易</p>
+        <p><strong>歴史的理由:</strong> 研究者が使っていた = 最新論文の実装がPythonで公開される</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Python基本構文を完全理解する</h2>
+    
+    <h3>1. 変数とデータ型</h3>
+    <div class="code-explanation">
+        <pre><code># 変数の定義（型宣言不要）
+name = "山田太郎"
+age = 30
+is_active = True
+scores = [85, 90, 78]
+user_info = {"name": "山田", "age": 30}</code></pre>
+        <div class="explanation">
+            <p><strong>文字列:</strong> シングルまたはダブルクォートで囲む</p>
+            <p><strong>数値:</strong> 整数も小数も同じ扱い</p>
+            <p><strong>真偽値:</strong> True/False（大文字始まり）</p>
+            <p><strong>リスト:</strong> [ ] で複数の値を格納</p>
+            <p><strong>辞書:</strong> { } でキーと値のペアを格納</p>
+        </div>
+    </div>
+    
+    <h3>2. 制御構文</h3>
+    <div class="code-explanation">
+        <pre><code># if文（インデントで構造を表現）
+if age >= 30:
+    print("30歳以上です")
+elif age >= 20:
+    print("20歳以上です")
+else:
+    print("20歳未満です")
+
+# forループ
+for score in scores:
+    print(f"スコア: {score}")
+
+# while文
+count = 0
+while count < 5:
+    print(count)
+    count += 1</code></pre>
+        <div class="explanation">
+            <p><strong>重要:</strong> Pythonはインデント（字下げ）で構造を表現</p>
+            <p><strong>if文:</strong> 条件分岐</p>
+            <p><strong>forループ:</strong> リストの各要素を処理</p>
+            <p><strong>whileループ:</strong> 条件が真の間、繰り返す</p>
+        </div>
+    </div>
+    
+    <h3>3. 関数の定義</h3>
+    <div class="code-explanation">
+        <pre><code>def calculate_average(scores):
+    """スコアの平均を計算する関数"""
+    total = sum(scores)
+    count = len(scores)
+    return total / count
+
+# 関数の呼び出し
+avg = calculate_average([85, 90, 78])
+print(f"平均: {avg}")</code></pre>
+        <div class="explanation">
+            <p><strong>def:</strong> 関数を定義</p>
+            <p><strong>"""...""":</strong> 関数の説明（docstring）</p>
+            <p><strong>return:</strong> 結果を返す</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>AIライブラリを理解する</h2>
+    
+    <h3>1. pandas: データ分析の基礎</h3>
+    <div class="code-explanation">
+        <pre><code>import pandas as pd
+
+# CSVファイルを読み込む
+df = pd.read_csv('users.csv')
+
+# データの確認
+print(df.head())  # 最初の5行を表示
+print(df.describe())  # 統計情報を表示
+
+# データの絞り込み
+active_users = df[df['is_active'] == True]
+high_scorers = df[df['score'] > 80]</code></pre>
+        <div class="explanation">
+            <h4>pandasの役割:</h4>
+            <p>表形式のデータ（CSV、Excel、SQLなど）を簡単に扱える</p>
+            <p><strong>FDEとして:</strong> 顧客データの品質確認、前処理に使う</p>
+        </div>
+    </div>
+    
+    <h3>2. numpy: 数値計算の基礎</h3>
+    <div class="code-explanation">
+        <pre><code>import numpy as np
+
+# 配列の作成
+scores = np.array([85, 90, 78, 92, 88])
+
+# 統計計算
+print(np.mean(scores))  # 平均
+print(np.std(scores))   # 標準偏差
+print(np.max(scores))   # 最大値</code></pre>
+        <div class="explanation">
+            <h4>numpyの役割:</h4>
+            <p>大量の数値データを高速に処理</p>
+            <p><strong>FDEとして:</strong> ベクトル計算、類似度計算の基礎</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>実践: FDEとしてAIコードを読む</h2>
+    
+    <h3>シナリオ: RAGのコードを理解する</h3>
+    <div class="scenario-box">
+        <p><strong>状況:</strong> エンジニアが書いたRAGのコードを確認する</p>
+        <pre><code>import pandas as pd
+from sentence_transformers import SentenceTransformer
+
+# ドキュメントを読み込む
+df = pd.read_csv('documents.csv')
+
+# ベクトル化モデルを初期化
+model = SentenceTransformer('all-MiniLM-L6-v2')
+
+# 各ドキュメントをベクトル化
+embeddings = model.encode(df['content'].tolist())
+
+# ベクトルをデータフレームに追加
+df['embedding'] = embeddings.tolist()
+
+# 保存
+df.to_csv('documents_with_embeddings.csv', index=False)</code></pre>
+        
+        <div class="analysis">
+            <h4>FDEとしての読み方:</h4>
+            <ol>
+                <li><strong>1-2行目:</strong> 必要なライブラリをインポート</li>
+                <li><strong>5行目:</strong> CSVファイルからドキュメントを読み込む</li>
+                <li><strong>8行目:</strong> ベクトル化モデルを初期化（all-MiniLM-L6-v2は軽量モデル）</li>
+                <li><strong>11行目:</strong> 各ドキュメントの内容をベクトルに変換</li>
+                <li><strong>14行目:</strong> ベクトルをデータフレームに追加</li>
+                <li><strong>17行目:</strong> 結果をCSVに保存</li>
+            </ol>
+            
+            <h4>顧客への説明:</h4>
+            <p>「このコードは、御社のドキュメントを機械が理解できる数値（ベクトル）に変換しています。これにより、キーワードではなく意味で検索できるようになります。」</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>よくあるエラーと対処法</h2>
+    
+    <div class="error-patterns">
+        <div class="error-card">
+            <h4>❌ IndentationError</h4>
+            <pre><code>def hello():
+print("Hello")  # インデントがない</code></pre>
+            <p><strong>原因:</strong> インデント（字下げ）が正しくない</p>
+            <p><strong>対処:</strong> 関数やif文の中は、必ず4スペースまたは1タブ字下げ</p>
+        </div>
+        
+        <div class="error-card">
+            <h4>❌ NameError: name 'pd' is not defined</h4>
+            <pre><code>df = pd.read_csv('data.csv')  # pdがインポートされていない</code></pre>
+            <p><strong>原因:</strong> ライブラリをインポートしていない</p>
+            <p><strong>対処:</strong> <code>import pandas as pd</code> を追加</p>
+        </div>
+        
+        <div class="error-card">
+            <h4>❌ KeyError: 'column_name'</h4>
+            <pre><code>df['column_name']  # 存在しない列名</code></pre>
+            <p><strong>原因:</strong> 指定した列名がデータフレームに存在しない</p>
+            <p><strong>対処:</strong> <code>df.columns</code> で列名を確認</p>
+        </div>
+    </div>
+</div>
+        `,
+        quiz: [
+            {
+                question: 'PythonがAI開発で選ばれた最大の理由は？',
+                options: [
+                    '実行速度が速いから',
+                    '豊富なAI/MLライブラリエコシステムがあるから',
+                    'Googleが作ったから',
+                    '無料だから'
+                ],
+                correct: 1,
+                explanation: 'Pythonの最大の強みは、TensorFlow、PyTorch、scikit-learnなど、豊富なAI/MLライブラリエコシステム。これにより、車輪の再発明をせずに最新技術を使える。'
+            },
+            {
+                question: '次のコードの出力は？ scores = [85, 90, 78]; print(len(scores))',
+                options: [
+                    '85',
+                    '90',
+                    '3',
+                    '253'
+                ],
+                correct: 2,
+                explanation: 'len() はリストの要素数を返す関数。scores には3つの要素があるので、3が出力される。'
+            },
+            {
+                question: 'pandasの主な用途は？',
+                options: [
+                    '画像処理',
+                    '表形式データの分析',
+                    'Web開発',
+                    'ゲーム開発'
+                ],
+                correct: 1,
+                explanation: 'pandasは表形式データ（CSV、Excel、SQLなど）の読み込み、加工、分析に特化したライブラリ。データ品質確認や前処理に必須。'
+            }
+        ],
+        exercise: {
+            title: '実践演習: Pythonコードを顧客に説明する',
+            prompt: `顧客から「このコードは何をしているの？」と聞かれた。非エンジニアに分かりやすく説明せよ。
+
+<pre><code>import pandas as pd
+
+df = pd.read_csv('customer_data.csv')
+high_value = df[df['purchase_amount'] > 100000]
+print(f"高額顧客数: {len(high_value)}")</code></pre>`,
+            sampleAnswer: `
+<div class="sample-answer">
+    <h4>模範解答例（顧客向け）</h4>
+    <p>「このコードは、顧客データのCSVファイルを読み込んで、購入金額が10万円を超える高額顧客を抽出し、その人数を表示しています。」</p>
+    
+    <h4>詳細説明（必要に応じて）</h4>
+    <ul>
+        <li><strong>1行目:</strong> pandasというデータ分析ライブラリを読み込む</li>
+        <li><strong>3行目:</strong> customer_data.csvファイルを読み込む</li>
+        <li><strong>4行目:</strong> purchase_amount（購入金額）が100,000を超える行だけを抽出</li>
+        <li><strong>5行目:</strong> 抽出された顧客の数を表示</li>
+    </ul>
+    
+    <h4>ビジネス的な意味</h4>
+    <p>「このコードを使えば、VIP顧客を自動的に特定できます。例えば、高額顧客だけに特別なキャンペーンを送る、といった施策に活用できます。」</p>
+</div>
+            `
+        },
+        nextSteps: [
+            'Code GymでPythonコードを読む練習をする',
+            'Day 8でAPIを学び、PythonでAPIを呼び出す方法を理解する',
+            '実際のAIプロジェクトのコードを読んでみる（GitHub等）'
+        ]
     },
     
     8: {

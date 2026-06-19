@@ -14,7 +14,7 @@ class DayContentManager {
     init() {
         this.loadDayContent();
         this.setupNavigation();
-        this.setupQuiz();
+        this.setupSidebarNavigation();
         this.updateProgress();
     }
     
@@ -232,6 +232,49 @@ class DayContentManager {
                 <a href="roadmap.html" class="btn-primary">ロードマップに戻る</a>
             </div>
         `;
+    }
+    
+    setupSidebarNavigation() {
+        const navContainer = document.getElementById('dayNavLinks');
+        const weeks = [
+            { name: 'Week 1', days: [1, 2, 3, 4, 5, 6, 7], title: 'FDE理解' },
+            { name: 'Week 2', days: [8, 9, 10, 11, 12, 13, 14, 15], title: 'コード読解とAI基礎' },
+            { name: 'Week 3', days: [16, 17, 18, 19, 20, 21, 22], title: '実装設計' },
+            { name: 'Week 4', days: [23, 24, 25, 26, 27, 28, 29, 30], title: '実戦演習' }
+        ];
+        
+        navContainer.innerHTML = weeks.map(week => `
+            <div class="week-nav">
+                <h4>${week.name}: ${week.title}</h4>
+                <div class="day-links">
+                    ${week.days.map(day => {
+                        const isCompleted = this.progressManager.isDayCompleted(day);
+                        const isCurrent = day === this.currentDay;
+                        return `
+                            <a href="day.html?day=${day}"
+                               class="day-link ${isCurrent ? 'current' : ''} ${isCompleted ? 'completed' : ''}">
+                                ${isCompleted ? '<i class="fas fa-check-circle"></i>' : '<i class="far fa-circle"></i>'}
+                                Day ${day}
+                            </a>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `).join('');
+        
+        // Update sidebar progress
+        const completedDays = this.progressManager.getCompletedDays().length;
+        const percentage = (completedDays / 30) * 100;
+        const progressRing = document.getElementById('sidebar-progress-ring');
+        const progressText = document.getElementById('sidebar-percentage');
+        
+        if (progressRing && progressText) {
+            const circumference = 2 * Math.PI * 45;
+            const offset = circumference - (percentage / 100) * circumference;
+            progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
+            progressRing.style.strokeDashoffset = offset;
+            progressText.textContent = `${Math.round(percentage)}%`;
+        }
     }
 }
 

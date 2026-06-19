@@ -41,8 +41,46 @@
             </div>
         </div>
 
-        <div class="day-content" id="dayContent">
-            <!-- Content will be loaded dynamically -->
+        <div class="day-content">
+            <div class="day-header">
+                <h1 id="day-number">Day 1</h1>
+                <h2 id="day-title">Loading...</h2>
+                <p id="day-subtitle" class="subtitle"></p>
+            </div>
+            
+            <div class="learning-goals">
+                <h3>学習目標</h3>
+                <ul id="learning-goals"></ul>
+            </div>
+            
+            <div id="main-content" class="main-content">
+                <!-- Content will be loaded dynamically -->
+            </div>
+            
+            <div class="quiz-section">
+                <h3>理解度チェック</h3>
+                <div id="quiz-container"></div>
+            </div>
+            
+            <div class="exercise-section">
+                <div id="exercise-container"></div>
+            </div>
+            
+            <div class="next-steps-section">
+                <div id="next-steps"></div>
+            </div>
+            
+            <div class="day-navigation">
+                <button id="prev-day" class="btn-secondary">
+                    <i class="fas fa-arrow-left"></i> 前の日
+                </button>
+                <button id="complete-day" class="btn-primary">
+                    <i class="far fa-circle"></i> 完了にする
+                </button>
+                <button id="next-day" class="btn-primary">
+                    次の日 <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
         </div>
     </div>
 

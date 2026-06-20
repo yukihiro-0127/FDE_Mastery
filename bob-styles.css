@@ -395,12 +395,65 @@
         font-size: 28px;
     }
 
+    .bob-content {
+        padding: 0 16px 60px;
+    }
+
     .bob-detail {
-        padding: 24px;
+        padding: 20px;
+        overflow-x: hidden;
+    }
+
+    .bob-detail h2 {
+        font-size: 24px;
+    }
+
+    .bob-detail h3 {
+        font-size: 20px;
+    }
+
+    .bob-detail h4 {
+        font-size: 18px;
     }
 
     .feature-grid {
         grid-template-columns: 1fr;
+    }
+
+    .bob-sections {
+        grid-template-columns: 1fr;
+    }
+
+    /* テーブルのレスポンシブ対応 */
+    .bob-detail table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* 拡張機能カードのレスポンシブ対応 */
+    .ext-card {
+        padding: 16px;
+    }
+
+    .extensions-overview {
+        padding: 16px;
+    }
+
+    .category-summary {
+        grid-template-columns: 1fr;
+    }
+
+    /* コード表示のレスポンシブ対応 */
+    pre {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* 画像のレスポンシブ対応 */
+    .bob-detail img {
+        max-width: 100%;
+        height: auto;
     }
 }
 

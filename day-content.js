@@ -181,66 +181,326 @@ window.dayContents = {
     },
     
     2: {
-        title: '客先常駐コンサルとの違い',
-        subtitle: '価値提供の構造から理解する',
+        title: 'コードとは何か',
+        subtitle: 'プログラミングの根本原理を理解する',
         goals: [
-            '両者の違いを顧客に説明できる',
-            'FDEが便利屋化しない条件を理解する',
-            'IBM文脈でのFDEの位置づけを理解する'
+            'コンピューターとコードが誕生した歴史を理解する',
+            'コードの種類と目的を網羅的に理解する',
+            'プログラミング言語の基本的な記号（/、{}、[]など）の意味を理解する',
+            'FDEとしてコードを読むための基礎を身につける'
         ],
         content: `
 <div class="content-section">
-    <h2>価値提供の構造比較</h2>
-    <p>客先常駐コンサルとFDEの最も本質的な違いは、<strong>ビジネスモデル</strong>にある。</p>
+    <h2>コンピューターとコードの誕生: なぜ人間は機械に命令を書くようになったのか</h2>
+    
+    <div class="timeline-box">
+        <h3>コンピューターとコードの歴史</h3>
+        <div class="timeline-item">
+            <h4>1940年代: 最初のコンピューター</h4>
+            <p>第二次世界大戦中、弾道計算や暗号解読のために、世界初の電子計算機ENIAC（1946年）が誕生。</p>
+            <p><strong>問題点:</strong> プログラムは物理的な配線で行う = 1つの計算をするために、何日もかけて配線を変更</p>
+            <div class="insight-box">
+                <p>💡 <strong>重要な気づき:</strong> 「計算手順を配線ではなく、データとして保存できないか？」→ これがコードの起源</p>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>1950年代: 機械語とアセンブリ言語</h4>
+            <p>コンピューターが直接理解できる「機械語」（0と1の羅列）が登場。</p>
+            <pre><code>10110000 01100001  # 機械語（人間には読めない）
+MOV AL, 61h        # アセンブリ言語（少し読みやすい）</code></pre>
+            <p><strong>問題点:</strong> 人間には理解しにくい、ミスが多い、生産性が低い</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>1950年代後半: 高級言語の誕生</h4>
+            <p>FORTRAN（1957年）、COBOL（1959年）など、人間が読み書きしやすい言語が登場。</p>
+            <pre><code>PRINT "Hello, World!"  # 英語のような文法</code></pre>
+            <p><strong>革新点:</strong> 人間が書いたコードを、コンパイラが機械語に翻訳する仕組み</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>1970年代: C言語とUNIX</h4>
+            <p>C言語（1972年）が登場し、オペレーティングシステム（OS）を書けるようになった。</p>
+            <p><strong>重要性:</strong> Windows、macOS、Linuxなど、現代のOSはすべてC言語の影響を受けている</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>1990年代: インターネットとWeb言語</h4>
+            <p>HTML（1991年）、JavaScript（1995年）が登場し、Webページを作れるようになった。</p>
+            <p><strong>革新点:</strong> コードを書けば、世界中の人がブラウザで見られる</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2000年代〜現在: クラウドとAI時代</h4>
+            <p>Python、Go、Rustなど、新しい目的に特化した言語が登場。</p>
+            <p><strong>現状:</strong> コードは「専門家のもの」から「誰もが使うツール」へ</p>
+        </div>
+    </div>
     
     <div class="insight-box">
-        <h4>💡 根源的な違い</h4>
-        <p><strong>客先常駐コンサル:</strong> 人月ビジネス（時間で課金）</p>
-        <p><strong>FDE:</strong> サブスクリプションビジネス（成果で課金）</p>
+        <h4>💡 なぜコードが必要なのか</h4>
+        <p><strong>本質:</strong> コードとは、「人間の意図をコンピューターに伝える言語」である</p>
+        <p><strong>比喩:</strong> 料理のレシピと同じ。「材料」と「手順」を書けば、誰でも同じ料理が作れる</p>
+        <p><strong>FDEとして:</strong> コードを読めることは、「システムが何をしているか」を理解する唯一の方法</p>
     </div>
 </div>
 
 <div class="content-section">
-    <h2>FDEが便利屋化するパターン</h2>
+    <h2>コードの種類: 何のために、どんなコードがあるのか</h2>
     
-    <div class="pattern-grid">
-        <div class="pattern-card bad">
-            <h4>パターン1: 何でも屋化</h4>
-            <p><strong>症状:</strong> 顧客の要望を何でも引き受ける</p>
-            <p><strong>対策:</strong> 「できること」と「やるべきこと」を区別する</p>
+    <div class="code-types">
+        <div class="code-type-card">
+            <h4>1. Webページを作るコード</h4>
+            <p><strong>言語:</strong> HTML、CSS、JavaScript</p>
+            <p><strong>目的:</strong> ブラウザで見えるページを作る</p>
+            <pre><code><h1>こんにちは</h1>  <!-- HTML: 構造 -->
+h1 { color: blue; }    /* CSS: 見た目 */
+alert("Hello!");       // JavaScript: 動き */</code></pre>
+            <p><strong>例:</strong> Amazon、YouTube、Googleなど、すべてのWebサイト</p>
         </div>
         
-        <div class="pattern-card bad">
-            <h4>パターン2: 長期滞在化</h4>
-            <p><strong>症状:</strong> 同じ顧客先に長期間滞在</p>
-            <p><strong>対策:</strong> 「いつまでに何を達成するか」を明確にする</p>
+        <div class="code-type-card">
+            <h4>2. サーバーで動くコード</h4>
+            <p><strong>言語:</strong> Python、Java、Node.js、Go</p>
+            <p><strong>目的:</strong> データを処理する、APIを提供する</p>
+            <pre><code>def get_user(user_id):
+    return database.query("SELECT * FROM users WHERE id = ?", user_id)</code></pre>
+            <p><strong>例:</strong> ログイン処理、決済処理、データ分析</p>
         </div>
+        
+        <div class="code-type-card">
+            <h4>3. データベースを操作するコード</h4>
+            <p><strong>言語:</strong> SQL</p>
+            <p><strong>目的:</strong> データを保存・取得・更新・削除する</p>
+            <pre><code>SELECT name, age FROM users WHERE age >= 30;</code></pre>
+            <p><strong>例:</strong> 顧客情報の管理、売上データの集計</p>
+        </div>
+        
+        <div class="code-type-card">
+            <h4>4. AIを動かすコード</h4>
+            <p><strong>言語:</strong> Python（TensorFlow、PyTorch）</p>
+            <p><strong>目的:</strong> 機械学習モデルを訓練・実行する</p>
+            <pre><code>model = ChatGPT()
+response = model.generate("こんにちは")</code></pre>
+            <p><strong>例:</strong> ChatGPT、画像認識、レコメンデーション</p>
+        </div>
+        
+        <div class="code-type-card">
+            <h4>5. インフラを管理するコード</h4>
+            <p><strong>言語:</strong> YAML、Terraform、Ansible</p>
+            <p><strong>目的:</strong> サーバーやネットワークを自動構築する</p>
+            <pre><code>server:
+  cpu: 4
+  memory: 16GB
+  disk: 100GB</code></pre>
+            <p><strong>例:</strong> クラウド環境の構築、サーバーの設定</p>
+        </div>
+        
+        <div class="code-type-card">
+            <h4>6. スマホアプリを作るコード</h4>
+            <p><strong>言語:</strong> Swift（iOS）、Kotlin（Android）、React Native</p>
+            <p><strong>目的:</strong> スマートフォンで動くアプリを作る</p>
+            <pre><code>Button("タップしてね") {
+    print("ボタンが押されました")
+}</code></pre>
+            <p><strong>例:</strong> LINE、Instagram、メルカリ</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>コードの基本的な記号: /、{}、[]、()の意味</h2>
+    
+    <div class="symbol-explanation">
+        <div class="symbol-card">
+            <h4>/ (スラッシュ)</h4>
+            <p><strong>用途1: パス区切り</strong></p>
+            <pre><code>/home/user/documents/file.txt  # Linuxのファイルパス
+https://example.com/api/users  # URLのパス</code></pre>
+            <p><strong>用途2: コメント（//）</strong></p>
+            <pre><code>// これはコメント（プログラムとして実行されない）
+int x = 10;  // 変数xに10を代入</code></pre>
+            <p><strong>用途3: 割り算</strong></p>
+            <pre><code>result = 10 / 2  # 結果は5</code></pre>
+        </div>
+        
+        <div class="symbol-card">
+            <h4>{} (波括弧・中括弧)</h4>
+            <p><strong>用途1: ブロック（処理のまとまり）</strong></p>
+            <pre><code>if (age >= 20) {
+    print("成人です");
+    print("お酒が飲めます");
+}</code></pre>
+            <p><strong>用途2: オブジェクト（JSONなど）</strong></p>
+            <pre><code>user = {
+    "name": "山田太郎",
+    "age": 30
+}</code></pre>
+        </div>
+        
+        <div class="symbol-card">
+            <h4>[] (角括弧)</h4>
+            <p><strong>用途1: 配列（リスト）</strong></p>
+            <pre><code>fruits = ["apple", "banana", "orange"]
+print(fruits[0])  # "apple"を表示</code></pre>
+            <p><strong>用途2: 配列の要素にアクセス</strong></p>
+            <pre><code>users[0]  # 最初のユーザー
+users[1]  # 2番目のユーザー</code></pre>
+        </div>
+        
+        <div class="symbol-card">
+            <h4>() (丸括弧)</h4>
+            <p><strong>用途1: 関数の引数</strong></p>
+            <pre><code>print("Hello")  # printという関数に"Hello"を渡す
+calculate(10, 20)  # calculateに10と20を渡す</code></pre>
+            <p><strong>用途2: 計算の優先順位</strong></p>
+            <pre><code>result = (10 + 5) * 2  # 括弧内を先に計算 → 30</code></pre>
+        </div>
+        
+        <div class="symbol-card">
+            <h4>; (セミコロン)</h4>
+            <p><strong>用途: 文の終わり</strong></p>
+            <pre><code>int x = 10;  # この文はここで終わり
+int y = 20;  # 次の文</code></pre>
+            <p><strong>注意:</strong> Python、Ruby、JavaScriptでは省略可能な場合が多い</p>
+        </div>
+        
+        <div class="symbol-card">
+            <h4>: (コロン)</h4>
+            <p><strong>用途1: キーと値の区切り（JSON、YAML）</strong></p>
+            <pre><code>name: "山田太郎"
+age: 30</code></pre>
+            <p><strong>用途2: ブロックの開始（Python）</strong></p>
+            <pre><code>if age >= 20:
+    print("成人です")</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>コードの考え方: プログラミングの3つの基本構造</h2>
+    
+    <div class="programming-concepts">
+        <div class="concept-card">
+            <h4>1. 順次処理（上から順番に実行）</h4>
+            <pre><code>name = "山田太郎"      # 1. 変数に名前を代入
+age = 30              # 2. 変数に年齢を代入
+print(name, age)      # 3. 名前と年齢を表示</code></pre>
+            <p><strong>考え方:</strong> 料理のレシピと同じ。上から順番に実行される。</p>
+        </div>
+        
+        <div class="concept-card">
+            <h4>2. 条件分岐（もし〜ならば）</h4>
+            <pre><code>if age >= 20:
+    print("成人です")
+else:
+    print("未成年です")</code></pre>
+            <p><strong>考え方:</strong> 「もし20歳以上なら成人、そうでなければ未成年」という判断。</p>
+        </div>
+        
+        <div class="concept-card">
+            <h4>3. 繰り返し（ループ）</h4>
+            <pre><code>for i in range(5):
+    print(i)  # 0, 1, 2, 3, 4 を表示</code></pre>
+            <p><strong>考え方:</strong> 同じ処理を何度も繰り返す。手作業でやると大変なことを自動化。</p>
+        </div>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 重要な気づき</h4>
+        <p>どんなに複雑なプログラムも、この3つの組み合わせで作られている。</p>
+        <p><strong>例:</strong> ChatGPTも、Googleも、Amazonも、すべて「順次処理」「条件分岐」「繰り返し」の組み合わせ。</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>FDEとしてコードを読むための心構え</h2>
+    
+    <div class="mindset-box">
+        <h4>1. 完璧に理解しようとしない</h4>
+        <p>最初から全部理解する必要はない。「このコードは何をしているか」の大枠を掴めればOK。</p>
+        
+        <h4>2. コメントと関数名を読む</h4>
+        <p>良いコードは、コメントと関数名だけで何をしているか分かる。</p>
+        <pre><code>// ユーザー情報を取得する関数
+function getUserInfo(userId) {
+    // データベースからユーザーを検索
+    return database.find(userId);
+}</code></pre>
+        
+        <h4>3. 実際に動かしてみる</h4>
+        <p>読むだけでなく、実際に動かして結果を見ることで理解が深まる。</p>
+        
+        <h4>4. 「なぜこのコードが必要か」を考える</h4>
+        <p>技術的な詳細より、「このコードがビジネス的に何を実現しているか」を理解する。</p>
     </div>
 </div>
         `,
         quiz: [
             {
-                question: 'FDEと客先常駐コンサルの最も本質的な違いは？',
+                question: 'コードが誕生した最大の理由は？',
                 options: [
-                    '滞在期間の長さ',
-                    '技術力の高さ',
-                    'ビジネスモデル（収益源）の違い',
-                    '顧客との距離感'
+                    '数学の計算を速くするため',
+                    '計算手順を配線ではなくデータとして保存するため',
+                    'ゲームを作るため',
+                    'インターネットを作るため'
+                ],
+                correct: 1,
+                explanation: '初期のコンピューター（ENIAC）は物理的な配線でプログラムを変更していた。「計算手順をデータとして保存できないか」という発想がコードの起源。'
+            },
+            {
+                question: '次の記号の意味は？ user["name"]',
+                options: [
+                    'userという関数を呼び出す',
+                    'userという配列の"name"番目の要素を取得',
+                    'userというオブジェクトの"name"というキーの値を取得',
+                    'エラー'
                 ],
                 correct: 2,
-                explanation: '最も本質的な違いは、ビジネスモデルである。この違いが、インセンティブ構造と行動原理を決定する。'
+                explanation: '[]は配列の要素にアクセスする記号。user["name"]は、userというオブジェクトの"name"というキーに対応する値を取得する。'
+            },
+            {
+                question: 'プログラミングの3つの基本構造に含まれないものは？',
+                options: [
+                    '順次処理',
+                    '条件分岐',
+                    '繰り返し',
+                    'データベース接続'
+                ],
+                correct: 3,
+                explanation: 'プログラミングの3つの基本構造は「順次処理」「条件分岐」「繰り返し」。データベース接続は応用的な機能。'
             }
         ],
         exercise: {
-            title: '実践演習: 顧客に違いを説明する',
-            prompt: '顧客から「FDEって、要するに客先常駐のSEですよね？」と言われた。どう返答するか？',
+            title: '実践演習: コードを読んで説明する',
+            prompt: `顧客から「このコードは何をしているの？」と聞かれた。非エンジニアに分かりやすく説明せよ。
+
+<pre><code>users = ["山田", "佐藤", "鈴木"]
+for user in users:
+    print("こんにちは、" + user + "さん")</code></pre>`,
             sampleAnswer: `
 <div class="sample-answer">
-    <h4>模範解答例</h4>
-    <p>「見た目は似ていますが、目的が違います。客先常駐SEは、御社のプロジェクトを完遂することが目的です。一方FDEは、御社の課題を解決しながら、その知見を業界全体の課題解決に活かすことが目的です。」</p>
+    <h4>模範解答例（顧客向け）</h4>
+    <p>「このコードは、3人のユーザー（山田さん、佐藤さん、鈴木さん）に対して、順番に挨拶メッセージを表示しています。」</p>
+    
+    <h4>詳細説明（必要に応じて）</h4>
+    <ul>
+        <li><strong>1行目:</strong> usersという変数に、3人の名前を格納</li>
+        <li><strong>2行目:</strong> forループで、usersの各要素を順番に処理</li>
+        <li><strong>3行目:</strong> 各ユーザーに対して「こんにちは、〇〇さん」と表示</li>
+    </ul>
+    
+    <h4>ビジネス的な意味</h4>
+    <p>「このような仕組みを使えば、1000人のユーザーに対しても、自動的にメッセージを送ることができます。手作業でやると大変ですが、コードなら一瞬です。」</p>
 </div>
             `
-        }
+        },
+        nextSteps: [
+            'Code Gymで実際にコードを書いて動かしてみる',
+            'Day 3で顧客課題の分解を学び、コードと業務の関係を理解する',
+            '身近なWebサイトのHTMLソースを見てみる（ブラウザの「ページのソースを表示」）'
+        ]
     },
     
     3: {
@@ -248,27 +508,149 @@ window.dayContents = {
         subtitle: '曖昧な要望を技術要件に変換する',
         goals: [
             '顧客の「やりたいこと」を3層に分解できる',
+            '表面的な要望から本質的な課題を見抜ける',
             '技術的制約を早期に発見できる',
-            '実現可能性を判断できる'
+            '実現可能性を判断し、顧客に説明できる'
         ],
         content: `
+<div class="content-section">
+    <h2>なぜ課題分解が重要なのか</h2>
+    
+    <div class="insight-box">
+        <h4>💡 FDEの最重要スキル</h4>
+        <p>顧客は「AIを導入したい」「効率化したい」と言うが、それは<strong>手段</strong>であって<strong>目的</strong>ではない。</p>
+        <p>FDEの仕事は、<strong>「本当に解決すべき課題は何か」を見抜くこと</strong>である。</p>
+        <p><strong>例:</strong> 「AIで効率化したい」→ 本当は「ベテラン社員の知識が属人化している」</p>
+    </div>
+    
+    <div class="real-example">
+        <h4>実例: 失敗するプロジェクトのパターン</h4>
+        <p><strong>顧客:</strong> 「AIチャットボットを導入したい」</p>
+        <p><strong>悪いFDE:</strong> 「分かりました。どのAI技術を使いますか？」→ そのまま実装</p>
+        <p><strong>結果:</strong> チャットボットは完成したが、誰も使わない。なぜなら、本当の課題は「問い合わせが多すぎる」ではなく「FAQが整理されていない」だったから。</p>
+        
+        <p><strong>良いFDE:</strong> 「なぜチャットボットが必要だと思われましたか？」→ 課題を深掘り</p>
+        <p><strong>結果:</strong> まずFAQを整理し、その上でチャットボットを導入。利用率80%超え。</p>
+    </div>
+</div>
+
 <div class="content-section">
     <h2>課題分解の3層構造</h2>
     
     <div class="layer-structure">
-        <div class="layer">
-            <h4>Layer 1: ビジネス課題</h4>
-            <p>顧客が本当に解決したいこと</p>
+        <div class="layer layer1">
+            <h4>Layer 1: ビジネス課題（Why）</h4>
+            <p><strong>問い:</strong> 顧客が本当に解決したいことは何か？</p>
+            <p><strong>例:</strong> 「売上が伸びない」「コストが高すぎる」「顧客満足度が低い」</p>
+            <p><strong>FDEの役割:</strong> 表面的な要望の裏にある、本質的な課題を見抜く</p>
         </div>
         
-        <div class="layer">
-            <h4>Layer 2: 業務要件</h4>
-            <p>なぜその課題が起きているのか</p>
+        <div class="layer layer2">
+            <h4>Layer 2: 業務要件（What）</h4>
+            <p><strong>問い:</strong> なぜその課題が起きているのか？</p>
+            <p><strong>例:</strong> 「属人化している」「手作業が多い」「データが分散している」</p>
+            <p><strong>FDEの役割:</strong> 現場を観察し、課題の根本原因を特定する</p>
         </div>
         
-        <div class="layer">
-            <h4>Layer 3: 技術要件</h4>
-            <p>どの技術で、どう実現するか</p>
+        <div class="layer layer3">
+            <h4>Layer 3: 技術要件（How）</h4>
+            <p><strong>問い:</strong> どの技術で、どう実現するか？</p>
+            <p><strong>例:</strong> 「RAGで知識を検索可能にする」「RPAで手作業を自動化」</p>
+            <p><strong>FDEの役割:</strong> 技術的な実現可能性を判断し、最適な解決策を提案する</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>実践: 課題分解の具体例</h2>
+    
+    <div class="case-study">
+        <h4>ケース1: 「AIで効率化したい」</h4>
+        <div class="analysis-steps">
+            <div class="step">
+                <h5>Step 1: 表面的な要望</h5>
+                <p>顧客: 「AIを使って業務を効率化したい」</p>
+            </div>
+            
+            <div class="step">
+                <h5>Step 2: Layer 1を特定（Why）</h5>
+                <p>FDE: 「効率化とは、具体的にどの業務のことですか？」</p>
+                <p>顧客: 「契約書のチェックに時間がかかりすぎている」</p>
+                <p><strong>→ ビジネス課題: 契約書チェックに時間がかかる</strong></p>
+            </div>
+            
+            <div class="step">
+                <h5>Step 3: Layer 2を特定（What）</h5>
+                <p>FDE: 「なぜ時間がかかるのですか？」</p>
+                <p>顧客: 「法務部の担当者が1人しかいない。過去の契約書を探すのに時間がかかる」</p>
+                <p><strong>→ 業務要件: 属人化、過去データの検索が困難</strong></p>
+            </div>
+            
+            <div class="step">
+                <h5>Step 4: Layer 3を設計（How）</h5>
+                <p>FDE: 「過去の契約書をRAGで検索可能にし、類似条項を自動提案するシステムを作りましょう」</p>
+                <p><strong>→ 技術要件: RAG + 契約書データベース + 類似検索</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>課題分解で使える質問テンプレート</h2>
+    
+    <div class="question-templates">
+        <div class="template-card">
+            <h4>Layer 1を特定する質問</h4>
+            <ul>
+                <li>「なぜそれが必要だと思われましたか？」</li>
+                <li>「それができないと、どんな問題が起きますか？」</li>
+                <li>「最終的に何を実現したいのですか？」</li>
+            </ul>
+        </div>
+        
+        <div class="template-card">
+            <h4>Layer 2を特定する質問</h4>
+            <ul>
+                <li>「現在はどのように対応していますか？」</li>
+                <li>「なぜその問題が起きているのですか？」</li>
+                <li>「誰が、どのくらいの時間をかけていますか？」</li>
+            </ul>
+        </div>
+        
+        <div class="template-card">
+            <h4>Layer 3を設計する質問</h4>
+            <ul>
+                <li>「既存システムとの連携は必要ですか？」</li>
+                <li>「セキュリティ要件はありますか？」</li>
+                <li>「いつまでに、どのレベルで実現したいですか？」</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>よくある失敗パターンと対策</h2>
+    
+    <div class="failure-patterns">
+        <div class="failure-card">
+            <h4>❌ 失敗パターン1: 技術から入る</h4>
+            <p><strong>症状:</strong> 「どのAI技術を使いますか？」と最初に聞く</p>
+            <p><strong>問題:</strong> ビジネス課題を理解せずに技術を選ぶと、的外れな解決策になる</p>
+            <p><strong>対策:</strong> 必ずLayer 1（Why）から始める</p>
+        </div>
+        
+        <div class="failure-card">
+            <h4>❌ 失敗パターン2: 顧客の言葉をそのまま受け取る</h4>
+            <p><strong>症状:</strong> 「AIチャットボットが欲しい」→ そのまま作る</p>
+            <p><strong>問題:</strong> 顧客は解決策を知らないことが多い</p>
+            <p><strong>対策:</strong> 「なぜそれが必要か」を必ず聞く</p>
+        </div>
+        
+        <div class="failure-card">
+            <h4>❌ 失敗パターン3: 完璧を目指しすぎる</h4>
+            <p><strong>症状:</strong> 「全部自動化しましょう」と提案する</p>
+            <p><strong>問題:</strong> スコープが大きすぎて、いつまでも完成しない</p>
+            <p><strong>対策:</strong> 「まず80%を解決する最小限の実装」から始める</p>
         </div>
     </div>
 </div>

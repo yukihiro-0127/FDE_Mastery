@@ -10,29 +10,29 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="glossary-header">
-        <div class="header-content">
-            <h1><i class="fas fa-book"></i> FDE用語集</h1>
-            <p>技術用語を営業・FDE視点で理解する</p>
-        </div>
-    </header>
-
-    <nav class="glossary-nav">
+    <nav class="nav">
         <div class="nav-container">
+            <a href="index.html" class="nav-brand">FDE 30-Day Field Readiness</a>
             <button class="hamburger" id="hamburger" aria-label="メニュー">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             <div class="nav-links" id="navLinks">
-                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> FDE 30-Day</a>
-                <a href="roadmap.html" class="nav-link"><i class="fas fa-map"></i> ロードマップ</a>
-                <a href="code-gym.html" class="nav-link"><i class="fas fa-dumbbell"></i> Code Gym</a>
-                <a href="glossary.html" class="nav-link active"><i class="fas fa-book"></i> 用語集</a>
-                <a href="bob.html" class="nav-link"><i class="fas fa-robot"></i> Bob</a>
+                <a href="roadmap.html" class="nav-link">30日ロードマップ</a>
+                <a href="code-gym.html" class="nav-link">Code Reading Gym</a>
+                <a href="glossary.html" class="nav-link active">用語集</a>
+                <a href="bob.html" class="nav-link">Bob</a>
             </div>
         </div>
     </nav>
+
+    <header class="glossary-header">
+        <div class="header-content">
+            <h1><i class="fas fa-book"></i> FDE用語集</h1>
+            <p>技術用語を営業・FDE視点で理解する</p>
+        </div>
+    </header>
 
     <div class="glossary-container">
         <aside class="glossary-sidebar">
@@ -104,6 +104,7 @@
         </main>
     </div>
 
+    <script src="app.js"></script>
     <script src="glossary-data.js"></script>
     <script src="glossary.js"></script>
 </body>

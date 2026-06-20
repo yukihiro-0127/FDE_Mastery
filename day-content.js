@@ -195,46 +195,135 @@ window.dayContents = {
     
     <div class="timeline-box">
         <h3>コンピューターとコードの歴史</h3>
+        
         <div class="timeline-item">
-            <h4>1940年代: 最初のコンピューター</h4>
-            <p>第二次世界大戦中、弾道計算や暗号解読のために、世界初の電子計算機ENIAC（1946年）が誕生。</p>
-            <p><strong>問題点:</strong> プログラムは物理的な配線で行う = 1つの計算をするために、何日もかけて配線を変更</p>
+            <h4>1940年代: 最初のコンピューター - 配線プログラミングの時代</h4>
+            <p>第二次世界大戦中、弾道計算や暗号解読のために、世界初の電子計算機ENIAC（1946年、ペンシルベニア大学）が誕生。重さ30トン、18,000本の真空管を使用。</p>
+            <p><strong>プログラミング方法:</strong> 物理的なケーブルとスイッチを手作業で接続し直す。1つのプログラムを変更するのに数日〜数週間かかった。</p>
+            <p><strong>問題点:</strong></p>
+            <ul>
+                <li>プログラム変更に膨大な時間がかかる</li>
+                <li>配線ミスが頻発する</li>
+                <li>同じ計算を別のコンピューターで実行できない</li>
+            </ul>
             <div class="insight-box">
-                <p>💡 <strong>重要な気づき:</strong> 「計算手順を配線ではなく、データとして保存できないか？」→ これがコードの起源</p>
+                <p>💡 <strong>革命的な発想:</strong> 「計算手順を配線ではなく、データとして保存できないか？」→ これがコードの起源。ジョン・フォン・ノイマンが「プログラム内蔵方式」を提案（1945年）。</p>
             </div>
         </div>
         
         <div class="timeline-item">
-            <h4>1950年代: 機械語とアセンブリ言語</h4>
-            <p>コンピューターが直接理解できる「機械語」（0と1の羅列）が登場。</p>
-            <pre><code>10110000 01100001  # 機械語（人間には読めない）
-MOV AL, 61h        # アセンブリ言語（少し読みやすい）</code></pre>
-            <p><strong>問題点:</strong> 人間には理解しにくい、ミスが多い、生産性が低い</p>
+            <h4>1950年代前半: 機械語 - コンピューターの母国語</h4>
+            <p><strong>機械語とは:</strong> コンピューターが直接理解できる、0と1の羅列。CPUの命令セットに対応。</p>
+            <pre><code>10110000 01100001  # レジスタALに97（'a'のASCIIコード）を代入
+00000100 00000001  # レジスタALに1を加算</code></pre>
+            <p><strong>問題点:</strong></p>
+            <ul>
+                <li>人間には全く読めない（16進数でも難しい）</li>
+                <li>1命令ずつ書くため、生産性が極めて低い</li>
+                <li>CPU が変わると全て書き直し</li>
+                <li>バグの発見が困難</li>
+            </ul>
+            <p><strong>実例:</strong> 「Hello, World!」を表示するだけで数十行の機械語が必要。</p>
         </div>
         
         <div class="timeline-item">
-            <h4>1950年代後半: 高級言語の誕生</h4>
-            <p>FORTRAN（1957年）、COBOL（1959年）など、人間が読み書きしやすい言語が登場。</p>
-            <pre><code>PRINT "Hello, World!"  # 英語のような文法</code></pre>
-            <p><strong>革新点:</strong> 人間が書いたコードを、コンパイラが機械語に翻訳する仕組み</p>
+            <h4>1950年代中盤: アセンブリ言語 - 人間が読める最低レベル</h4>
+            <p><strong>アセンブリ言語とは:</strong> 機械語に1対1で対応する、人間が読める記号（ニーモニック）を使った言語。</p>
+            <pre><code>MOV AL, 61h    ; レジスタALに97を代入
+ADD AL, 1      ; レジスタALに1を加算
+INT 21h        ; DOS割り込みを呼び出し</code></pre>
+            <p><strong>革新点:</strong></p>
+            <ul>
+                <li>機械語より読みやすい（MOV = Move、ADD = Add）</li>
+                <li>アセンブラが自動的に機械語に変換</li>
+                <li>コメントを書ける</li>
+            </ul>
+            <p><strong>問題点:</strong></p>
+            <ul>
+                <li>依然としてCPU依存（Intel用とARM用で全く違う）</li>
+                <li>低レベルすぎて、複雑なプログラムは書けない</li>
+                <li>生産性が低い（1000行書いても簡単な処理しかできない）</li>
+            </ul>
+            <p><strong>現在の用途:</strong> OSのカーネル、デバイスドライバ、組み込みシステムなど、速度が最重要な部分のみ。</p>
         </div>
         
         <div class="timeline-item">
-            <h4>1970年代: C言語とUNIX</h4>
-            <p>C言語（1972年）が登場し、オペレーティングシステム（OS）を書けるようになった。</p>
-            <p><strong>重要性:</strong> Windows、macOS、Linuxなど、現代のOSはすべてC言語の影響を受けている</p>
+            <h4>1950年代後半: 高級言語の誕生 - 人間の言葉に近づく</h4>
+            <p><strong>FORTRAN（1957年、IBM）:</strong> 世界初の実用的な高級言語。科学技術計算用。</p>
+            <pre><code>PROGRAM HELLO
+    PRINT *, 'Hello, World!'
+END PROGRAM HELLO</code></pre>
+            <p><strong>COBOL（1959年、米国防総省）:</strong> 事務処理用。銀行システムで今も現役。</p>
+            <pre><code>DISPLAY 'Hello, World!'.</code></pre>
+            <p><strong>革新点:</strong></p>
+            <ul>
+                <li>英語のような文法（PRINT、IF、WHILEなど）</li>
+                <li>コンパイラが自動的に機械語に翻訳</li>
+                <li>CPU非依存（同じコードが異なるコンピューターで動く）</li>
+                <li>生産性が10倍以上向上</li>
+            </ul>
+            <p><strong>重要な概念:</strong> 「コンパイラ」の誕生。人間が書いたコードを、コンピューターが理解できる機械語に自動変換する仕組み。</p>
         </div>
         
         <div class="timeline-item">
-            <h4>1990年代: インターネットとWeb言語</h4>
-            <p>HTML（1991年）、JavaScript（1995年）が登場し、Webページを作れるようになった。</p>
-            <p><strong>革新点:</strong> コードを書けば、世界中の人がブラウザで見られる</p>
+            <h4>1970年代: C言語とUNIX - OSを書ける言語</h4>
+            <p><strong>UNIX（1969年、AT&T ベル研究所）:</strong> ケン・トンプソンとデニス・リッチーが開発した革命的なOS。</p>
+            <p><strong>C言語（1972年、デニス・リッチー）:</strong> UNIXを書き直すために開発された言語。</p>
+            <pre><code>#include <stdio.h>
+
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}</code></pre>
+            <p><strong>なぜC言語が革命的だったのか:</strong></p>
+            <ul>
+                <li><strong>高級言語なのに速い:</strong> アセンブリ言語に近い速度で動く</li>
+                <li><strong>ポータブル:</strong> 異なるコンピューターに移植しやすい</li>
+                <li><strong>OSを書ける:</strong> ハードウェアを直接制御できる</li>
+                <li><strong>シンプル:</strong> 言語仕様が小さく、学習しやすい</li>
+            </ul>
+            <p><strong>影響:</strong></p>
+            <ul>
+                <li>Windows、macOS、Linuxなど、現代のOSはすべてC言語で書かれている（一部アセンブリ）</li>
+                <li>C++、Java、JavaScript、Pythonなど、後の言語に大きな影響</li>
+                <li>現在でも、組み込みシステム、ゲームエンジン、データベースなどで使われる</li>
+            </ul>
+            <p><strong>UNIXの哲学:</strong> 「1つのことをうまくやる小さなプログラムを組み合わせる」→ この思想が現代のマイクロサービスにつながる</p>
         </div>
         
         <div class="timeline-item">
-            <h4>2000年代〜現在: クラウドとAI時代</h4>
-            <p>Python、Go、Rustなど、新しい目的に特化した言語が登場。</p>
-            <p><strong>現状:</strong> コードは「専門家のもの」から「誰もが使うツール」へ</p>
+            <h4>1980年代: オブジェクト指向の台頭</h4>
+            <p><strong>C++（1983年）:</strong> C言語にオブジェクト指向を追加。大規模ソフトウェア開発が可能に。</p>
+            <p><strong>オブジェクト指向とは:</strong> データと処理をまとめて「オブジェクト」として扱う考え方。</p>
+            <pre><code>class Dog {
+    string name;
+    void bark() { cout << "Woof!"; }
+};</code></pre>
+            <p><strong>革新点:</strong> コードの再利用性が向上、大規模開発が可能に</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>1990年代: インターネットとWeb言語の爆発</h4>
+            <p><strong>HTML（1991年、ティム・バーナーズ=リー）:</strong> Webページの構造を記述。</p>
+            <p><strong>Java（1995年、Sun Microsystems）:</strong> 「Write Once, Run Anywhere」= どこでも動く。</p>
+            <p><strong>JavaScript（1995年、Netscape）:</strong> Webページに動きをつける。名前は似ているがJavaとは別物。</p>
+            <p><strong>PHP（1995年）:</strong> サーバーサイドWeb開発の標準に。</p>
+            <p><strong>革新点:</strong> コードを書けば、世界中の人がブラウザで見られる = インターネット革命</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2000年代: クラウドとモバイルの時代</h4>
+            <p><strong>Python（1991年誕生、2000年代に普及）:</strong> シンプルで読みやすい。AI/ML開発の標準に。</p>
+            <p><strong>Ruby（1995年誕生、2000年代に普及）:</strong> Ruby on Railsでスタートアップ開発が加速。</p>
+            <p><strong>Go（2009年、Google）:</strong> クラウドインフラ開発に最適化。</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2010年代〜現在: AI時代とコードの民主化</h4>
+            <p><strong>Swift（2014年、Apple）:</strong> iOSアプリ開発の標準。</p>
+            <p><strong>Rust（2015年）:</strong> メモリ安全性を保証する次世代言語。</p>
+            <p><strong>TypeScript（2012年、Microsoft）:</strong> JavaScriptに型安全性を追加。</p>
+            <p><strong>現状:</strong> コードは「専門家のもの」から「誰もが使うツール」へ。GitHub Copilot、ChatGPTなどのAIがコードを書く時代に。</p>
         </div>
     </div>
     
@@ -243,6 +332,136 @@ MOV AL, 61h        # アセンブリ言語（少し読みやすい）</code></pr
         <p><strong>本質:</strong> コードとは、「人間の意図をコンピューターに伝える言語」である</p>
         <p><strong>比喩:</strong> 料理のレシピと同じ。「材料」と「手順」を書けば、誰でも同じ料理が作れる</p>
         <p><strong>FDEとして:</strong> コードを読めることは、「システムが何をしているか」を理解する唯一の方法</p>
+        <p><strong>歴史から学ぶこと:</strong> プログラミング言語は、「人間がコンピューターと対話しやすくする」ために進化してきた。機械語→アセンブリ→高級言語→AI支援という流れは、すべて「人間の生産性向上」のため。</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>主要プログラミング言語の完全ガイド</h2>
+    
+    <div class="language-guide">
+        <div class="language-card">
+            <h4>Python - AI時代の標準言語</h4>
+            <p><strong>誕生:</strong> 1991年（Guido van Rossum）</p>
+            <p><strong>特徴:</strong> シンプルで読みやすい、豊富なライブラリ</p>
+            <pre><code>def greet(name):
+    print(f"Hello, {name}!")
+
+greet("World")</code></pre>
+            <p><strong>用途:</strong></p>
+            <ul>
+                <li>AI/機械学習（TensorFlow、PyTorch）</li>
+                <li>データ分析（pandas、numpy）</li>
+                <li>Web開発（Django、Flask）</li>
+                <li>自動化スクリプト</li>
+            </ul>
+            <p><strong>なぜ人気か:</strong> 学習コストが低い、AI開発の標準、科学計算に強い</p>
+            <p><strong>FDEとして:</strong> 顧客のデータ分析、PoC開発で最も使う言語</p>
+        </div>
+        
+        <div class="language-card">
+            <h4>JavaScript - Web開発の必須言語</h4>
+            <p><strong>誕生:</strong> 1995年（Brendan Eich、Netscape）</p>
+            <p><strong>特徴:</strong> ブラウザで動く唯一の言語、Node.jsでサーバーでも動く</p>
+            <pre><code>function greet(name) {
+    console.log(`Hello, ${name}!`);
+}
+
+greet("World");</code></pre>
+            <p><strong>用途:</strong></p>
+            <ul>
+                <li>Webページの動的な動き（React、Vue、Angular）</li>
+                <li>サーバーサイド（Node.js、Express）</li>
+                <li>モバイルアプリ（React Native）</li>
+                <li>デスクトップアプリ（Electron）</li>
+            </ul>
+            <p><strong>なぜ人気か:</strong> フロントエンドとバックエンドを同じ言語で書ける、エコシステムが巨大</p>
+            <p><strong>FDEとして:</strong> 顧客向けダッシュボード、管理画面の開発で使う</p>
+        </div>
+        
+        <div class="language-card">
+            <h4>Java - エンタープライズの王様</h4>
+            <p><strong>誕生:</strong> 1995年（Sun Microsystems、現Oracle）</p>
+            <p><strong>特徴:</strong> 「Write Once, Run Anywhere」、堅牢性が高い</p>
+            <pre><code>public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}</code></pre>
+            <p><strong>用途:</strong></p>
+            <ul>
+                <li>大規模業務システム（銀行、保険、製造業）</li>
+                <li>Androidアプリ開発</li>
+                <li>Webアプリケーション（Spring Framework）</li>
+                <li>ビッグデータ処理（Hadoop、Spark）</li>
+            </ul>
+            <p><strong>なぜ人気か:</strong> 安定性、セキュリティ、大規模開発に強い</p>
+            <p><strong>FDEとして:</strong> 大企業の既存システムと連携する際に理解が必要</p>
+        </div>
+        
+        <div class="language-card">
+            <h4>TypeScript - JavaScriptの進化形</h4>
+            <p><strong>誕生:</strong> 2012年（Microsoft）</p>
+            <p><strong>特徴:</strong> JavaScriptに型安全性を追加</p>
+            <pre><code>function greet(name: string): void {
+    console.log(`Hello, ${name}!`);
+}
+
+greet("World");</code></pre>
+            <p><strong>用途:</strong> 大規模なWebアプリケーション開発</p>
+            <p><strong>なぜ人気か:</strong> バグを事前に防げる、IDEのサポートが強力</p>
+        </div>
+        
+        <div class="language-card">
+            <h4>Go - クラウドインフラの標準</h4>
+            <p><strong>誕生:</strong> 2009年（Google）</p>
+            <p><strong>特徴:</strong> シンプル、高速、並行処理に強い</p>
+            <pre><code>package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}</code></pre>
+            <p><strong>用途:</strong></p>
+            <ul>
+                <li>マイクロサービス</li>
+                <li>クラウドインフラ（Kubernetes、Docker）</li>
+                <li>API開発</li>
+            </ul>
+            <p><strong>なぜ人気か:</strong> コンパイルが速い、デプロイが簡単、並行処理が書きやすい</p>
+        </div>
+        
+        <div class="language-card">
+            <h4>Rust - 次世代のシステムプログラミング</h4>
+            <p><strong>誕生:</strong> 2015年（Mozilla）</p>
+            <p><strong>特徴:</strong> メモリ安全性を保証、C/C++並みの速度</p>
+            <p><strong>用途:</strong> OS、ブラウザエンジン、組み込みシステム</p>
+            <p><strong>なぜ注目されるか:</strong> C/C++の代替として、安全性と速度を両立</p>
+        </div>
+        
+        <div class="language-card">
+            <h4>SQL - データベース操作の標準</h4>
+            <p><strong>誕生:</strong> 1974年（IBM）</p>
+            <p><strong>特徴:</strong> データベース専用の言語</p>
+            <pre><code>SELECT name, age
+FROM users
+WHERE age >= 30
+ORDER BY age DESC;</code></pre>
+            <p><strong>用途:</strong> データの取得、更新、削除、集計</p>
+            <p><strong>なぜ重要か:</strong> すべてのビジネスデータはデータベースに保存されている</p>
+            <p><strong>FDEとして:</strong> 顧客データの分析、レポート作成で毎日使う</p>
+        </div>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 言語選択の基準</h4>
+        <p><strong>速度重視:</strong> C、C++、Rust、Go</p>
+        <p><strong>開発速度重視:</strong> Python、JavaScript、Ruby</p>
+        <p><strong>安定性重視:</strong> Java、Go</p>
+        <p><strong>AI/ML:</strong> Python一択</p>
+        <p><strong>Web開発:</strong> JavaScript/TypeScript + Python/Java/Go</p>
+        <p><strong>FDEとして:</strong> Python（データ分析・AI）、JavaScript（UI）、SQL（データ操作）の3つを優先的に学ぶ</p>
     </div>
 </div>
 
@@ -434,6 +653,170 @@ function getUserInfo(userId) {
         
         <h4>4. 「なぜこのコードが必要か」を考える</h4>
         <p>技術的な詳細より、「このコードがビジネス的に何を実現しているか」を理解する。</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>AI時代のコーディング: Vibe Codingと開発の未来</h2>
+    
+    <div class="insight-box">
+        <h4>💡 コーディングの革命</h4>
+        <p>2023年以降、GitHub Copilot、ChatGPT、Claudeなどの登場により、<strong>「コードを書く」から「AIと対話してコードを生成する」</strong>時代に突入した。</p>
+        <p>これは「Vibe Coding」と呼ばれ、プログラマーの役割を根本的に変えつつある。</p>
+    </div>
+    
+    <div class="timeline-box">
+        <h3>コーディング手法の進化</h3>
+        <div class="timeline-item">
+            <h4>2000年代: 手書きコーディング</h4>
+            <p>すべてのコードを人間が1行ずつ書く。Stack Overflowでコピペして修正。</p>
+            <p><strong>生産性:</strong> 1日100〜300行</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2010年代: IDE支援コーディング</h4>
+            <p>IntelliJ、VS Codeなどの高機能IDEが、コード補完・リファクタリングを支援。</p>
+            <p><strong>生産性:</strong> 1日200〜500行</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2021年: GitHub Copilot登場</h4>
+            <p>AIがコードを提案。コメントを書くだけで、関数全体を生成。</p>
+            <p><strong>生産性:</strong> 1日500〜1000行</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2023年〜現在: Vibe Coding時代</h4>
+            <p>ChatGPT、Claude、Cursorなどで、自然言語でコードを生成。</p>
+            <p><strong>生産性:</strong> 1日1000〜3000行（ただし、レビューと修正が重要）</p>
+        </div>
+    </div>
+    
+    <div class="vibe-coding-explanation">
+        <h3>Vibe Codingとは何か</h3>
+        <p><strong>定義:</strong> AIに「こういう感じのコードが欲しい」と伝えて、コードを生成してもらう開発手法。</p>
+        
+        <div class="example-box">
+            <h4>従来のコーディング</h4>
+            <pre><code>// 1. 仕様書を読む
+// 2. アルゴリズムを考える
+// 3. コードを1行ずつ書く
+// 4. デバッグする
+// 5. テストする
+
+function calculateTax(amount) {
+    if (amount <= 0) {
+        throw new Error("Invalid amount");
+    }
+    const taxRate = 0.1;
+    return amount * taxRate;
+}</code></pre>
+        </div>
+        
+        <div class="example-box">
+            <h4>Vibe Coding</h4>
+            <pre><code>// AIに指示: 「消費税を計算する関数を作って。
+// 金額が0以下ならエラーを投げて。税率は10%。」
+
+→ AIが上記のコードを生成
+
+// 人間の役割:
+// 1. 生成されたコードをレビュー
+// 2. ビジネスロジックが正しいか確認
+// 3. エッジケースを追加
+// 4. テストコードも生成してもらう</code></pre>
+        </div>
+    </div>
+    
+    <div class="impact-analysis">
+        <h3>プログラマーの需要はどう変わったか</h3>
+        
+        <div class="impact-card">
+            <h4>❌ 減少した需要</h4>
+            <ul>
+                <li><strong>単純なCRUD実装:</strong> AIが自動生成できる</li>
+                <li><strong>定型的なコード:</strong> テンプレートから生成可能</li>
+                <li><strong>ボイラープレートコード:</strong> AIが一瞬で書ける</li>
+                <li><strong>Stack Overflowコピペ職人:</strong> AIの方が速い</li>
+            </ul>
+        </div>
+        
+        <div class="impact-card">
+            <h4>✅ 増加した需要</h4>
+            <ul>
+                <li><strong>アーキテクチャ設計:</strong> システム全体の設計はAIには難しい</li>
+                <li><strong>コードレビュー:</strong> AIが生成したコードの品質チェック</li>
+                <li><strong>ビジネスロジック設計:</strong> 要件を正確に理解し、AIに指示</li>
+                <li><strong>パフォーマンス最適化:</strong> AIが生成したコードの改善</li>
+                <li><strong>セキュリティ監査:</strong> AIが見落とす脆弱性の発見</li>
+                <li><strong>プロンプトエンジニアリング:</strong> AIに正確に指示する技術</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="new-skills">
+        <h3>AI時代に必要なスキル</h3>
+        
+        <div class="skill-card">
+            <h4>1. コードを読む力（最重要）</h4>
+            <p>AIが生成したコードを理解し、問題を見つける力。</p>
+            <p><strong>なぜ重要か:</strong> AIは間違ったコードも自信満々に生成する</p>
+        </div>
+        
+        <div class="skill-card">
+            <h4>2. 要件を言語化する力</h4>
+            <p>「こういう感じ」を、AIが理解できる形で説明する力。</p>
+            <p><strong>例:</strong> 「ユーザー認証機能」→「JWTトークンを使った認証。有効期限は24時間。リフレッシュトークンも実装。」</p>
+        </div>
+        
+        <div class="skill-card">
+            <h4>3. アーキテクチャを設計する力</h4>
+            <p>システム全体の構造を設計する力。AIは部分最適は得意だが、全体最適は苦手。</p>
+        </div>
+        
+        <div class="skill-card">
+            <h4>4. デバッグ力</h4>
+            <p>AIが生成したコードのバグを見つけ、修正する力。</p>
+        </div>
+        
+        <div class="skill-card">
+            <h4>5. ビジネス理解</h4>
+            <p>技術的に正しいだけでなく、ビジネス的に意味のあるコードを書く力。</p>
+        </div>
+    </div>
+    
+    <div class="fde-perspective">
+        <h3>FDEとしてのAI時代の戦い方</h3>
+        
+        <div class="strategy-box">
+            <h4>戦略1: AIを使いこなす</h4>
+            <p>GitHub Copilot、Cursor、ChatGPTなどを日常的に使い、生産性を10倍にする。</p>
+            <p><strong>具体例:</strong> PoCのプロトタイプを1週間ではなく1日で作る</p>
+        </div>
+        
+        <div class="strategy-box">
+            <h4>戦略2: コードレビュー力を磨く</h4>
+            <p>AIが生成したコードの問題点を即座に見抜く力を鍛える。</p>
+            <p><strong>具体例:</strong> セキュリティホール、パフォーマンス問題、エッジケースの見落とし</p>
+        </div>
+        
+        <div class="strategy-box">
+            <h4>戦略3: ビジネス価値にフォーカス</h4>
+            <p>「コードを書く」ことではなく、「顧客の課題を解決する」ことに集中。</p>
+            <p><strong>具体例:</strong> 技術的に完璧でも、ビジネス的に意味がなければ価値はゼロ</p>
+        </div>
+        
+        <div class="strategy-box">
+            <h4>戦略4: 人間にしかできないことをやる</h4>
+            <p>顧客との対話、要件定義、アーキテクチャ設計など、AIが苦手な領域に注力。</p>
+        </div>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 AI時代の真実</h4>
+        <p><strong>誤解:</strong> 「AIがコードを書くから、プログラマーは不要になる」</p>
+        <p><strong>真実:</strong> 「AIがコードを書くから、プログラマーは<strong>より高度な仕事</strong>に集中できる」</p>
+        <p><strong>FDEとして:</strong> AIを使いこなせるエンジニアと、使いこなせないエンジニアの差は10倍以上。今すぐAIツールを使い始めよう。</p>
     </div>
 </div>
         `,
@@ -2274,10 +2657,339 @@ grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
     14: {
         title: 'Fine-tuning vs RAG',
         subtitle: '技術選定の判断基準',
-        goals: ['両者の違い理解', '選定基準理解', 'コスト比較'],
-        content: `<div class="content-section"><h2>選定基準</h2><p>データ量、更新頻度、精度要件で判断</p></div>`,
-        quiz: [{question: 'データが頻繁に更新される場合は？', options: ['Fine-tuning', 'RAG', 'どちらでも', '不可能'], correct: 1, explanation: 'RAGは動的に更新可能。'}],
-        exercise: {title: '技術選定', prompt: '顧客に最適な技術を提案せよ', sampleAnswer: '<div class="sample-answer"><p>更新頻度が高いのでRAGを推奨</p></div>'}
+        goals: [
+            'Fine-tuningとRAGの本質的な違いを理解する',
+            'それぞれのメリット・デメリットを説明できる',
+            'ビジネス要件から最適な技術を選定できる',
+            'コストと精度のトレードオフを判断できる'
+        ],
+        content: `
+<div class="content-section">
+    <h2>Fine-tuningとRAGの本質的な違い</h2>
+    
+    <div class="definition-box">
+        <h3>Fine-tuning（ファインチューニング）</h3>
+        <p><strong>定義:</strong> 既存のAIモデルに、特定のデータを学習させて、そのドメインに特化させる技術。</p>
+        <p><strong>比喩:</strong> 「汎用的な料理人」を「日本料理の専門家」に育てる</p>
+        <pre><code>汎用モデル（GPT-4） + 企業の文書データ → 企業専用モデル</code></pre>
+    </div>
+    
+    <div class="definition-box">
+        <h3>RAG（Retrieval-Augmented Generation）</h3>
+        <p><strong>定義:</strong> AIモデルに質問する際、関連する情報を検索して一緒に渡す技術。</p>
+        <p><strong>比喩:</strong> 「料理人」に「レシピ本」を渡して料理してもらう</p>
+        <pre><code>質問 + 検索した関連情報 → 汎用モデル（GPT-4） → 回答</code></pre>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 根本的な違い</h4>
+        <p><strong>Fine-tuning:</strong> モデル自体を変更する = 知識を「記憶」させる</p>
+        <p><strong>RAG:</strong> モデルは変更せず、情報を「参照」させる</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>それぞれのメリット・デメリット</h2>
+    
+    <div class="comparison-table">
+        <h3>Fine-tuning</h3>
+        <div class="pros-cons">
+            <div class="pros">
+                <h4>✅ メリット</h4>
+                <ul>
+                    <li><strong>高精度:</strong> ドメイン特化で、専門的な回答が可能</li>
+                    <li><strong>低レイテンシ:</strong> 検索不要なので、応答が速い</li>
+                    <li><strong>一貫性:</strong> 学習したスタイルで統一された回答</li>
+                    <li><strong>コンパクト:</strong> 小さいモデルでも高性能を実現可能</li>
+                </ul>
+            </div>
+            
+            <div class="cons">
+                <h4>❌ デメリット</h4>
+                <ul>
+                    <li><strong>高コスト:</strong> 学習に数万円〜数百万円かかる</li>
+                    <li><strong>時間がかかる:</strong> 学習に数時間〜数日必要</li>
+                    <li><strong>更新が困難:</strong> データ更新のたびに再学習が必要</li>
+                    <li><strong>ハルシネーション:</strong> 古い情報を「記憶」として出力する可能性</li>
+                    <li><strong>専門知識必要:</strong> 機械学習の知識が必要</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="comparison-table">
+        <h3>RAG</h3>
+        <div class="pros-cons">
+            <div class="pros">
+                <h4>✅ メリット</h4>
+                <ul>
+                    <li><strong>低コスト:</strong> 学習不要、APIコストのみ</li>
+                    <li><strong>即座に更新:</strong> データベースを更新すれば即反映</li>
+                    <li><strong>透明性:</strong> どの情報を参照したか追跡可能</li>
+                    <li><strong>柔軟性:</strong> 複数のデータソースを組み合わせ可能</li>
+                    <li><strong>実装が簡単:</strong> 機械学習の専門知識不要</li>
+                </ul>
+            </div>
+            
+            <div class="cons">
+                <h4>❌ デメリット</h4>
+                <ul>
+                    <li><strong>検索精度依存:</strong> 検索が失敗すると回答も失敗</li>
+                    <li><strong>高レイテンシ:</strong> 検索 + 生成で時間がかかる</li>
+                    <li><strong>コンテキスト制限:</strong> 大量の情報を一度に渡せない</li>
+                    <li><strong>ランニングコスト:</strong> 毎回APIを呼ぶのでコストが積み重なる</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>技術選定の判断基準</h2>
+    
+    <div class="decision-tree">
+        <h3>判断フローチャート</h3>
+        
+        <div class="decision-step">
+            <h4>Step 1: データの更新頻度を確認</h4>
+            <div class="decision-options">
+                <div class="option">
+                    <p><strong>毎日〜毎週更新:</strong> RAG推奨</p>
+                    <p class="reason">理由: Fine-tuningは再学習に時間とコストがかかる</p>
+                    <p class="example">例: ニュース記事、商品情報、社内規定</p>
+                </div>
+                <div class="option">
+                    <p><strong>月1回以下の更新:</strong> Fine-tuning検討可能</p>
+                    <p class="reason">理由: 再学習の頻度が低ければコストが許容範囲</p>
+                    <p class="example">例: 専門用語集、業界知識、企業の文化</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="decision-step">
+            <h4>Step 2: データ量を確認</h4>
+            <div class="decision-options">
+                <div class="option">
+                    <p><strong>少量（〜1万件）:</strong> RAG推奨</p>
+                    <p class="reason">理由: Fine-tuningには大量のデータが必要</p>
+                </div>
+                <div class="option">
+                    <p><strong>大量（10万件〜）:</strong> Fine-tuning検討可能</p>
+                    <p class="reason">理由: 十分な学習データがあれば高精度を実現</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="decision-step">
+            <h4>Step 3: 精度要件を確認</h4>
+            <div class="decision-options">
+                <div class="option">
+                    <p><strong>80%の精度でOK:</strong> RAG推奨</p>
+                    <p class="reason">理由: 実装が簡単で、早く結果が出る</p>
+                    <p class="example">例: 社内FAQ、ドキュメント検索</p>
+                </div>
+                <div class="option">
+                    <p><strong>95%以上の精度が必要:</strong> Fine-tuning検討</p>
+                    <p class="reason">理由: ドメイン特化で高精度を実現</p>
+                    <p class="example">例: 医療診断支援、法律文書分析</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="decision-step">
+            <h4>Step 4: 予算を確認</h4>
+            <div class="decision-options">
+                <div class="option">
+                    <p><strong>初期予算が限られている:</strong> RAG推奨</p>
+                    <p class="reason">理由: 初期コストが低く、すぐに始められる</p>
+                </div>
+                <div class="option">
+                    <p><strong>初期投資可能、ランニングコスト削減したい:</strong> Fine-tuning検討</p>
+                    <p class="reason">理由: 初期コストは高いが、長期的にはコスト削減</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>コスト比較: 具体的な数字</h2>
+    
+    <div class="cost-comparison">
+        <h3>シナリオ: 社内FAQ（1万件の文書）</h3>
+        
+        <div class="cost-card">
+            <h4>RAGの場合</h4>
+            <ul>
+                <li><strong>初期コスト:</strong> 0円〜10万円（実装費用のみ）</li>
+                <li><strong>月間コスト:</strong> 5万円〜20万円（API利用料）</li>
+                <li><strong>更新コスト:</strong> 0円（データベース更新のみ）</li>
+                <li><strong>開発期間:</strong> 1〜2週間</li>
+            </ul>
+            <p><strong>年間総コスト:</strong> 60万円〜250万円</p>
+        </div>
+        
+        <div class="cost-card">
+            <h4>Fine-tuningの場合</h4>
+            <ul>
+                <li><strong>初期コスト:</strong> 50万円〜300万円（学習費用 + 実装費用）</li>
+                <li><strong>月間コスト:</strong> 1万円〜5万円（推論API利用料）</li>
+                <li><strong>更新コスト:</strong> 10万円〜50万円（再学習費用）</li>
+                <li><strong>開発期間:</strong> 1〜3ヶ月</li>
+            </ul>
+            <p><strong>年間総コスト:</strong> 100万円〜500万円（初年度）、50万円〜200万円（2年目以降）</p>
+        </div>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 コスト判断のポイント</h4>
+        <p><strong>短期（1年以内）:</strong> RAGの方が安い</p>
+        <p><strong>長期（3年以上）:</strong> Fine-tuningの方が安くなる可能性</p>
+        <p><strong>FDEとして:</strong> まずRAGで始めて、効果が証明されたらFine-tuningを検討</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>実践: 顧客への提案例</h2>
+    
+    <div class="case-study">
+        <h4>ケース1: 社内FAQ自動応答</h4>
+        <div class="customer-requirement">
+            <p><strong>顧客要件:</strong></p>
+            <ul>
+                <li>社内規定・FAQ（5,000件）を自動応答したい</li>
+                <li>毎月10件程度の更新がある</li>
+                <li>予算は初期100万円、月10万円</li>
+            </ul>
+        </div>
+        <div class="fde-proposal">
+            <p><strong>FDEの提案:</strong> RAG推奨</p>
+            <p><strong>理由:</strong></p>
+            <ul>
+                <li>更新頻度が高い（毎月10件）→ Fine-tuningは再学習コストが高い</li>
+                <li>データ量が中規模（5,000件）→ RAGで十分な精度</li>
+                <li>予算が限られている → RAGなら予算内で実現可能</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="case-study">
+        <h4>ケース2: 医療診断支援AI</h4>
+        <div class="customer-requirement">
+            <p><strong>顧客要件:</strong></p>
+            <ul>
+                <li>過去の診断記録（10万件）から類似症例を提案</li>
+                <li>データ更新は年1回</li>
+                <li>95%以上の精度が必要</li>
+                <li>予算は初期1,000万円</li>
+            </ul>
+        </div>
+        <div class="fde-proposal">
+            <p><strong>FDEの提案:</strong> Fine-tuning推奨</p>
+            <p><strong>理由:</strong></p>
+            <ul>
+                <li>高精度が必須（95%以上）→ Fine-tuningで専門性を高める</li>
+                <li>データ量が大規模（10万件）→ 十分な学習データ</li>
+                <li>更新頻度が低い（年1回）→ 再学習コストが許容範囲</li>
+                <li>予算が十分 → 初期投資可能</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>ハイブリッドアプローチ: 両方を組み合わせる</h2>
+    
+    <div class="hybrid-approach">
+        <h3>RAG + Fine-tuningの組み合わせ</h3>
+        <p><strong>アイデア:</strong> Fine-tuningで基礎知識を学習させ、RAGで最新情報を補完</p>
+        
+        <div class="example-box">
+            <h4>例: 企業の技術サポートAI</h4>
+            <ul>
+                <li><strong>Fine-tuning:</strong> 製品の基本知識、専門用語、トラブルシューティングの基本パターン</li>
+                <li><strong>RAG:</strong> 最新のリリースノート、既知の不具合情報、顧客からの質問履歴</li>
+            </ul>
+            <p><strong>メリット:</strong> 高精度 + 最新情報 = 最強の組み合わせ</p>
+            <p><strong>デメリット:</strong> コストが高い、実装が複雑</p>
+        </div>
+    </div>
+</div>
+        `,
+        quiz: [
+            {
+                question: 'データが毎日更新される場合、どちらを選ぶべきか？',
+                options: [
+                    'Fine-tuning',
+                    'RAG',
+                    'どちらでも良い',
+                    'どちらも使えない'
+                ],
+                correct: 1,
+                explanation: 'RAGは動的に更新可能。Fine-tuningは再学習に時間とコストがかかるため、頻繁な更新には不向き。'
+            },
+            {
+                question: 'Fine-tuningの最大のメリットは？',
+                options: [
+                    '低コスト',
+                    '即座に更新できる',
+                    'ドメイン特化で高精度',
+                    '実装が簡単'
+                ],
+                correct: 2,
+                explanation: 'Fine-tuningの最大のメリットは、ドメインに特化した高精度な回答が可能になること。ただし、コストと時間がかかる。'
+            },
+            {
+                question: 'RAGの最大のメリットは？',
+                options: [
+                    '高精度',
+                    '低レイテンシ',
+                    '即座に更新できる',
+                    '小さいモデルで動く'
+                ],
+                correct: 2,
+                explanation: 'RAGの最大のメリットは、データベースを更新すれば即座に反映されること。再学習不要で、常に最新情報を提供できる。'
+            }
+        ],
+        exercise: {
+            title: '実践演習: 技術選定を提案する',
+            prompt: `顧客から以下の要件で相談された。RAGとFine-tuningのどちらを推奨するか、理由とともに説明せよ。
+
+<strong>要件:</strong>
+- 社内の技術文書（3,000件）を検索・要約したい
+- 毎週5〜10件の新規文書が追加される
+- 予算は初期50万円、月5万円
+- 精度は80%程度でOK`,
+            sampleAnswer: `
+<div class="sample-answer">
+    <h4>模範解答例</h4>
+    <p><strong>推奨技術:</strong> RAG</p>
+    
+    <h4>理由:</h4>
+    <ol>
+        <li><strong>更新頻度が高い:</strong> 毎週5〜10件の更新があるため、Fine-tuningでは再学習コストが高すぎる</li>
+        <li><strong>予算が限られている:</strong> RAGなら初期50万円、月5万円で実現可能。Fine-tuningは初期だけで100万円以上かかる</li>
+        <li><strong>精度要件が80%:</strong> RAGでも十分達成可能な精度</li>
+        <li><strong>データ量が中規模:</strong> 3,000件ならRAGで十分対応可能</li>
+    </ol>
+    
+    <h4>実装プラン:</h4>
+    <ul>
+        <li>Week 1-2: 既存文書をベクトルデータベースに登録</li>
+        <li>Week 3: RAGシステムの実装とテスト</li>
+        <li>Week 4: 社内トライアル開始</li>
+    </ul>
+    
+    <h4>将来の拡張:</h4>
+    <p>「もし精度が不十分な場合は、Fine-tuningとのハイブリッドアプローチも検討できます。まずはRAGで始めて、効果を確認してから判断しましょう。」</p>
+</div>
+            `
+        },
+        nextSteps: [
+            'Day 15でWeek 2の総復習を行う',
+            '実際のRAG実装を試してみる（LangChain、LlamaIndex）',
+            'Fine-tuningのチュートリアルを読んでみる（OpenAI、Hugging Face）'
+        ]
     },
     
     15: {

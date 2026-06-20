@@ -1172,6 +1172,209 @@ window.bobSections = [
                     </div>
                 </div>
             </div>
+
+            <div class="usage-section">
+                <h3>🔌 API接続の実装方法</h3>
+                <p>BobでAPI接続を実装する際の実践的なガイドです。REST API、GraphQL、WebSocketなど、様々なAPI接続パターンに対応できます。</p>
+
+                <div class="api-guide">
+                    <h4>📡 REST API接続の基本</h4>
+                    <div class="step-by-step">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>Bobに指示する</h5>
+                                <div class="prompt-box">
+                                    <p><strong>プロンプト例：</strong></p>
+                                    <pre><code>「https://api.example.com/users からユーザー一覧を取得するAPIクライアントを作成してください。
+- axiosを使用
+- エラーハンドリングを実装
+- ローディング状態の管理
+- TypeScriptで型定義も作成」</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>生成されたコードの例</h5>
+                                <pre><code>// api/userApi.ts
+import axios from 'axios';
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+export const userApi = {
+  async getUsers(): Promise<User[]> {
+    try {
+      const response = await axios.get('https://api.example.com/users');
+      return response.data;
+    } catch (error) {
+      console.error('Failed to fetch users:', error);
+      throw error;
+    }
+  }
+};</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>環境変数の設定</h5>
+                                <p>Bobに「.envファイルを作成してAPI URLを環境変数化して」と指示すると：</p>
+                                <pre><code>// .env
+VITE_API_BASE_URL=https://api.example.com
+
+// api/config.ts
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>🔐 認証付きAPI接続</h4>
+                    <div class="auth-api-example">
+                        <p><strong>プロンプト例：</strong></p>
+                        <div class="prompt-box">
+                            <pre><code>「JWT認証を使用したAPI接続を実装してください。
+- ログイン時にトークンを取得してlocalStorageに保存
+- すべてのAPI リクエストにAuthorizationヘッダーを自動付与
+- トークン期限切れ時は自動でリフレッシュ
+- 401エラー時はログイン画面にリダイレクト」</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-section">
+                <h3>🎨 イラスト・デザインをBobで実装する方法</h3>
+                <p>デザインツールで作成したイラストやデザインを、Bobを使ってWebサイトに反映させる実践的な方法です。</p>
+
+                <div class="design-implementation">
+                    <h4>方法1: 画像ファイルとして実装</h4>
+                    <div class="step-by-step">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>画像を準備</h5>
+                                <p>Figma、Illustrator、Photoshopなどで作成したイラストをエクスポート：</p>
+                                <ul>
+                                    <li><strong>PNG：</strong> 透過が必要な場合（ロゴ、アイコンなど）</li>
+                                    <li><strong>SVG：</strong> 拡大縮小が必要な場合（アイコン、イラスト）</li>
+                                    <li><strong>WebP：</strong> 写真やイラストで軽量化したい場合</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>Bobに指示</h5>
+                                <div class="prompt-box">
+                                    <pre><code>「/public/images/hero-illustration.svg を使用して、
+ヒーローセクションに以下のレイアウトで配置してください：
+- 左側にテキスト（タイトル、説明、CTAボタン）
+- 右側にイラスト
+- レスポンシブ対応（モバイルでは縦並び）
+- イラストはホバー時に少し浮き上がるアニメーション」</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>生成されたコード例</h5>
+                                <pre><code><div class="hero">
+  <div class="hero-content">
+    <h1>あなたのサービス名</h1>
+    <p>サービスの説明文</p>
+    <button>今すぐ始める</button>
+  </div>
+  <div class="hero-illustration">
+    <img src="/images/hero-illustration.svg" alt="Hero Illustration">
+  </div>
+</div>
+
+<style>
+.hero-illustration img {
+  transition: transform 0.3s ease;
+}
+.hero-illustration img:hover {
+  transform: translateY(-10px);
+}
+</style></code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>方法2: SVGコードとして直接実装</h4>
+                    <div class="svg-implementation">
+                        <p>SVGファイルの中身をコピーして、Bobに渡す方法：</p>
+                        <div class="step-by-step">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>SVGコードを取得</h5>
+                                    <p>Figmaの場合：オブジェクトを選択 → 右クリック → Copy as SVG</p>
+                                </div>
+                            </div>
+
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>Bobに指示</h5>
+                                    <div class="prompt-box">
+                                        <pre><code>「以下のSVGコードをReactコンポーネント化してください。
+- propsでサイズと色を変更可能に
+- TypeScriptで型定義
+- アクセシビリティ対応（aria-label追加）
+
+[ここにSVGコードを貼り付け]」</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>方法3: デザインシステムの実装</h4>
+                    <div class="design-system">
+                        <p><strong>プロンプト例：</strong></p>
+                        <div class="prompt-box">
+                            <pre><code>「Figmaのデザインシステムを基に、以下のコンポーネントを作成してください：
+- カラーパレット（Primary: #0066FF, Secondary: #00CC88）
+- タイポグラフィ（見出し、本文、キャプション）
+- ボタンコンポーネント（Primary、Secondary、Outline）
+- カードコンポーネント
+- すべてTailwind CSSで実装」</code></pre>
+                        </div>
+                    </div>
+
+                    <h4>💡 実践的なTips</h4>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h5>🎯 画像最適化</h5>
+                            <p>「画像を最適化してください。WebP形式に変換し、遅延読み込みを実装」とBobに指示</p>
+                        </div>
+                        <div class="tip-card">
+                            <h5>📱 レスポンシブ画像</h5>
+                            <p>「srcsetを使用して、デバイスサイズに応じた画像を配信」と指示</p>
+                        </div>
+                        <div class="tip-card">
+                            <h5>🎨 CSSアニメーション</h5>
+                            <p>「イラストにスクロールアニメーションを追加。画面に入ったらフェードイン」と指示</p>
+                        </div>
+                        <div class="tip-card">
+                            <h5>♿ アクセシビリティ</h5>
+                            <p>「すべての画像にalt属性を追加し、装飾的な画像はaria-hidden="true"を設定」と指示</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         `
     },
     {
@@ -1204,6 +1407,38 @@ window.bobSections = [
                     <p><strong>概要：</strong> OpenAI Codexを使用したAIペアプログラマー。コメントから自動的にコードを生成。</p>
                     <p><strong>主な機能：</strong> リアルタイムコード補完、関数全体の生成、複数の提案、テストコード生成</p>
                     <p><strong>こんな時に：</strong> 定型的なコードを書くのが面倒、テストコードを素早く作りたい</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「GitHub Copilot」を検索してインストール</li>
+                            <li><strong>サインイン：</strong> GitHubアカウントでサインイン（学生は無料）</li>
+                            <li><strong>コメントで指示：</strong> <code>// ユーザー認証機能を実装</code> と書くと自動でコード生成</li>
+                            <li><strong>Tab/Enterで採用：</strong> 提案が表示されたらTabキーで採用</li>
+                            <li><strong>複数提案を見る：</strong> <code>Ctrl+Enter</code> (Win) / <code>Cmd+Enter</code> (Mac) で複数の提案を表示</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <p><strong>シナリオ：</strong> REST APIのエンドポイントを作成したい</p>
+                        <pre><code>// Express.jsでユーザー一覧を取得するGET APIを作成
+// ↓ Copilotが自動生成
+app.get('/api/users', async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>日本語コメントOK：</strong> 日本語で指示しても理解してくれる</li>
+                            <li><strong>関数名から推測：</strong> <code>function calculateTax(</code> と書くだけで税金計算ロジックを提案</li>
+                            <li><strong>テストコード生成：</strong> <code>// test for calculateTax</code> でテストコードを自動生成</li>
+                            <li><strong>リファクタリング：</strong> 既存コードを選択してCopilot Chatで「このコードをリファクタリングして」</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="ext-card">

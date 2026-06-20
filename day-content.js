@@ -1622,7 +1622,7 @@ ORDER BY total_spent DESC;</code></pre>
         title: 'FDEメモの書き方',
         subtitle: '知見を構造化する',
         goals: ['課題を構造化できる', '再利用可能な形で記録', 'パターンを抽出'],
-        content: `<div class="content-section"><h2>FDEメモの目的</h2><p>個別案件の知見を、次の案件で再利用できる形にする</p></div>`,
+        contentFile: 'day6-content.html',
         quiz: [{question: 'FDEメモで最も重要なのは？', options: ['詳細な記録', 'パターンの抽出', '美しい文章', '長い説明'], correct: 1, explanation: 'パターンを抽出することで再利用可能になる。'}],
         exercise: {title: 'FDEメモを書く', prompt: '案件の知見をメモにまとめよ', sampleAnswer: '<div class="sample-answer"><p>課題パターン、技術選定理由、注意点を記載</p></div>'}
     },
@@ -4816,36 +4816,7 @@ grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
         title: '30日間の総まとめ',
         subtitle: 'FDEとしての第一歩',
         goals: ['全体の振り返り', '今後の学習計画', '実践への準備'],
-        content: `
-<div class="content-section">
-    <h2>30日間で学んだこと</h2>
-    
-    <div class="week-summary">
-        <h3>Week 1: FDE理解</h3>
-        <p>FDEとは何か、客先常駐との違い、課題分解の方法</p>
-        
-        <h3>Week 2: コード読解とAI基礎</h3>
-        <p>JSON/SQL/Python/API/YAML/Logs、RAG、プロンプト</p>
-        
-        <h3>Week 3: 実装設計</h3>
-        <p>PoC設計、データ評価、システム連携、コスト、リスク</p>
-        
-        <h3>Week 4: 実戦演習</h3>
-        <p>業界別ケース、本番化、運用、知見の資産化</p>
-    </div>
-    
-    <div class="next-steps">
-        <h2>これからの学習</h2>
-        <ul>
-            <li>実際の案件で実践する</li>
-            <li>Code Reading Gymで継続的に練習</li>
-            <li>FDEメモを書き続ける</li>
-            <li>業界知識を深める</li>
-            <li>IBM製品を学ぶ</li>
-        </ul>
-    </div>
-</div>
-        `,
+        contentFile: 'day30-content.html',
         quiz: [{question: '30日間で最も重要な学びは？', options: ['技術', '課題理解', '資産化', '全て'], correct: 3, explanation: '全てが重要で、相互に関連している。'}],
         exercise: {title: '総まとめ', prompt: '30日間の学びを振り返り、今後の計画を立てよ', sampleAnswer: '<div class="sample-answer"><p>FDEの本質を理解し、技術的な会話ができるようになった。今後は実案件で実践し、知見を蓄積していく。</p></div>'}
     }

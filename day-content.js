@@ -2913,11 +2913,122 @@ grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
     
     12: {
         title: 'プロンプトエンジニアリング',
-        subtitle: 'LLMを使いこなす',
-        goals: ['効果的なプロンプト作成', 'Few-shot学習', 'Chain-of-Thought'],
-        content: `<div class="content-section"><h2>プロンプトとは</h2><p>LLMへの指示文</p></div>`,
-        quiz: [{question: 'プロンプトで重要なのは？', options: ['長さ', '明確さ', '難しさ', '専門用語'], correct: 1, explanation: '明確な指示が重要。'}],
-        exercise: {title: 'プロンプトを書く', prompt: '効果的なプロンプトを作成せよ', sampleAnswer: '<div class="sample-answer"><p>具体的な指示と例を含める</p></div>'}
+        subtitle: 'LLMを使いこなす技術 - 指示の質が成果を決める',
+        goals: [
+            'プロンプトエンジニアリングの本質を理解する',
+            '効果的なプロンプトの5要素を使いこなす',
+            'Few-shot学習とChain-of-Thoughtを実践できる',
+            'FDEとして顧客にプロンプト設計を提案できる'
+        ],
+        content: `
+<div class="content-section">
+    <h2>プロンプトエンジニアリングとは何か</h2>
+    
+    <div class="definition-box">
+        <h3>プロンプトエンジニアリングの定義</h3>
+        <p><strong>プロンプトエンジニアリング</strong>とは、LLM（大規模言語モデル）から望ましい出力を引き出すために、入力（プロンプト）を設計・最適化する技術である。</p>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 なぜプロンプトエンジニアリングが重要なのか</h4>
+        <p>LLMは強力だが、<strong>「何を聞くか」で結果が劇的に変わる</strong>。同じ質問でも、プロンプトの書き方次第で、精度が10%から90%まで変動する。</p>
+        <p>プロンプトエンジニアリングは、<strong>「AIとの対話の技術」</strong>であり、FDEにとって必須のスキルである。</p>
+    </div>
+    
+    <h3>悪いプロンプト vs 良いプロンプト</h3>
+    
+    <div class="comparison">
+        <div class="bad-example">
+            <h4>❌ 悪いプロンプト</h4>
+            <pre><code>「顧客管理システムを作って」</code></pre>
+            <p><strong>問題点:</strong> 曖昧すぎる、制約がない、ゴールが不明確</p>
+        </div>
+        
+        <div class="good-example">
+            <h4>✅ 良いプロンプト</h4>
+            <pre><code>「以下の要件で顧客管理APIを作成：
+- Python + FastAPI + PostgreSQL
+- 顧客CRUD、検索、購買履歴
+- JWT認証、エラーハンドリング
+- レスポンス200ms以内
+まず設計案を提示してください」</code></pre>
+            <p><strong>良い点:</strong> 技術スタック明確、機能具体的、制約明示、段階的指示</p>
+        </div>
+    </div>
+    
+    <h3>効果的なプロンプトの5要素</h3>
+    
+    <div class="elements-grid">
+        <div class="element-card">
+            <h4>1. 役割（Role）</h4>
+            <pre><code>「あなたは経験豊富なPythonエンジニアです」</code></pre>
+        </div>
+        
+        <div class="element-card">
+            <h4>2. コンテキスト（Context）</h4>
+            <pre><code>「金融機関向けシステム、Java + Oracle構成」</code></pre>
+        </div>
+        
+        <div class="element-card">
+            <h4>3. タスク（Task）</h4>
+            <pre><code>「セキュリティ脆弱性を指摘してください」</code></pre>
+        </div>
+        
+        <div class="element-card">
+            <h4>4. 制約（Constraints）</h4>
+            <pre><code>「既存DB構造は変更しないでください」</code></pre>
+        </div>
+        
+        <div class="element-card">
+            <h4>5. 出力形式（Format）</h4>
+            <pre><code>「JSON形式、箇条書き3つ」</code></pre>
+        </div>
+    </div>
+    
+    <h3>Few-shot学習: 例を示して学習させる</h3>
+    
+    <div class="technique-box">
+        <h4>Few-shotとは</h4>
+        <p>LLMに「こういう入力には、こういう出力」という例を複数示し、パターンを学習させる技術。</p>
+        
+        <pre><code>【例1】顧客: 「データを安全に保存したい」
+技術要件: 「DB暗号化、アクセス制御、監査ログ」
+
+【例2】顧客: 「システムが遅い」
+技術要件: 「パフォーマンス測定、ボトルネック特定、キャッシュ戦略」
+
+【変換してください】
+顧客: 「社員が簡単に使えるようにしたい」
+技術要件: ?</code></pre>
+    </div>
+    
+    <h3>Chain-of-Thought: 思考プロセスを明示させる</h3>
+    
+    <div class="technique-box">
+        <h4>CoTを使ったプロンプト</h4>
+        <pre><code>「このシステムの問題点を、以下の手順で分析：
+1. システムの目的と主要機能を整理
+2. 各機能の実装方法を確認
+3. セキュリティ、パフォーマンス、保守性の観点から問題点を洗い出し
+4. 優先度をつけて改善案を提示
+
+段階的に考えて、各ステップの結果を示してください」</code></pre>
+    </div>
+</div>
+        `,
+        quiz: [
+            {
+                question: 'プロンプトエンジニアリングで最も重要なのは？',
+                options: ['プロンプトを長く書く', '専門用語を多用', '具体的で明確な指示', '難しい質問'],
+                correct: 2,
+                explanation: '具体的で明確な指示を与えることが最も重要。曖昧な指示では期待する出力を得られない。'
+            }
+        ],
+        exercise: {
+            title: '実践演習: 効果的なプロンプトを作成',
+            prompt: '「Excelベースの在庫管理をWebシステムに移行したい」という要望を、LLMに技術要件として整理させるプロンプトを作成せよ。',
+            sampleAnswer: '<div class="sample-answer"><pre><code>「以下の顧客要望を技術要件に変換：\n【要望】Excelベースの在庫管理をWebシステムに移行\n【背景】複数拠点で同時更新、データ不整合発生\n【出力】1.機能要件 2.非機能要件 3.技術スタック候補 4.移行計画 5.確認事項」</code></pre></div>'
+        }
     },
     
     13: {
@@ -3900,11 +4011,275 @@ grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
     
     29: {
         title: '知見の資産化',
-        subtitle: '次の案件に活かす',
-        goals: ['パターンの抽出', 'ドキュメント化', 'ナレッジ共有'],
-        content: `<div class="content-section"><h2>資産化</h2><p>個別案件を再利用可能な知見に</p></div>`,
-        quiz: [{question: '知見の資産化で重要なのは？', options: ['詳細', 'パターン', '量', '速度'], correct: 1, explanation: 'パターンを抽出することが重要。'}],
-        exercise: {title: '資産化', prompt: '案件の知見を資産化せよ', sampleAnswer: '<div class="sample-answer"><p>業界別課題パターン、技術選定基準、失敗事例</p></div>'}
+        subtitle: '1件の成功を10件の成功に変える技術',
+        goals: [
+            '知見の資産化の本質を理解する',
+            'パターン抽出の方法を習得する',
+            '再利用可能なドキュメントを作成できる',
+            'FDEとして組織に知見を還元できる'
+        ],
+        content: `
+<div class="content-section">
+    <h2>知見の資産化とは何か: FDEの最も重要な仕事</h2>
+    
+    <div class="definition-box">
+        <h3>知見の資産化の定義</h3>
+        <p><strong>知見の資産化</strong>とは、個別案件で得た経験を、次の案件で再利用可能な形に整理・文書化し、組織全体の勝ちパターンとして蓄積することである。</p>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 なぜ知見の資産化が重要なのか</h4>
+        <p>FDEの価値は、<strong>「1件の成功」ではなく「1件の成功を10件の成功に変えること」</strong>にある。</p>
+        <p>個別案件で終わらせてしまうと、次の案件でまた同じ失敗を繰り返し、同じ調査を繰り返し、同じ提案を一から作り直すことになる。これは、組織にとって大きな機会損失である。</p>
+        <p>知見を資産化することで、<strong>組織全体の提案力・実装力・成功率が向上</strong>し、FDE個人の市場価値も高まる。</p>
+    </div>
+    
+    <h3>知見の資産化の3つのレベル</h3>
+    
+    <div class="levels-grid">
+        <div class="level-card">
+            <h4>Level 1: 個人メモ（自分だけが分かる）</h4>
+            <p><strong>形式:</strong> 箇条書き、スクリーンショット、個人的なメモ</p>
+            <p><strong>問題点:</strong> 他人が読めない、検索できない、再利用できない</p>
+            <p><strong>例:</strong> 「顧客Aの案件、うまくいった。RAG使った。」</p>
+        </div>
+        
+        <div class="level-card">
+            <h4>Level 2: チーム共有（チームが分かる）</h4>
+            <p><strong>形式:</strong> 構造化されたドキュメント、背景・課題・解決策を明記</p>
+            <p><strong>価値:</strong> チームメンバーが参考にできる、類似案件で再利用できる</p>
+            <p><strong>例:</strong> 「製造業向けRAG導入パターン: 課題、技術選定、実装方法、失敗事例」</p>
+        </div>
+        
+        <div class="level-card">
+            <h4>Level 3: 組織資産（全社が使える）</h4>
+            <p><strong>形式:</strong> テンプレート、チェックリスト、判断基準、再利用可能なコード</p>
+            <p><strong>価値:</strong> 新人でも使える、営業も提案に使える、勝ちパターンとして確立</p>
+            <p><strong>例:</strong> 「業界別AI導入テンプレート集、技術選定フローチャート、提案書テンプレート」</p>
+        </div>
+    </div>
+    
+    <h3>知見の資産化の5ステップ</h3>
+    
+    <div class="workflow-steps">
+        <div class="workflow-step">
+            <h4>Step 1: パターンを抽出する</h4>
+            <p>個別案件の詳細から、<strong>再利用可能なパターン</strong>を抽出する。</p>
+            <div class="example-box">
+                <h5>悪い例（個別すぎる）</h5>
+                <p>「A社の在庫管理システムで、PostgreSQLのインデックスを追加したら速くなった」</p>
+                
+                <h5>良い例（パターン化）</h5>
+                <p>「在庫管理システムでは、商品コード・日付・拠点コードの複合インデックスが有効。検索クエリの90%がこの3つの組み合わせだから。」</p>
+            </div>
+        </div>
+        
+        <div class="workflow-step">
+            <h4>Step 2: 背景と課題を明確にする</h4>
+            <p><strong>「なぜその解決策が必要だったのか」</strong>を記録する。これがないと、他の案件で適用すべきか判断できない。</p>
+            <div class="template-box">
+                <h5>テンプレート</h5>
+                <pre><code>【業界】製造業
+【課題】複数拠点の在庫データが分散し、リアルタイムで把握できない
+【制約】既存システム（AS/400）は変更不可
+【解決策】RAGで在庫データを統合検索
+【効果】在庫確認時間を30分→3分に短縮
+【失敗事例】最初はFine-tuningを試したが、データ更新が追いつかず断念</code></pre>
+            </div>
+        </div>
+        
+        <div class="workflow-step">
+            <h4>Step 3: 判断基準を文書化する</h4>
+            <p><strong>「なぜその技術を選んだのか」</strong>の判断基準を明確にする。</p>
+            <div class="decision-criteria">
+                <h5>例: RAG vs Fine-tuning の判断基準</h5>
+                <table>
+                    <tr>
+                        <th>条件</th>
+                        <th>推奨技術</th>
+                        <th>理由</th>
+                    </tr>
+                    <tr>
+                        <td>データが毎日更新される</td>
+                        <td>RAG</td>
+                        <td>Fine-tuningは再学習に時間がかかる</td>
+                    </tr>
+                    <tr>
+                        <td>専門用語が多い</td>
+                        <td>Fine-tuning</td>
+                        <td>ドメイン特化で精度が上がる</td>
+                    </tr>
+                    <tr>
+                        <td>情報源の透明性が必要</td>
+                        <td>RAG</td>
+                        <td>どの文書を参照したか追跡可能</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="workflow-step">
+            <h4>Step 4: 再利用可能な成果物を作る</h4>
+            <p>次の案件で<strong>そのまま使える形</strong>にする。</p>
+            <div class="deliverables">
+                <h5>再利用可能な成果物の例</h5>
+                <ul>
+                    <li><strong>提案書テンプレート:</strong> 業界別、課題別の提案書ひな形</li>
+                    <li><strong>技術選定フローチャート:</strong> 条件に応じた技術選定の判断木</li>
+                    <li><strong>チェックリスト:</strong> PoC前、本番化前の確認項目</li>
+                    <li><strong>コードテンプレート:</strong> RAG実装、API連携、認証処理などの雛形</li>
+                    <li><strong>FAQ:</strong> 顧客からよく聞かれる質問と回答</li>
+                    <li><strong>失敗事例集:</strong> やってはいけないこと、ハマりポイント</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="workflow-step">
+            <h4>Step 5: 組織に還元する</h4>
+            <p>作成した資産を、<strong>チームや全社で使える形</strong>にする。</p>
+            <div class="sharing-methods">
+                <h5>還元方法</h5>
+                <ul>
+                    <li><strong>社内Wiki:</strong> 検索可能な形で公開</li>
+                    <li><strong>勉強会:</strong> 実際の案件を題材に知見を共有</li>
+                    <li><strong>テンプレート集:</strong> 営業が提案に使えるテンプレート</li>
+                    <li><strong>コードリポジトリ:</strong> 再利用可能なコードを共有</li>
+                    <li><strong>ケーススタディ:</strong> 成功事例・失敗事例を文書化</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <h3>知見の資産化の実例</h3>
+    
+    <div class="case-study">
+        <h4>実例: 製造業向けRAG導入パターンの資産化</h4>
+        
+        <div class="before-after">
+            <div class="before">
+                <h5>資産化前（個別対応）</h5>
+                <p>A社、B社、C社で同じような在庫管理の課題に対応したが、毎回一から調査・提案・実装を繰り返していた。</p>
+                <ul>
+                    <li>提案書作成: 各社3日</li>
+                    <li>技術調査: 各社2日</li>
+                    <li>PoC実装: 各社5日</li>
+                    <li><strong>合計: 30日</strong></li>
+                </ul>
+            </div>
+            
+            <div class="after">
+                <h5>資産化後（パターン適用）</h5>
+                <p>「製造業向けRAG導入パターン」を作成し、テンプレート化。</p>
+                <ul>
+                    <li>提案書作成: 各社0.5日（テンプレート活用）</li>
+                    <li>技術調査: 各社0.5日（判断基準を適用）</li>
+                    <li>PoC実装: 各社2日（コードテンプレート活用）</li>
+                    <li><strong>合計: 9日（70%削減）</strong></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="asset-content">
+            <h5>資産化した内容</h5>
+            <ul>
+                <li><strong>提案書テンプレート:</strong> 製造業の在庫管理課題、RAGの価値、導入ステップ</li>
+                <li><strong>技術選定基準:</strong> RAG vs Fine-tuning の判断フローチャート</li>
+                <li><strong>実装テンプレート:</strong> RAG + ベクトルDB + API連携のコード雛形</li>
+                <li><strong>FAQ:</strong> 「既存システムとの連携は？」「コストは？」「精度は？」</li>
+                <li><strong>失敗事例:</strong> 「最初はFine-tuningを試したが、データ更新が追いつかず断念」</li>
+            </ul>
+        </div>
+    </div>
+    
+    <h3>知見の資産化を阻む3つの罠</h3>
+    
+    <div class="pitfalls">
+        <div class="pitfall-card">
+            <h4>罠1: 「忙しくて時間がない」</h4>
+            <p><strong>問題:</strong> 案件が終わったら次の案件に移り、振り返る時間がない</p>
+            <p><strong>対策:</strong> 案件中に少しずつ記録する。週1回30分の振り返りタイムを確保する。</p>
+        </div>
+        
+        <div class="pitfall-card">
+            <h4>罠2: 「完璧なドキュメントを作ろうとする」</h4>
+            <p><strong>問題:</strong> 完璧を目指して結局何も残せない</p>
+            <p><strong>対策:</strong> 80%の完成度で公開する。使われながら改善する。</p>
+        </div>
+        
+        <div class="pitfall-card">
+            <h4>罠3: 「自分だけが分かる形で記録する」</h4>
+            <p><strong>問題:</strong> 他人が読めない、検索できない、再利用できない</p>
+            <p><strong>対策:</strong> テンプレートを使う。背景・課題・解決策を必ず書く。</p>
+        </div>
+    </div>
+    
+    <h3>FDEとしての知見の資産化チェックリスト</h3>
+    
+    <div class="checklist">
+        <h4>案件終了時に必ず確認すること</h4>
+        <ul>
+            <li>□ この案件で得た最も重要な学びは何か？</li>
+            <li>□ 次の案件で再利用できるパターンは何か？</li>
+            <li>□ 失敗したこと、ハマったことは何か？</li>
+            <li>□ 顧客からよく聞かれた質問は何か？</li>
+            <li>□ 技術選定の判断基準は明確か？</li>
+            <li>□ 提案書のテンプレート化できる部分はあるか？</li>
+            <li>□ コードで再利用できる部分はあるか？</li>
+            <li>□ チームに共有すべき知見は何か？</li>
+            <li>□ 営業が提案に使える情報は何か？</li>
+            <li>□ 次の自分が見返した時に理解できるか？</li>
+        </ul>
+    </div>
+</div>
+        `,
+        quiz: [
+            {
+                question: '知見の資産化で最も重要なのは？',
+                options: [
+                    '詳細な記録を残すこと',
+                    '再利用可能なパターンを抽出すること',
+                    '大量のドキュメントを作ること',
+                    '速く記録すること'
+                ],
+                correct: 1,
+                explanation: '知見の資産化で最も重要なのは、個別案件の詳細ではなく、次の案件で再利用可能なパターンを抽出すること。パターンがあれば、類似案件で素早く適用できる。'
+            }
+        ],
+        exercise: {
+            title: '実践演習: 案件の知見を資産化する',
+            prompt: 'あなたは製造業A社で、在庫管理システムにRAGを導入し、成功した。この経験を、次の製造業案件で再利用できる形に資産化せよ。',
+            sampleAnswer: `
+<div class="sample-answer">
+    <h4>模範解答例</h4>
+    
+    <h5>1. パターンの抽出</h5>
+    <p><strong>製造業向けRAG導入パターン</strong></p>
+    <ul>
+        <li>課題: 複数拠点の在庫データが分散、リアルタイム把握が困難</li>
+        <li>解決策: RAGで在庫データを統合検索</li>
+        <li>効果: 在庫確認時間を30分→3分に短縮</li>
+    </ul>
+    
+    <h5>2. 技術選定基準</h5>
+    <p>RAGを選んだ理由:</p>
+    <ul>
+        <li>在庫データが毎日更新される（Fine-tuningは再学習に時間がかかる）</li>
+        <li>既存システム（AS/400）は変更不可（RAGなら既存システムに影響なし）</li>
+        <li>情報源の透明性が必要（どの拠点のデータか追跡可能）</li>
+    </ul>
+    
+    <h5>3. 再利用可能な成果物</h5>
+    <ul>
+        <li>提案書テンプレート: 製造業の在庫管理課題、RAGの価値、導入ステップ</li>
+        <li>実装テンプレート: RAG + Pinecone + API連携のコード雛形</li>
+        <li>FAQ: 「既存システムとの連携は？」「コストは？」「精度は？」</li>
+    </ul>
+    
+    <h5>4. 失敗事例</h5>
+    <p>最初はFine-tuningを試したが、在庫データが毎日更新されるため、再学習が追いつかず断念。RAGに切り替えて成功。</p>
+</div>
+            `
+        }
     },
     
     30: {

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Bob Test</title>
+</head>
+<body>
+    <h1>Bob Data Test</h1>
+    <div id="result"></div>
+    <div id="errors" style="margin-top: 20px; padding: 10px; background: #fee; border: 1px solid #f00;"></div>
+    
+    <script>
+        // エラーをキャッチ
+        window.onerror = function(msg, url, lineNo, columnNo, error) {
+            const errorsDiv = document.getElementById('errors');
+            errorsDiv.innerHTML += `
+                <p><strong>JavaScript Error:</strong></p>
+                <p>Message: ${msg}</p>
+                <p>Line: ${lineNo}, Column: ${columnNo}</p>
+                <p>File: ${url}</p>
+                <pre>${error ? error.stack : 'No stack trace'}</pre>
+            `;
+            return false;
+        };
+    </script>
+    
+    <script src="bob-data.js"></script>
+    <script>
+        const resultDiv = document.getElementById('result');
+        
+        if (typeof window.bobSections === 'undefined') {
+            resultDiv.innerHTML = '<p style="color: red;">❌ window.bobSections is undefined</p><p>Check the errors section below for details.</p>';
+            console.error('window.bobSections is undefined');
+        } else if (!Array.isArray(window.bobSections)) {
+            resultDiv.innerHTML = '<p style="color: red;">❌ window.bobSections is not an array</p>';
+            console.error('window.bobSections is not an array:', typeof window.bobSections);
+        } else {
+            resultDiv.innerHTML = `
+                <p style="color: green;">✅ window.bobSections loaded successfully</p>
+                <p>Number of sections: ${window.bobSections.length}</p>
+                <ul>
+                    ${window.bobSections.map(s => `<li>${s.id}: ${s.title}</li>`).join('')}
+                </ul>
+            `;
+            console.log('✅ bobSections:', window.bobSections);
+        }
+    </script>
+</body>
+</html>

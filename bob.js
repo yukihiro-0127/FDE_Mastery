@@ -42,6 +42,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeBobPage() {
+    // 2つのファイルからセクションを結合
+    if (window.bobSectionsMain && window.bobSectionsExtensions) {
+        window.bobSections = [...window.bobSectionsMain, ...window.bobSectionsExtensions];
+    }
+    
     renderSections();
     
     // デフォルトで最初のセクションを表示

@@ -3957,29 +3957,343 @@ grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
     
     23: {
         title: 'ケース1: 製造業',
-        subtitle: '不良品検知AI',
-        goals: ['製造業特有の課題理解', 'Edge AI活用', '現場導入の工夫'],
-        content: `<div class="content-section"><h2>ケース概要</h2><p>工場の不良品を画像認識で検知</p></div>`,
-        quiz: [{question: '製造業AIで重要なのは？', options: ['精度', 'リアルタイム性', 'コスト', '全て'], correct: 3, explanation: '全てが重要だが、特にリアルタイム性。'}],
-        exercise: {title: 'ケース分析', prompt: '課題と解決策を提案せよ', sampleAnswer: '<div class="sample-answer"><p>Edge AIでリアルタイム判定、クラウドで学習</p></div>'}
+        subtitle: '不良品検知AI - 現場で動くAIの実装',
+        goals: [
+            '製造業特有の課題とAI活用の可能性を理解する',
+            'Edge AIとクラウドAIの使い分けを判断できる',
+            '現場導入の工夫と失敗パターンを理解する',
+            'FDEとして製造業向けAI提案ができる'
+        ],
+        content: `
+<div class="content-section">
+    <h2>製造業AI導入の現実: 精度99%でも失敗する理由</h2>
+    
+    <div class="case-overview">
+        <h3>ケース概要</h3>
+        <p><strong>顧客:</strong> 大手自動車部品メーカー</p>
+        <p><strong>課題:</strong> 製造ラインで不良品の見逃しが発生。人間の目視検査では限界。</p>
+        <p><strong>要望:</strong> AIで不良品を自動検知し、品質を向上させたい。</p>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 製造業AIの本質的な課題</h4>
+        <p>製造業では、<strong>「精度99%」では不十分</strong>。1万個に1個の不良品でも、顧客クレームや製品リコールにつながる。</p>
+        <p>さらに、<strong>リアルタイム性</strong>が必須。製造ラインは止められないため、判定に1秒以上かかると使えない。</p>
+    </div>
+    
+    <h3>FDEとしての提案: Edge AI + クラウドAIのハイブリッド構成</h3>
+    
+    <div class="solution-architecture">
+        <h4>システム構成</h4>
+        <pre><code>【Edge AI（工場内）】
+カメラ → Edge AI（リアルタイム判定） → 製造ライン制御
+↓（不良品画像のみ）
+【クラウドAI】
+不良品画像を蓄積 → モデル再学習 → Edge AIに配信</code></pre>
+        
+        <h4>なぜこの構成なのか</h4>
+        <ul>
+            <li><strong>Edge AI:</strong> リアルタイム判定（100ms以内）、ネットワーク遅延なし</li>
+            <li><strong>クラウドAI:</strong> 大量データで継続的に学習、モデル精度向上</li>
+        </ul>
+    </div>
+    
+    <h3>実装のポイント</h3>
+    
+    <div class="implementation-points">
+        <div class="point-card">
+            <h4>1. データ収集の工夫</h4>
+            <p><strong>課題:</strong> 不良品データが少ない（良品:不良品 = 1000:1）</p>
+            <p><strong>解決策:</strong></p>
+            <ul>
+                <li>Data Augmentation（画像の回転、明るさ調整）で不良品データを増やす</li>
+                <li>Anomaly Detection（異常検知）で「正常」を学習させる</li>
+                <li>人間が見逃した不良品を後工程で収集し、学習データに追加</li>
+            </ul>
+        </div>
+        
+        <div class="point-card">
+            <h4>2. 現場との調整</h4>
+            <p><strong>課題:</strong> 現場作業員が「AIに仕事を奪われる」と不安</p>
+            <p><strong>解決策:</strong></p>
+            <ul>
+                <li>AIは「支援ツール」であり、最終判断は人間が行うと明示</li>
+                <li>AIが不良品と判定した画像を、人間が確認する運用</li>
+                <li>現場の声を聞き、誤検知を減らす改善を継続</li>
+            </ul>
+        </div>
+        
+        <div class="point-card">
+            <h4>3. 段階的導入</h4>
+            <p><strong>Phase 1:</strong> 1ラインで試験導入（3ヶ月）</p>
+            <p><strong>Phase 2:</strong> 精度検証、現場フィードバック反映（2ヶ月）</p>
+            <p><strong>Phase 3:</strong> 全ラインに展開（6ヶ月）</p>
+        </div>
+    </div>
+    
+    <h3>失敗事例から学ぶ</h3>
+    
+    <div class="failure-cases">
+        <div class="failure-card">
+            <h4>❌ 失敗事例1: クラウドAIのみで実装</h4>
+            <p><strong>問題:</strong> ネットワーク遅延で判定に3秒かかり、製造ラインが止まった</p>
+            <p><strong>教訓:</strong> 製造業ではEdge AIが必須。リアルタイム性を最優先に。</p>
+        </div>
+        
+        <div class="failure-card">
+            <h4>❌ 失敗事例2: 精度99.9%で満足</h4>
+            <p><strong>問題:</strong> 1000個に1個の不良品を見逃し、顧客クレーム発生</p>
+            <p><strong>教訓:</strong> 製造業では「見逃しゼロ」が目標。過検知（誤って不良品と判定）は許容できるが、見逃しは許容できない。</p>
+        </div>
+        
+        <div class="failure-card">
+            <h4>❌ 失敗事例3: 現場の声を聞かずに導入</h4>
+            <p><strong>問題:</strong> 現場作業員が使わず、形骸化</p>
+            <p><strong>教訓:</strong> 現場の声を聞き、運用に組み込む。AIは「押し付け」ではなく「協働」。</p>
+        </div>
+    </div>
+    
+    <h3>成果と今後の展開</h3>
+    
+    <div class="results">
+        <h4>導入成果</h4>
+        <ul>
+            <li><strong>不良品検知率:</strong> 95% → 99.8%（人間の目視を超える）</li>
+            <li><strong>検査時間:</strong> 1個あたり5秒 → 0.1秒（50倍高速化）</li>
+            <li><strong>コスト削減:</strong> 検査員3名 → 1名（確認作業のみ）</li>
+            <li><strong>顧客クレーム:</strong> 月10件 → 月1件（90%削減）</li>
+        </ul>
+        
+        <h4>今後の展開</h4>
+        <ul>
+            <li>他の製造ラインへの横展開</li>
+            <li>予知保全（設備故障の予測）への応用</li>
+            <li>品質データの分析による製造プロセス改善</li>
+        </ul>
+    </div>
+</div>
+        `,
+        quiz: [
+            {
+                question: '製造業AIで最も重要なのは？',
+                options: ['精度', 'リアルタイム性', 'コスト', '全て重要だが、特にリアルタイム性'],
+                correct: 3,
+                explanation: '製造業では精度、リアルタイム性、コストの全てが重要だが、特にリアルタイム性が必須。製造ラインは止められないため、判定に時間がかかると使えない。'
+            }
+        ],
+        exercise: {
+            title: '実践演習: 製造業AI提案',
+            prompt: '食品メーカーから「製造ラインで異物混入を検知したい」という要望があった。FDEとして、技術提案を作成せよ。',
+            sampleAnswer: '<div class="sample-answer"><h4>提案内容</h4><p><strong>システム構成:</strong> Edge AI（工場内）+ クラウドAI（学習）のハイブリッド</p><p><strong>技術選定:</strong> 画像認識（YOLO）+ Anomaly Detection</p><p><strong>導入ステップ:</strong> Phase 1: 1ライン試験導入 → Phase 2: 精度検証 → Phase 3: 全ライン展開</p><p><strong>リスク対策:</strong> 過検知は許容、見逃しゼロを目標。人間が最終確認。</p></div>'
+        }
     },
     
     24: {
         title: 'ケース2: 金融業',
-        subtitle: '与信審査AI',
-        goals: ['金融業特有の課題理解', '説明可能性の重要性', 'コンプライアンス対応'],
-        content: `<div class="content-section"><h2>ケース概要</h2><p>AIで与信審査を効率化</p></div>`,
-        quiz: [{question: '金融AIで最も重要なのは？', options: ['精度', '速度', '説明可能性', 'コスト'], correct: 2, explanation: '説明可能性が法的に必要。'}],
-        exercise: {title: 'ケース分析', prompt: '課題と解決策を提案せよ', sampleAnswer: '<div class="sample-answer"><p>XAIで判断根拠を可視化、人間が最終判断</p></div>'}
+        subtitle: '与信審査AI - 説明可能性とコンプライアンス',
+        goals: [
+            '金融業特有の規制とAI活用の制約を理解する',
+            '説明可能性（XAI）の実装方法を理解する',
+            'コンプライアンス対応の実践方法を習得する',
+            'FDEとして金融業向けAI提案ができる'
+        ],
+        content: `
+<div class="content-section">
+    <h2>金融業AI導入の現実: 精度だけでは導入できない</h2>
+    
+    <div class="case-overview">
+        <h3>ケース概要</h3>
+        <p><strong>顧客:</strong> 地方銀行</p>
+        <p><strong>課題:</strong> 中小企業向け融資の与信審査に時間がかかる（平均2週間）</p>
+        <p><strong>要望:</strong> AIで与信審査を効率化し、審査期間を短縮したい</p>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 金融業AIの本質的な課題</h4>
+        <p>金融業では、<strong>「なぜその判断をしたのか」の説明が法的に必要</strong>。ブラックボックスなAIは使えない。</p>
+        <p>さらに、<strong>公平性</strong>も重要。年齢、性別、人種などで差別的な判断をしてはいけない。</p>
+    </div>
+    
+    <h3>FDEとしての提案: XAI（説明可能AI）+ 人間の最終判断</h3>
+    
+    <div class="solution-architecture">
+        <h4>システム構成</h4>
+        <pre><code>【入力】企業の財務データ、業界情報、経営者情報
+↓
+【AI判定】与信スコア算出（0-100点）
+↓
+【XAI】判断根拠を可視化（SHAP値）
+↓
+【人間】最終判断（AIは参考情報）</code></pre>
+        
+        <h4>なぜこの構成なのか</h4>
+        <ul>
+            <li><strong>XAI:</strong> 判断根拠を可視化し、説明可能性を確保</li>
+            <li><strong>人間の最終判断:</strong> AIは参考情報、最終判断は人間が行う</li>
+        </ul>
+    </div>
+    
+    <h3>実装のポイント</h3>
+    
+    <div class="implementation-points">
+        <div class="point-card">
+            <h4>1. 説明可能性の実装（XAI）</h4>
+            <p><strong>手法:</strong> SHAP（SHapley Additive exPlanations）</p>
+            <p><strong>出力例:</strong></p>
+            <pre><code>与信スコア: 65点
+
+【判断根拠】
++ 売上高成長率: +15点（過去3年で30%成長）
++ 自己資本比率: +10点（40%と健全）
+- 営業利益率: -5点（業界平均を下回る）
+- 経営者年齢: -3点（70歳と高齢）</code></pre>
+        </div>
+        
+        <div class="point-card">
+            <h4>2. 公平性の確保</h4>
+            <p><strong>対策:</strong></p>
+            <ul>
+                <li>年齢、性別、人種などの属性を学習データから除外</li>
+                <li>バイアス検出ツールで差別的な判断がないか検証</li>
+                <li>定期的に監査し、公平性を確認</li>
+            </ul>
+        </div>
+        
+        <div class="point-card">
+            <h4>3. コンプライアンス対応</h4>
+            <p><strong>必要な対応:</strong></p>
+            <ul>
+                <li>AIの判断根拠を記録し、監査に対応できるようにする</li>
+                <li>金融庁のガイドラインに準拠</li>
+                <li>顧客に「AIを使用している」ことを開示</li>
+            </ul>
+        </div>
+    </div>
+    
+    <h3>成果と今後の展開</h3>
+    
+    <div class="results">
+        <h4>導入成果</h4>
+        <ul>
+            <li><strong>審査期間:</strong> 平均2週間 → 3日（85%短縮）</li>
+            <li><strong>審査精度:</strong> 貸倒率 5% → 3%（40%改善）</li>
+            <li><strong>顧客満足度:</strong> 審査が速くなり、中小企業から高評価</li>
+        </ul>
+    </div>
+</div>
+        `,
+        quiz: [
+            {
+                question: '金融AIで最も重要なのは？',
+                options: ['精度', '速度', '説明可能性', 'コスト'],
+                correct: 2,
+                explanation: '金融業では説明可能性が法的に必要。「なぜその判断をしたのか」を説明できないAIは使えない。'
+            }
+        ],
+        exercise: {
+            title: '実践演習: 金融業AI提案',
+            prompt: '保険会社から「保険金請求の不正検知をAIで自動化したい」という要望があった。FDEとして、技術提案を作成せよ。',
+            sampleAnswer: '<div class="sample-answer"><h4>提案内容</h4><p><strong>システム構成:</strong> 異常検知AI + XAI + 人間の最終判断</p><p><strong>説明可能性:</strong> SHAP値で判断根拠を可視化</p><p><strong>コンプライアンス:</strong> 判断根拠を記録、監査対応</p><p><strong>公平性:</strong> バイアス検出ツールで差別的判断を防止</p></div>'
+        }
     },
     
     25: {
         title: 'ケース3: 小売業',
-        subtitle: '需要予測AI',
-        goals: ['小売業特有の課題理解', '時系列予測', '在庫最適化'],
-        content: `<div class="content-section"><h2>ケース概要</h2><p>AIで需要を予測し在庫を最適化</p></div>`,
-        quiz: [{question: '需要予測で重要なのは？', options: ['過去データ', '外部要因', '季節性', '全て'], correct: 3, explanation: '全ての要因を考慮する必要がある。'}],
-        exercise: {title: 'ケース分析', prompt: '課題と解決策を提案せよ', sampleAnswer: '<div class="sample-answer"><p>時系列予測+外部データ統合、段階的導入</p></div>'}
+        subtitle: '需要予測AI - 在庫最適化と機会損失の削減',
+        goals: [
+            '小売業特有の課題とAI活用の可能性を理解する',
+            '時系列予測の実装方法を理解する',
+            '外部データ統合の重要性を理解する',
+            'FDEとして小売業向けAI提案ができる'
+        ],
+        content: `
+<div class="content-section">
+    <h2>小売業AI導入の現実: 予測精度80%でも大きな価値</h2>
+    
+    <div class="case-overview">
+        <h3>ケース概要</h3>
+        <p><strong>顧客:</strong> 全国展開するコンビニチェーン</p>
+        <p><strong>課題:</strong> 商品の発注量が適切でなく、廃棄ロスと機会損失が発生</p>
+        <p><strong>要望:</strong> AIで需要を予測し、在庫を最適化したい</p>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 小売業AIの本質的な課題</h4>
+        <p>小売業では、<strong>「過去データだけでは予測できない」</strong>。天気、イベント、競合の動きなど、外部要因が大きく影響する。</p>
+        <p>さらに、<strong>商品ごとに予測精度が異なる</strong>。定番商品は予測しやすいが、新商品や季節商品は難しい。</p>
+    </div>
+    
+    <h3>FDEとしての提案: 時系列予測 + 外部データ統合</h3>
+    
+    <div class="solution-architecture">
+        <h4>システム構成</h4>
+        <pre><code>【入力データ】
+- 過去の販売データ（2年分）
+- 天気予報（気温、降水確率）
+- イベント情報（祝日、地域イベント）
+- 競合情報（近隣店舗の動向）
+↓
+【AI予測】翌日の需要予測
+↓
+【発注最適化】予測に基づいて自動発注</code></pre>
+    </div>
+    
+    <h3>実装のポイント</h3>
+    
+    <div class="implementation-points">
+        <div class="point-card">
+            <h4>1. 外部データの統合</h4>
+            <p><strong>重要な外部データ:</strong></p>
+            <ul>
+                <li><strong>天気:</strong> 気温が高いとアイスが売れる、雨の日は傘が売れる</li>
+                <li><strong>イベント:</strong> 祝日、地域イベント、スポーツ大会</li>
+                <li><strong>競合:</strong> 近隣店舗のセール情報</li>
+            </ul>
+        </div>
+        
+        <div class="point-card">
+            <h4>2. 商品カテゴリ別の予測</h4>
+            <p><strong>カテゴリ分け:</strong></p>
+            <ul>
+                <li><strong>定番商品:</strong> 予測精度90%（おにぎり、飲料）</li>
+                <li><strong>季節商品:</strong> 予測精度70%（アイス、おでん）</li>
+                <li><strong>新商品:</strong> 予測精度50%（類似商品のデータで予測）</li>
+            </ul>
+        </div>
+        
+        <div class="point-card">
+            <h4>3. 段階的導入</h4>
+            <p><strong>Phase 1:</strong> 定番商品のみ（3ヶ月）</p>
+            <p><strong>Phase 2:</strong> 季節商品を追加（3ヶ月）</p>
+            <p><strong>Phase 3:</strong> 全商品に展開（6ヶ月）</p>
+        </div>
+    </div>
+    
+    <h3>成果と今後の展開</h3>
+    
+    <div class="results">
+        <h4>導入成果</h4>
+        <ul>
+            <li><strong>廃棄ロス:</strong> 月100万円 → 30万円（70%削減）</li>
+            <li><strong>機会損失:</strong> 月50万円 → 20万円（60%削減）</li>
+            <li><strong>在庫回転率:</strong> 月10回 → 月15回（50%改善）</li>
+        </ul>
+    </div>
+</div>
+        `,
+        quiz: [
+            {
+                question: '需要予測で重要なのは？',
+                options: ['過去データ', '外部要因', '季節性', '全て重要'],
+                correct: 3,
+                explanation: '需要予測では、過去データ、外部要因（天気、イベント）、季節性の全てを考慮する必要がある。'
+            }
+        ],
+        exercise: {
+            title: '実践演習: 小売業AI提案',
+            prompt: 'アパレルチェーンから「在庫を最適化したい」という要望があった。FDEとして、技術提案を作成せよ。',
+            sampleAnswer: '<div class="sample-answer"><h4>提案内容</h4><p><strong>システム構成:</strong> 時系列予測 + 外部データ統合（天気、トレンド、SNS）</p><p><strong>予測対象:</strong> 商品カテゴリ別（定番、季節、トレンド）</p><p><strong>導入ステップ:</strong> Phase 1: 定番商品 → Phase 2: 季節商品 → Phase 3: 全商品</p></div>'
+        }
     },
     
     26: {

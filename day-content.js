@@ -1030,11 +1030,331 @@ print(f"高額顧客数: {len(high_value)}")</code></pre>`,
     
     10: {
         title: 'ログを読む',
-        subtitle: 'トラブルシューティングの基礎',
-        goals: ['ログレベル理解', 'エラー特定', '原因推定'],
-        content: `<div class="content-section"><h2>ログの読み方</h2><p>システムの動作を記録したもの</p></div>`,
-        quiz: [{question: '最も深刻なログレベルは？', options: ['INFO', 'WARN', 'ERROR', 'DEBUG'], correct: 2, explanation: 'ERRORが最も深刻。'}],
-        exercise: {title: 'ログを読む', prompt: 'エラーの原因を特定せよ', sampleAnswer: '<div class="sample-answer"><p>接続タイムアウトエラー</p></div>'}
+        subtitle: 'システムの声を聞く技術',
+        goals: [
+            'ログが生まれた歴史と重要性を理解する',
+            'ログレベルの意味と使い分けを完全に理解する',
+            '実際のログからエラー原因を特定できる',
+            'FDEとしてログを活用したトラブルシューティングができる'
+        ],
+        content: `
+<div class="content-section">
+    <h2>ログの歴史: なぜログが重要なのか</h2>
+    
+    <div class="timeline-box">
+        <h3>ログの進化</h3>
+        <div class="timeline-item">
+            <h4>1960年代: デバッグの始まり</h4>
+            <p>コンピューターが登場した当初、プログラムの動作を確認する手段は「print文」だけだった。</p>
+            <pre><code>PRINT "Processing record 1"
+PRINT "Processing record 2"</code></pre>
+            <p><strong>問題点:</strong> 本番環境で使えない、後から確認できない、大量のprint文で遅くなる</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>1980年代: ログファイルの登場</h4>
+            <p>UNIXシステムで、システムの動作をファイルに記録する仕組みが標準化。</p>
+            <pre><code>/var/log/system.log
+/var/log/error.log</code></pre>
+            <p><strong>革新点:</strong> 後から確認できる、本番環境でも使える、レベル別に分類できる</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2000年代: 構造化ログ</h4>
+            <p>JSONやXML形式でログを記録し、機械的に解析できるように。</p>
+            <pre><code>{"timestamp": "2024-01-20T10:30:00Z", "level": "ERROR", "message": "Connection timeout"}</code></pre>
+            <p><strong>革新点:</strong> 自動分析、可視化、アラート設定が可能に</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2010年代〜現在: 分散ログ管理</h4>
+            <p>Splunk、ELK Stack、CloudWatchなど、複数サーバーのログを集約・分析するツールが登場。</p>
+            <p><strong>現状:</strong> マイクロサービス時代に、ログは「システムの健康診断書」として不可欠</p>
+        </div>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 なぜログが重要なのか</h4>
+        <p><strong>技術的理由:</strong> 本番環境で起きた問題を、後から再現・分析できる唯一の手段</p>
+        <p><strong>ビジネス的理由:</strong> システム障害の原因特定が早い = ダウンタイムが短い = 損失が少ない</p>
+        <p><strong>法的理由:</strong> セキュリティインシデント発生時、ログが証拠になる</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>ログレベルを完全理解する</h2>
+    
+    <div class="log-levels">
+        <div class="log-level-card debug">
+            <h4>DEBUG（デバッグ）</h4>
+            <p><strong>重要度:</strong> 最低</p>
+            <p><strong>用途:</strong> 開発中のデバッグ情報</p>
+            <p><strong>例:</strong></p>
+            <pre><code>2024-01-20 10:30:00 DEBUG [UserService] Fetching user data for ID: 12345
+2024-01-20 10:30:01 DEBUG [Database] Query executed: SELECT * FROM users WHERE id=12345
+2024-01-20 10:30:01 DEBUG [UserService] User data retrieved: {name: "山田太郎", age: 30}</code></pre>
+            <p><strong>FDEとして:</strong> 本番環境では通常オフ。開発時のみ使用。</p>
+        </div>
+        
+        <div class="log-level-card info">
+            <h4>INFO（情報）</h4>
+            <p><strong>重要度:</strong> 低</p>
+            <p><strong>用途:</strong> 正常な動作の記録</p>
+            <p><strong>例:</strong></p>
+            <pre><code>2024-01-20 10:30:00 INFO [Application] Server started on port 8080
+2024-01-20 10:30:05 INFO [UserService] User login successful: user_id=12345
+2024-01-20 10:30:10 INFO [OrderService] Order created: order_id=67890, amount=10000</code></pre>
+            <p><strong>FDEとして:</strong> システムが正常に動いているか確認するために使う。</p>
+        </div>
+        
+        <div class="log-level-card warn">
+            <h4>WARN（警告）</h4>
+            <p><strong>重要度:</strong> 中</p>
+            <p><strong>用途:</strong> 問題になる可能性がある状況</p>
+            <p><strong>例:</strong></p>
+            <pre><code>2024-01-20 10:30:00 WARN [Database] Connection pool 80% full (8/10 connections in use)
+2024-01-20 10:30:05 WARN [Cache] Cache hit rate below 50% (current: 45%)
+2024-01-20 10:30:10 WARN [API] Response time exceeded threshold: 3.5s (threshold: 3.0s)</code></pre>
+            <p><strong>FDEとして:</strong> 今すぐ問題ではないが、放置すると問題になる可能性がある。監視が必要。</p>
+        </div>
+        
+        <div class="log-level-card error">
+            <h4>ERROR（エラー）</h4>
+            <p><strong>重要度:</strong> 高</p>
+            <p><strong>用途:</strong> 処理が失敗した</p>
+            <p><strong>例:</strong></p>
+            <pre><code>2024-01-20 10:30:00 ERROR [Database] Connection timeout after 30s
+2024-01-20 10:30:05 ERROR [PaymentService] Payment failed: insufficient_funds, user_id=12345
+2024-01-20 10:30:10 ERROR [FileService] File not found: /data/documents/report.pdf</code></pre>
+            <p><strong>FDEとして:</strong> 即座に対応が必要。ユーザーに影響が出ている可能性が高い。</p>
+        </div>
+        
+        <div class="log-level-card fatal">
+            <h4>FATAL / CRITICAL（致命的）</h4>
+            <p><strong>重要度:</strong> 最高</p>
+            <p><strong>用途:</strong> システムが停止する重大なエラー</p>
+            <p><strong>例:</strong></p>
+            <pre><code>2024-01-20 10:30:00 FATAL [Application] Out of memory: Cannot allocate 1GB
+2024-01-20 10:30:05 FATAL [Database] All database connections failed
+2024-01-20 10:30:10 FATAL [Security] Unauthorized access detected, shutting down</code></pre>
+            <p><strong>FDEとして:</strong> 緊急対応が必要。システム全体が停止している可能性がある。</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>実践: FDEとしてログを読む</h2>
+    
+    <h3>シナリオ1: RAGシステムのエラー調査</h3>
+    <div class="scenario-box">
+        <p><strong>状況:</strong> 顧客から「RAGシステムが動かない」と連絡が来た</p>
+        <p><strong>ログ:</strong></p>
+        <pre><code>2024-01-20 10:25:00 INFO [RAGService] Starting document retrieval for query: "製品Aの仕様"
+2024-01-20 10:25:01 DEBUG [VectorDB] Searching for similar documents, query_vector_size: 384
+2024-01-20 10:25:02 WARN [VectorDB] Query took 2.5s (threshold: 2.0s)
+2024-01-20 10:25:03 INFO [VectorDB] Found 5 similar documents
+2024-01-20 10:25:04 INFO [LLMService] Sending prompt to LLM, context_size: 2048 tokens
+2024-01-20 10:25:05 ERROR [LLMService] LLM API call failed: rate_limit_exceeded
+2024-01-20 10:25:05 ERROR [LLMService] Retry 1/3 after 1s
+2024-01-20 10:25:06 ERROR [LLMService] LLM API call failed: rate_limit_exceeded
+2024-01-20 10:25:06 ERROR [LLMService] Retry 2/3 after 2s
+2024-01-20 10:25:08 ERROR [LLMService] LLM API call failed: rate_limit_exceeded
+2024-01-20 10:25:08 ERROR [LLMService] Retry 3/3 failed, giving up
+2024-01-20 10:25:08 ERROR [RAGService] Document retrieval failed: LLM service unavailable</code></pre>
+        
+        <div class="analysis">
+            <h4>FDEとしての読み方:</h4>
+            <ol>
+                <li><strong>10:25:00-10:25:03:</strong> ベクトル検索は成功（5件のドキュメントを取得）</li>
+                <li><strong>10:25:02 WARN:</strong> 検索に2.5秒かかっている（閾値2.0秒超過）→ パフォーマンス問題の兆候</li>
+                <li><strong>10:25:05-10:25:08 ERROR:</strong> LLM APIの呼び出しが3回とも失敗</li>
+                <li><strong>エラー原因:</strong> rate_limit_exceeded = API呼び出し回数の上限超過</li>
+            </ol>
+            
+            <h4>顧客への説明:</h4>
+            <p>「RAGシステム自体は正常に動作していますが、LLM（言語モデル）のAPI呼び出し回数が上限を超えています。これは、同時に多くのユーザーがシステムを使用しているためです。対策として、APIプランのアップグレードまたはリクエストの分散が必要です。」</p>
+            
+            <h4>技術者への説明:</h4>
+            <p>「ベクトル検索は成功していますが、LLMServiceでrate_limit_exceededが発生しています。リトライロジックは正常に動作していますが、3回とも失敗しています。対策として、1) APIプランのアップグレード、2) リクエストキューイング、3) キャッシュの導入を検討してください。また、VectorDBの検索時間が閾値を超えているので、インデックスの最適化も必要です。」</p>
+        </div>
+    </div>
+    
+    <h3>シナリオ2: データベース接続エラー</h3>
+    <div class="scenario-box">
+        <p><strong>状況:</strong> 本番環境で突然エラーが発生</p>
+        <p><strong>ログ:</strong></p>
+        <pre><code>2024-01-20 14:30:00 INFO [Application] Processing request: GET /api/users/12345
+2024-01-20 14:30:01 DEBUG [Database] Attempting to connect to database: host=db.example.com, port=5432
+2024-01-20 14:30:31 ERROR [Database] Connection timeout after 30s
+2024-01-20 14:30:31 ERROR [Database] Failed to execute query: SELECT * FROM users WHERE id=12345
+2024-01-20 14:30:31 ERROR [Application] Request failed: database_connection_error
+2024-01-20 14:30:31 INFO [Application] Returning 500 Internal Server Error to client</code></pre>
+        
+        <div class="analysis">
+            <h4>FDEとしての読み方:</h4>
+            <ol>
+                <li><strong>14:30:00:</strong> ユーザーからのリクエストを受信</li>
+                <li><strong>14:30:01:</strong> データベースへの接続を試行</li>
+                <li><strong>14:30:31:</strong> 30秒後にタイムアウト（14:30:01から30秒経過）</li>
+                <li><strong>原因:</strong> データベースサーバーに接続できない</li>
+            </ol>
+            
+            <h4>考えられる原因:</h4>
+            <ul>
+                <li>データベースサーバーがダウンしている</li>
+                <li>ネットワークの問題（ファイアウォール、ルーティング）</li>
+                <li>データベースの接続数上限に達している</li>
+                <li>データベースの認証情報が間違っている</li>
+            </ul>
+            
+            <h4>次のアクション:</h4>
+            <ol>
+                <li>データベースサーバーの稼働状況を確認</li>
+                <li>ネットワーク接続を確認（ping、telnet）</li>
+                <li>データベースの接続数を確認</li>
+                <li>データベースのログを確認</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>ログ分析のベストプラクティス</h2>
+    
+    <div class="best-practices">
+        <div class="practice-card">
+            <h4>1. タイムスタンプを追う</h4>
+            <p>エラーが発生した時刻から、前後のログを確認する。エラーの「前兆」が見つかることが多い。</p>
+            <pre><code>10:29:55 WARN [Database] Connection pool 90% full
+10:29:58 WARN [Database] Connection pool 95% full
+10:30:00 ERROR [Database] Connection pool exhausted</code></pre>
+            <p><strong>分析:</strong> 10:29:55から接続プールが逼迫し始め、10:30:00に枯渇した。</p>
+        </div>
+        
+        <div class="practice-card">
+            <h4>2. エラーメッセージをそのまま検索</h4>
+            <p>エラーメッセージをGoogle検索すると、同じ問題に遭遇した人の解決策が見つかることが多い。</p>
+            <p><strong>例:</strong> "rate_limit_exceeded" → OpenAI APIの呼び出し制限</p>
+        </div>
+        
+        <div class="practice-card">
+            <h4>3. ログレベルでフィルタリング</h4>
+            <p>まずERRORとFATALだけを見る。次にWARNを見る。INFOとDEBUGは必要に応じて。</p>
+            <pre><code># ERRORとFATALだけを表示
+grep -E "ERROR|FATAL" application.log
+
+# 特定の時間帯のERRORを表示
+grep "2024-01-20 10:3" application.log | grep ERROR</code></pre>
+        </div>
+        
+        <div class="practice-card">
+            <h4>4. パターンを見つける</h4>
+            <p>同じエラーが繰り返し発生していないか確認する。</p>
+            <pre><code># 同じエラーの発生回数をカウント
+grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>FDEとしてのログ活用</h2>
+    
+    <div class="fde-usage">
+        <div class="usage-card">
+            <h4>1. PoC中のデバッグ</h4>
+            <p>PoCで問題が発生した時、ログを見てエンジニアに具体的に報告できる。</p>
+            <p><strong>悪い報告:</strong> 「動きません」</p>
+            <p><strong>良い報告:</strong> 「10:30:00にrate_limit_exceededエラーが発生しています。LLM APIの呼び出し制限に達したようです。」</p>
+        </div>
+        
+        <div class="usage-card">
+            <h4>2. パフォーマンス問題の発見</h4>
+            <p>WARNレベルのログから、将来の問題を予測できる。</p>
+            <p><strong>例:</strong> 「検索時間が閾値を超えています。データ量が増えると、さらに遅くなる可能性があります。」</p>
+        </div>
+        
+        <div class="usage-card">
+            <h4>3. 顧客への説明</h4>
+            <p>ログを根拠に、技術的な問題を非エンジニアに説明できる。</p>
+            <p><strong>例:</strong> 「ログを確認したところ、データベースへの接続が30秒でタイムアウトしています。これは、データベースサーバーに問題がある可能性が高いです。」</p>
+        </div>
+    </div>
+</div>
+        `,
+        quiz: [
+            {
+                question: 'ログが重要な最大の理由は？',
+                options: [
+                    '開発者が好きだから',
+                    '本番環境で起きた問題を後から分析できる唯一の手段だから',
+                    '法律で義務付けられているから',
+                    'ファイルサイズを大きくするため'
+                ],
+                correct: 1,
+                explanation: 'ログは、本番環境で起きた問題を後から再現・分析できる唯一の手段。デバッガーが使えない本番環境では、ログが唯一の情報源。'
+            },
+            {
+                question: '次のログで、最初に確認すべき問題は？',
+                options: [
+                    'DEBUG: Query executed',
+                    'INFO: User login successful',
+                    'WARN: Connection pool 90% full',
+                    'ERROR: Database connection timeout'
+                ],
+                correct: 3,
+                explanation: 'ERRORが最優先。ユーザーに影響が出ている可能性が高い。次にWARNを確認し、将来の問題を予測する。'
+            },
+            {
+                question: 'rate_limit_exceededエラーの意味は？',
+                options: [
+                    'データベースが満杯',
+                    'API呼び出し回数の上限超過',
+                    'メモリ不足',
+                    'ネットワーク切断'
+                ],
+                correct: 1,
+                explanation: 'rate_limit_exceededは、API呼び出し回数が上限を超えたことを示す。対策として、APIプランのアップグレードやリクエストの分散が必要。'
+            }
+        ],
+        exercise: {
+            title: '実践演習: ログからエラー原因を特定する',
+            prompt: `顧客から「システムが遅い」と連絡が来た。以下のログから原因を特定し、顧客に説明せよ。
+
+<pre><code>2024-01-20 15:00:00 INFO [Application] Request received: GET /api/search?q=製品A
+2024-01-20 15:00:01 DEBUG [VectorDB] Searching for similar documents
+2024-01-20 15:00:15 WARN [VectorDB] Query took 14.2s (threshold: 2.0s)
+2024-01-20 15:00:15 INFO [VectorDB] Found 100 similar documents
+2024-01-20 15:00:16 INFO [LLMService] Sending prompt to LLM, context_size: 8192 tokens
+2024-01-20 15:00:25 WARN [LLMService] LLM response took 9.1s (threshold: 5.0s)
+2024-01-20 15:00:25 INFO [Application] Request completed in 25.3s</code></pre>`,
+            sampleAnswer: `
+<div class="sample-answer">
+    <h4>模範解答例（顧客向け）</h4>
+    <p>「システムが遅い原因は2つあります。1つ目は、ドキュメント検索に14秒かかっていること（通常は2秒以内）。2つ目は、AIの回答生成に9秒かかっていること（通常は5秒以内）。合計で25秒かかっています。」</p>
+    
+    <h4>原因分析</h4>
+    <ul>
+        <li><strong>ベクトル検索が遅い（14.2秒）:</strong> データ量が増えた、またはインデックスが最適化されていない可能性</li>
+        <li><strong>LLM応答が遅い（9.1秒）:</strong> コンテキストサイズが大きすぎる（8192トークン）</li>
+    </ul>
+    
+    <h4>改善提案</h4>
+    <ol>
+        <li><strong>短期対策:</strong> 検索結果を100件から10件に減らす（コンテキストサイズを削減）</li>
+        <li><strong>中期対策:</strong> ベクトルデータベースのインデックスを最適化</li>
+        <li><strong>長期対策:</strong> キャッシュを導入し、同じ検索は再利用</li>
+    </ol>
+    
+    <h4>技術者への説明</h4>
+    <p>「VectorDBの検索時間が14.2秒（閾値2.0秒の7倍）、LLMServiceの応答時間が9.1秒（閾値5.0秒の1.8倍）です。context_sizeが8192トークンと大きいので、検索結果の上限を減らすことを推奨します。また、VectorDBのインデックス最適化とクエリキャッシュの導入を検討してください。」</p>
+</div>
+            `
+        },
+        nextSteps: [
+            'Code Gymで実際のログを読む練習をする',
+            'Day 11でRAGの基礎を学び、RAGシステムのログを理解する',
+            '自分の担当案件のログを確認し、WARNレベルの問題がないかチェックする'
+        ]
     },
     
     11: {
@@ -1084,11 +1404,516 @@ print(f"高額顧客数: {len(high_value)}")</code></pre>`,
     
     16: {
         title: 'PoC設計',
-        subtitle: '検証可能な実験設計',
-        goals: ['PoCの目的設定', '成功基準定義', 'スコープ設定'],
-        content: `<div class="content-section"><h2>PoCとは</h2><p>Proof of Concept - 技術的実現可能性の検証</p></div>`,
-        quiz: [{question: 'PoCで最も重要なのは？', options: ['完璧な実装', '成功基準', '長期間', '大規模'], correct: 1, explanation: '成功基準を明確にすることが重要。'}],
-        exercise: {title: 'PoC設計', prompt: 'PoCの成功基準を定義せよ', sampleAnswer: '<div class="sample-answer"><p>精度80%以上、レスポンス3秒以内</p></div>'}
+        subtitle: '失敗しない実験設計の技術',
+        goals: [
+            'PoCとは何か、なぜ必要かを完全に理解する',
+            '成功基準を定量的に定義できる',
+            'スコープを適切に設定できる',
+            'FDEとしてPoC設計をリードできる'
+        ],
+        content: `
+<div class="content-section">
+    <h2>PoCとは何か: なぜPoCが必要なのか</h2>
+    
+    <div class="definition-box">
+        <h3>PoC (Proof of Concept) の定義</h3>
+        <p><strong>PoC</strong>とは、「この技術で、この課題を解決できるか」を<strong>小規模に検証する実験</strong>である。</p>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 なぜPoCが必要なのか</h4>
+        <p><strong>ビジネス的理由:</strong> いきなり本番システムを作ると、失敗した時の損失が大きい（数千万円〜数億円）</p>
+        <p><strong>技術的理由:</strong> AIは「やってみないと分からない」ことが多い（データ品質、精度、速度）</p>
+        <p><strong>組織的理由:</strong> 小さな成功を見せることで、社内の理解と予算を獲得できる</p>
+    </div>
+    
+    <div class="comparison-table">
+        <h3>PoCと本番システムの違い</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>観点</th>
+                    <th>PoC</th>
+                    <th>本番システム</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>目的</strong></td>
+                    <td>技術的実現可能性の検証</td>
+                    <td>ビジネス価値の提供</td>
+                </tr>
+                <tr>
+                    <td><strong>期間</strong></td>
+                    <td>2週間〜3ヶ月</td>
+                    <td>6ヶ月〜2年</td>
+                </tr>
+                <tr>
+                    <td><strong>データ量</strong></td>
+                    <td>100〜1,000件</td>
+                    <td>10万〜1,000万件</td>
+                </tr>
+                <tr>
+                    <td><strong>ユーザー数</strong></td>
+                    <td>5〜20人（社内のみ）</td>
+                    <td>100〜10,000人</td>
+                </tr>
+                <tr>
+                    <td><strong>可用性</strong></td>
+                    <td>営業時間のみ（9-18時）</td>
+                    <td>24時間365日</td>
+                </tr>
+                <tr>
+                    <td><strong>セキュリティ</strong></td>
+                    <td>基本的な対策</td>
+                    <td>厳格な対策</td>
+                </tr>
+                <tr>
+                    <td><strong>コスト</strong></td>
+                    <td>100万〜500万円</td>
+                    <td>3,000万〜3億円</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>PoC設計の5ステップ</h2>
+    
+    <div class="step-card">
+        <h3>Step 1: 目的を明確にする</h3>
+        <p>「何を検証したいのか」を一言で言えるようにする。</p>
+        
+        <div class="example-box bad">
+            <h4>❌ 悪い例</h4>
+            <p>「RAGを使って社内文書を検索できるようにする」</p>
+            <p><strong>問題点:</strong> 「検証したいこと」が不明確。これは目的ではなく手段。</p>
+        </div>
+        
+        <div class="example-box good">
+            <h4>✅ 良い例</h4>
+            <p>「RAGを使って、社内問い合わせ対応時間を50%削減できるか検証する」</p>
+            <p><strong>良い点:</strong> 検証したいこと（対応時間削減）が明確。数値目標がある。</p>
+        </div>
+    </div>
+    
+    <div class="step-card">
+        <h3>Step 2: 成功基準を定量的に定義する</h3>
+        <p>「どうなったら成功か」を数値で定義する。これがPoCで最も重要。</p>
+        
+        <div class="success-criteria">
+            <h4>成功基準の3要素</h4>
+            <div class="criteria-grid">
+                <div class="criteria-card">
+                    <h5>1. 精度（Accuracy）</h5>
+                    <p><strong>定義:</strong> AIの回答がどれだけ正確か</p>
+                    <p><strong>例:</strong></p>
+                    <ul>
+                        <li>回答の正解率: 80%以上</li>
+                        <li>ユーザー満足度: 5段階評価で4以上</li>
+                        <li>人間確認が必要な割合: 20%以下</li>
+                    </ul>
+                </div>
+                
+                <div class="criteria-card">
+                    <h5>2. 速度（Speed）</h5>
+                    <p><strong>定義:</strong> どれだけ速く回答できるか</p>
+                    <p><strong>例:</strong></p>
+                    <ul>
+                        <li>回答生成時間: 3秒以内</li>
+                        <li>検索時間: 1秒以内</li>
+                        <li>同時ユーザー数: 10人まで対応可能</li>
+                    </ul>
+                </div>
+                
+                <div class="criteria-card">
+                    <h5>3. コスト（Cost）</h5>
+                    <p><strong>定義:</strong> どれだけコストがかかるか</p>
+                    <p><strong>例:</strong></p>
+                    <ul>
+                        <li>1回答あたりのコスト: 10円以下</li>
+                        <li>月間運用コスト: 10万円以下</li>
+                        <li>初期構築コスト: 300万円以下</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="example-box">
+            <h4>実際の成功基準の例</h4>
+            <pre><code>【RAG社内問い合わせシステムのPoC成功基準】
+
+1. 精度
+   - 回答の正解率: 80%以上
+   - ユーザー満足度: 5段階評価で平均4.0以上
+   - 「分からない」と回答する割合: 10%以下
+
+2. 速度
+   - 回答生成時間: 平均3秒以内
+   - 検索時間: 平均1秒以内
+   - 同時ユーザー数: 10人まで対応可能
+
+3. コスト
+   - 1回答あたりのコスト: 10円以下
+   - PoC期間中の総コスト: 100万円以下
+
+4. ビジネス効果
+   - 問い合わせ対応時間: 平均10分→5分（50%削減）
+   - 担当者の負荷: 1日20件→10件（50%削減）</code></pre>
+        </div>
+    </div>
+    
+    <div class="step-card">
+        <h3>Step 3: スコープを設定する</h3>
+        <p>「何をやるか」だけでなく、「何をやらないか」を明確にする。</p>
+        
+        <div class="scope-definition">
+            <h4>スコープ設定の4要素</h4>
+            
+            <div class="scope-item">
+                <h5>1. 対象データ</h5>
+                <div class="example-box good">
+                    <p><strong>やる:</strong> 社内FAQ 100件、製品マニュアル 50件</p>
+                    <p><strong>やらない:</strong> 過去のメール、Slackログ、外部サイト</p>
+                </div>
+            </div>
+            
+            <div class="scope-item">
+                <h5>2. 対象ユーザー</h5>
+                <div class="example-box good">
+                    <p><strong>やる:</strong> カスタマーサポート部門の10名</p>
+                    <p><strong>やらない:</strong> 全社員、外部顧客</p>
+                </div>
+            </div>
+            
+            <div class="scope-item">
+                <h5>3. 機能</h5>
+                <div class="example-box good">
+                    <p><strong>やる:</strong> 質問応答、関連文書の表示</p>
+                    <p><strong>やらない:</strong> 多言語対応、音声入力、画像検索</p>
+                </div>
+            </div>
+            
+            <div class="scope-item">
+                <h5>4. 期間</h5>
+                <div class="example-box good">
+                    <p><strong>準備期間:</strong> 2週間（データ収集・前処理）</p>
+                    <p><strong>開発期間:</strong> 4週間（システム構築）</p>
+                    <p><strong>検証期間:</strong> 2週間（実際に使ってもらう）</p>
+                    <p><strong>合計:</strong> 8週間（2ヶ月）</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="step-card">
+        <h3>Step 4: リスクを特定する</h3>
+        <p>「何が失敗の原因になるか」を事前に考え、対策を立てる。</p>
+        
+        <div class="risk-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>リスク</th>
+                        <th>影響</th>
+                        <th>対策</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>データ品質が低い</td>
+                        <td>精度が目標に達しない</td>
+                        <td>事前にデータ品質を評価、前処理計画を立てる</td>
+                    </tr>
+                    <tr>
+                        <td>データ量が不足</td>
+                        <td>検証が不十分</td>
+                        <td>最低限必要なデータ量を事前に定義、追加収集計画を立てる</td>
+                    </tr>
+                    <tr>
+                        <td>ユーザーが使ってくれない</td>
+                        <td>検証ができない</td>
+                        <td>事前に使い方を説明、インセンティブを設定</td>
+                    </tr>
+                    <tr>
+                        <td>コストが予算を超える</td>
+                        <td>PoCが中断</td>
+                        <td>事前にコスト試算、上限を設定</td>
+                    </tr>
+                    <tr>
+                        <td>技術的に実現できない</td>
+                        <td>PoC失敗</td>
+                        <td>事前に技術検証、代替案を用意</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="step-card">
+        <h3>Step 5: 評価方法を決める</h3>
+        <p>「どうやって成功基準を測定するか」を具体的に決める。</p>
+        
+        <div class="evaluation-methods">
+            <div class="method-card">
+                <h5>1. 定量評価</h5>
+                <p><strong>方法:</strong> システムログから自動的に測定</p>
+                <ul>
+                    <li>回答生成時間: システムログから自動集計</li>
+                    <li>検索時間: システムログから自動集計</li>
+                    <li>利用回数: システムログから自動集計</li>
+                    <li>コスト: API使用量から自動計算</li>
+                </ul>
+            </div>
+            
+            <div class="method-card">
+                <h5>2. 定性評価</h5>
+                <p><strong>方法:</strong> ユーザーアンケート</p>
+                <ul>
+                    <li>回答の正確性: 5段階評価（1=不正確、5=正確）</li>
+                    <li>使いやすさ: 5段階評価（1=使いにくい、5=使いやすい）</li>
+                    <li>満足度: 5段階評価（1=不満、5=満足）</li>
+                    <li>自由記述: 良かった点、改善点</li>
+                </ul>
+            </div>
+            
+            <div class="method-card">
+                <h5>3. 人間評価</h5>
+                <p><strong>方法:</strong> 専門家が回答を評価</p>
+                <ul>
+                    <li>100件の質問に対する回答を専門家が評価</li>
+                    <li>正解/不正解/部分正解を判定</li>
+                    <li>正解率を計算</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>実践: FDEとしてPoC設計をリードする</h2>
+    
+    <h3>シナリオ: 製造業の品質管理AI導入PoC</h3>
+    <div class="scenario-box">
+        <p><strong>状況:</strong> 製造業の顧客が「AIで不良品検知を自動化したい」と相談してきた</p>
+        
+        <div class="poc-design">
+            <h4>Step 1: 目的を明確にする</h4>
+            <p><strong>目的:</strong> 画像認識AIを使って、製品の不良品検知を自動化し、検査時間を50%削減できるか検証する</p>
+            
+            <h4>Step 2: 成功基準を定義する</h4>
+            <pre><code>【成功基準】
+1. 精度
+   - 不良品検知率: 95%以上（見逃し5%以下）
+   - 誤検知率: 10%以下（正常品を不良品と判定）
+   - 人間の検査員との一致率: 90%以上
+
+2. 速度
+   - 1枚あたりの検査時間: 1秒以内
+   - 同時処理枚数: 10枚まで
+
+3. コスト
+   - 1枚あたりの検査コスト: 1円以下
+   - PoC期間中の総コスト: 300万円以下
+
+4. ビジネス効果
+   - 検査時間: 1枚10秒→5秒（50%削減）
+   - 検査員の負荷: 1日1,000枚→500枚（50%削減）</code></pre>
+            
+            <h4>Step 3: スコープを設定する</h4>
+            <pre><code>【やること】
+- 対象製品: 製品A（最も不良率が高い製品）
+- 対象不良: 傷、汚れ、変形の3種類
+- データ量: 正常品1,000枚、不良品300枚
+- ユーザー: 品質管理部門の5名
+- 期間: 3ヶ月（準備1ヶ月、開発1ヶ月、検証1ヶ月）
+
+【やらないこと】
+- 製品B、C、Dは対象外
+- 色ムラ、サイズ不良は対象外
+- 全社展開は本PoCの範囲外
+- 既存システムとの連携は本PoCの範囲外</code></pre>
+            
+            <h4>Step 4: リスクと対策</h4>
+            <pre><code>【リスク1】不良品の画像データが不足
+→ 対策: 事前に300枚確保できるか確認。不足なら過去データを掘り起こす
+
+【リスク2】照明条件が一定でない
+→ 対策: 撮影環境を標準化。照明を固定
+
+【リスク3】検査員が使ってくれない
+→ 対策: 事前に使い方を説明。検査時間が短縮されることを強調
+
+【リスク4】精度が目標に達しない
+→ 対策: 複数のAIモデルを試す。人間確認フローを用意</code></pre>
+            
+            <h4>Step 5: 評価方法</h4>
+            <pre><code>【定量評価】
+- システムログから検査時間、処理枚数を自動集計
+- 検知率、誤検知率を計算
+
+【定性評価】
+- 検査員5名にアンケート（使いやすさ、満足度）
+
+【人間評価】
+- 検査員が100枚の画像をAIと同時に評価
+- AIと人間の判定を比較し、一致率を計算</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>PoCでよくある失敗パターン</h2>
+    
+    <div class="failure-patterns">
+        <div class="failure-card">
+            <h4>❌ 失敗パターン1: 成功基準が曖昧</h4>
+            <p><strong>例:</strong> 「うまくいったら成功」</p>
+            <p><strong>問題:</strong> 何をもって「うまくいった」と判断するか不明</p>
+            <p><strong>対策:</strong> 数値で定義する（精度80%以上、など）</p>
+        </div>
+        
+        <div class="failure-card">
+            <h4>❌ 失敗パターン2: スコープが広すぎる</h4>
+            <p><strong>例:</strong> 「全社の全業務を対象にする」</p>
+            <p><strong>問題:</strong> 期間内に終わらない、コストが膨らむ</p>
+            <p><strong>対策:</strong> 最小限のスコープから始める</p>
+        </div>
+        
+        <div class="failure-card">
+            <h4>❌ 失敗パターン3: データ品質を確認しない</h4>
+            <p><strong>例:</strong> 「データはあるから大丈夫」</p>
+            <p><strong>問題:</strong> 実際には使えないデータだった</p>
+            <p><strong>対策:</strong> 事前にデータ品質を評価する</p>
+        </div>
+        
+        <div class="failure-card">
+            <h4>❌ 失敗パターン4: ユーザーを巻き込まない</h4>
+            <p><strong>例:</strong> 「完成してから見せる」</p>
+            <p><strong>問題:</strong> 実際のニーズと合わない</p>
+            <p><strong>対策:</strong> 早い段階からユーザーを巻き込む</p>
+        </div>
+    </div>
+</div>
+        `,
+        quiz: [
+            {
+                question: 'PoCで最も重要なのは？',
+                options: [
+                    '完璧な実装',
+                    '成功基準を定量的に定義すること',
+                    '長期間かけること',
+                    '大規模にすること'
+                ],
+                correct: 1,
+                explanation: 'PoCで最も重要なのは、成功基準を定量的に定義すること。「どうなったら成功か」が明確でないと、検証ができない。'
+            },
+            {
+                question: 'PoCのスコープ設定で重要なのは？',
+                options: [
+                    'できるだけ多くの機能を入れる',
+                    '「何をやらないか」を明確にする',
+                    '全社展開を前提にする',
+                    '完璧を目指す'
+                ],
+                correct: 1,
+                explanation: 'PoCでは「何をやらないか」を明確にすることが重要。スコープを絞ることで、期間内に検証を完了できる。'
+            },
+            {
+                question: '次の成功基準で、最も良いのは？',
+                options: [
+                    '「うまくいったら成功」',
+                    '「ユーザーが満足したら成功」',
+                    '「回答の正解率80%以上、レスポンス3秒以内」',
+                    '「できるだけ良い結果を出す」'
+                ],
+                correct: 2,
+                explanation: '成功基準は定量的に定義する必要がある。「回答の正解率80%以上、レスポンス3秒以内」のように、数値で測定可能な基準が良い。'
+            }
+        ],
+        exercise: {
+            title: '実践演習: PoC設計書を作成する',
+            prompt: `顧客から以下の相談を受けた。PoC設計書を作成せよ。
+
+<strong>顧客の要望:</strong>
+「社内のコールセンターで、オペレーターが顧客からの問い合わせに回答する際、マニュアルを探すのに時間がかかっている。AIで自動的にマニュアルを検索して、回答案を提示できないか。」
+
+<strong>現状:</strong>
+- マニュアル: 500ページ（PDF形式）
+- オペレーター: 20名
+- 1日の問い合わせ件数: 200件
+- 1件あたりの平均対応時間: 10分（うちマニュアル検索に5分）`,
+            sampleAnswer: `
+<div class="sample-answer">
+    <h4>PoC設計書</h4>
+    
+    <h5>1. 目的</h5>
+    <p>RAGを使って、コールセンターのマニュアル検索時間を50%削減できるか検証する</p>
+    
+    <h5>2. 成功基準</h5>
+    <pre><code>【精度】
+- 回答案の正解率: 80%以上
+- オペレーター満足度: 5段階評価で平均4.0以上
+- 「分からない」と回答する割合: 10%以下
+
+【速度】
+- 回答案生成時間: 3秒以内
+- 同時ユーザー数: 10人まで対応可能
+
+【コスト】
+- 1回答あたりのコスト: 10円以下
+- PoC期間中の総コスト: 200万円以下
+
+【ビジネス効果】
+- マニュアル検索時間: 5分→2.5分（50%削減）
+- 1件あたりの対応時間: 10分→7.5分（25%削減）</code></pre>
+    
+    <h5>3. スコープ</h5>
+    <pre><code>【やること】
+- 対象マニュアル: 製品Aのマニュアル100ページ（最も問い合わせが多い製品）
+- 対象ユーザー: オペレーター5名
+- 機能: 質問応答、関連ページの表示
+- 期間: 2ヶ月（準備2週間、開発4週間、検証2週間）
+
+【やらないこと】
+- 製品B、Cのマニュアルは対象外
+- 全オペレーターへの展開は本PoCの範囲外
+- 既存システムとの連携は本PoCの範囲外
+- 多言語対応は本PoCの範囲外</code></pre>
+    
+    <h5>4. リスクと対策</h5>
+    <pre><code>【リスク1】マニュアルのPDF品質が低い（スキャン画像など）
+→ 対策: 事前にPDFの品質を確認。必要ならテキスト化
+
+【リスク2】オペレーターが使ってくれない
+→ 対策: 事前に使い方を説明。検索時間が短縮されることを強調
+
+【リスク3】精度が目標に達しない
+→ 対策: 複数のAIモデルを試す。人間確認フローを用意
+
+【リスク4】コストが予算を超える
+→ 対策: 事前にコスト試算。上限を設定</code></pre>
+    
+    <h5>5. 評価方法</h5>
+    <pre><code>【定量評価】
+- システムログから検索時間、利用回数を自動集計
+- コストをAPI使用量から自動計算
+
+【定性評価】
+- オペレーター5名にアンケート（使いやすさ、満足度）
+
+【人間評価】
+- 100件の質問に対する回答案を専門家が評価
+- 正解率を計算</code></pre>
+</div>
+            `
+        },
+        nextSteps: [
+            'Day 17でデータ品質評価を学び、PoCに必要なデータを準備する',
+            'Day 18でシステム連携設計を学び、既存システムとの統合を考える',
+            '実際の案件でPoC設計書を作成してみる'
+        ]
     },
     
     17: {

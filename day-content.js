@@ -4168,6 +4168,7 @@ grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
     23: {
         title: 'ケース1: 製造業',
         subtitle: '不良品検知AI - 現場で動くAIの実装',
+        contentFile: 'day23-content.html',
         goals: [
             '製造業特有の課題とAI活用の可能性を理解する',
             'Edge AIとクラウドAIの使い分けを判断できる',
@@ -4301,6 +4302,7 @@ grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
     24: {
         title: 'ケース2: 金融業',
         subtitle: '与信審査AI - 説明可能性とコンプライアンス',
+        contentFile: 'day24-content.html',
         goals: [
             '金融業特有の規制とAI活用の制約を理解する',
             '説明可能性（XAI）の実装方法を理解する',
@@ -4410,6 +4412,7 @@ grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
     25: {
         title: 'ケース3: 小売業',
         subtitle: '需要予測AI - 在庫最適化と機会損失の削減',
+        contentFile: 'day25-content.html',
         goals: [
             '小売業特有の課題とAI活用の可能性を理解する',
             '時系列予測の実装方法を理解する',
@@ -4508,8 +4511,9 @@ grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
     
     26: {
         title: 'ケース4: ヘルスケア',
-        subtitle: '診断支援AI',
-        goals: ['ヘルスケア特有の課題理解', '医療データの扱い', '倫理的配慮'],
+        subtitle: '診断支援AI - 安全性と倫理的配慮',
+        contentFile: 'day26-content.html',
+        goals: ['ヘルスケア特有の課題理解', '医療データの扱い', '倫理的配慮', 'FDEとしてヘルスケア向けAI提案ができる'],
         content: `<div class="content-section"><h2>ケース概要</h2><p>AIで医師の診断を支援</p></div>`,
         quiz: [{question: 'ヘルスケアAIで最も重要なのは？', options: ['精度', '安全性', 'コスト', '速度'], correct: 1, explanation: '安全性が最優先。'}],
         exercise: {title: 'ケース分析', prompt: '課題と解決策を提案せよ', sampleAnswer: '<div class="sample-answer"><p>医師の判断を支援、最終判断は医師、データ匿名化</p></div>'}
@@ -4517,8 +4521,9 @@ grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
     
     27: {
         title: '本番化の準備',
-        subtitle: 'PoCから本番へ',
-        goals: ['本番化要件の整理', 'スケーラビリティ', '運用設計'],
+        subtitle: 'PoCから本番へ - スケーラビリティと運用設計',
+        contentFile: 'day27-content.html',
+        goals: ['本番化要件の整理', 'スケーラビリティ設計', '運用設計', 'デプロイ戦略'],
         content: `<div class="content-section"><h2>本番化</h2><p>PoCと本番の違いを理解する</p></div>`,
         quiz: [{question: '本番化で最も重要なのは？', options: ['機能', '性能', '運用', '全て'], correct: 3, explanation: '全てが重要だが、特に運用。'}],
         exercise: {title: '本番化計画', prompt: '本番化の要件を整理せよ', sampleAnswer: '<div class="sample-answer"><p>監視、バックアップ、障害対応、スケーリング</p></div>'}
@@ -4526,8 +4531,9 @@ grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
     
     28: {
         title: '運用とモニタリング',
-        subtitle: '継続的な改善',
-        goals: ['モニタリング設計', 'アラート設定', '改善サイクル'],
+        subtitle: '継続的な改善 - リリース後が本当のスタート',
+        contentFile: 'day28-content.html',
+        goals: ['モニタリング設計', 'アラート設定', '改善サイクル', '運用体制の整備'],
         content: `<div class="content-section"><h2>運用</h2><p>リリース後の継続的改善</p></div>`,
         quiz: [{question: '運用で最も重要なのは？', options: ['監視', '改善', '対応', '全て'], correct: 3, explanation: '全てが重要。'}],
         exercise: {title: '運用設計', prompt: 'モニタリング項目を定義せよ', sampleAnswer: '<div class="sample-answer"><p>精度、レスポンス、エラー率、利用状況</p></div>'}

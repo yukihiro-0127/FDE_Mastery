@@ -1,0 +1,604 @@
+<div class="content-section">
+    <h2>運用とモニタリングの現実: リリース後が本当のスタート</h2>
+    
+    <div class="case-overview">
+        <h3>📋 運用とは</h3>
+        <p><strong>定義:</strong> AIシステムをリリース後、継続的に監視・改善し、安定稼働させること</p>
+        <p><strong>重要性:</strong> リリースはゴールではなくスタート。運用が成功の鍵。</p>
+        <p><strong>運用の課題:</strong></p>
+        <ul>
+            <li><strong>モデルの劣化:</strong> 時間とともにAIモデルの精度が低下（データドリフト）</li>
+            <li><strong>障害対応:</strong> 予期しない障害が発生し、迅速な対応が必要</li>
+            <li><strong>継続的改善:</strong> ユーザーのフィードバックを反映し、改善を続ける</li>
+        </ul>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 運用で失敗する3つの理由</h4>
+        <p><strong>1. モニタリング不足:</strong> 問題に気づかず、ユーザーからクレームが来てから対応</p>
+        <p><strong>2. 改善サイクルなし:</strong> リリース後、放置。精度が低下しても改善しない</p>
+        <p><strong>3. 運用体制不足:</strong> 運用担当者がいない、または知識不足</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>モニタリング設計</h2>
+    
+    <h3>1. システムモニタリング</h3>
+    <div class="capability-grid">
+        <div class="capability-card">
+            <h4>インフラ監視</h4>
+            <p><strong>監視項目:</strong></p>
+            <ul>
+                <li>CPU使用率（閾値: 80%）</li>
+                <li>メモリ使用率（閾値: 80%）</li>
+                <li>ディスク使用率（閾値: 80%）</li>
+                <li>ネットワーク使用率（閾値: 80%）</li>
+            </ul>
+            <p><strong>ツール:</strong> CloudWatch、Datadog、Prometheus</p>
+            <p><strong>アラート:</strong> 閾値超過時にSlack通知</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>アプリケーション監視</h4>
+            <p><strong>監視項目:</strong></p>
+            <ul>
+                <li>レスポンスタイム（閾値: 3秒）</li>
+                <li>エラー率（閾値: 5%）</li>
+                <li>スループット（1秒あたりのリクエスト数）</li>
+                <li>同時接続数</li>
+            </ul>
+            <p><strong>ツール:</strong> New Relic、Datadog APM、Sentry</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>データベース監視</h4>
+            <p><strong>監視項目:</strong></p>
+            <ul>
+                <li>クエリ実行時間（閾値: 1秒）</li>
+                <li>接続数（閾値: 100）</li>
+                <li>デッドロック発生数</li>
+                <li>レプリケーション遅延</li>
+            </ul>
+            <p><strong>ツール:</strong> CloudWatch、Datadog、pgBadger</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>ログ監視</h4>
+            <p><strong>監視項目:</strong></p>
+            <ul>
+                <li>エラーログ（ERROR、CRITICAL）</li>
+                <li>警告ログ（WARNING）</li>
+                <li>アクセスログ（異常なアクセスパターン）</li>
+            </ul>
+            <p><strong>ツール:</strong> CloudWatch Logs、Elasticsearch、Splunk</p>
+        </div>
+    </div>
+    
+    <h3>2. AIモデルモニタリング</h3>
+    <div class="capability-grid">
+        <div class="capability-card">
+            <h4>精度モニタリング</h4>
+            <p><strong>監視項目:</strong></p>
+            <ul>
+                <li>精度（Accuracy）</li>
+                <li>適合率（Precision）</li>
+                <li>再現率（Recall）</li>
+                <li>F1スコア</li>
+            </ul>
+            <p><strong>頻度:</strong> 1日1回</p>
+            <p><strong>閾値:</strong> 精度が5%以上低下したらアラート</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>データドリフト検知</h4>
+            <p><strong>定義:</strong> 入力データの分布が変化すること</p>
+            <p><strong>例:</strong></p>
+            <ul>
+                <li>学習時: 20代が50%、30代が30%、40代が20%</li>
+                <li>本番時: 20代が30%、30代が40%、40代が30%</li>
+            </ul>
+            <p><strong>検知方法:</strong> KLダイバージェンス、KSテスト</p>
+            <p><strong>ツール:</strong> SageMaker Model Monitor、Evidently</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>モデルドリフト検知</h4>
+            <p><strong>定義:</strong> モデルの予測精度が低下すること</p>
+            <p><strong>原因:</strong></p>
+            <ul>
+                <li>データドリフト</li>
+                <li>ビジネス環境の変化</li>
+                <li>競合の動き</li>
+            </ul>
+            <p><strong>対策:</strong> モデルの再学習</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>推論時間モニタリング</h4>
+            <p><strong>監視項目:</strong></p>
+            <ul>
+                <li>平均推論時間</li>
+                <li>最大推論時間</li>
+                <li>95パーセンタイル推論時間</li>
+            </ul>
+            <p><strong>閾値:</strong> 1秒以上でアラート</p>
+        </div>
+    </div>
+    
+    <h3>3. ビジネスモニタリング</h3>
+    <div class="capability-grid">
+        <div class="capability-card">
+            <h4>利用状況モニタリング</h4>
+            <p><strong>監視項目:</strong></p>
+            <ul>
+                <li>DAU（Daily Active Users）</li>
+                <li>MAU（Monthly Active Users）</li>
+                <li>処理件数</li>
+                <li>成功率</li>
+            </ul>
+            <p><strong>ツール:</strong> Google Analytics、Mixpanel</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>ユーザー満足度モニタリング</h4>
+            <p><strong>監視項目:</strong></p>
+            <ul>
+                <li>NPS（Net Promoter Score）</li>
+                <li>CSAT（Customer Satisfaction Score）</li>
+                <li>フィードバック</li>
+                <li>クレーム件数</li>
+            </ul>
+            <p><strong>頻度:</strong> 月1回アンケート</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>ビジネスKPIモニタリング</h4>
+            <p><strong>監視項目:</strong></p>
+            <ul>
+                <li>コスト削減額</li>
+                <li>売上向上額</li>
+                <li>ROI</li>
+                <li>業務効率化率</li>
+            </ul>
+            <p><strong>頻度:</strong> 月1回レポート</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>A/Bテスト</h4>
+            <p><strong>目的:</strong> 新機能の効果を検証</p>
+            <p><strong>方法:</strong></p>
+            <ul>
+                <li>A群: 現行バージョン（50%）</li>
+                <li>B群: 新バージョン（50%）</li>
+                <li>KPIを比較</li>
+            </ul>
+            <p><strong>ツール:</strong> Optimizely、LaunchDarkly</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>アラート設計</h2>
+    
+    <h3>1. アラートレベル</h3>
+    <div class="comparison-table-wrapper">
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>レベル</th>
+                    <th>条件</th>
+                    <th>通知方法</th>
+                    <th>対応時間</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Critical</strong></td>
+                    <td>サーバーダウン、エラー率50%以上</td>
+                    <td>電話、SMS、Slack</td>
+                    <td>5分以内</td>
+                </tr>
+                <tr>
+                    <td><strong>High</strong></td>
+                    <td>エラー率20%以上、レスポンスタイム5秒以上</td>
+                    <td>Slack、メール</td>
+                    <td>30分以内</td>
+                </tr>
+                <tr>
+                    <td><strong>Medium</strong></td>
+                    <td>CPU使用率80%以上、エラー率10%以上</td>
+                    <td>Slack、メール</td>
+                    <td>1時間以内</td>
+                </tr>
+                <tr>
+                    <td><strong>Low</strong></td>
+                    <td>ディスク使用率80%以上</td>
+                    <td>メール</td>
+                    <td>1日以内</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <h3>2. アラート疲れ対策</h3>
+    <div class="capability-grid">
+        <div class="capability-card">
+            <h4>問題: アラートが多すぎる</h4>
+            <p><strong>症状:</strong></p>
+            <ul>
+                <li>1日100件以上のアラート</li>
+                <li>重要なアラートが埋もれる</li>
+                <li>アラートを無視するようになる</li>
+            </ul>
+        </div>
+        
+        <div class="capability-card">
+            <h4>対策1: 閾値の調整</h4>
+            <p><strong>方法:</strong> 閾値を適切に設定</p>
+            <ul>
+                <li>CPU使用率: 70% → 80%</li>
+                <li>エラー率: 1% → 5%</li>
+                <li>過去のデータを分析して適切な閾値を設定</li>
+            </ul>
+        </div>
+        
+        <div class="capability-card">
+            <h4>対策2: アラートの集約</h4>
+            <p><strong>方法:</strong> 同じ種類のアラートをまとめる</p>
+            <ul>
+                <li>5分間に10件のエラー → 1件のアラート</li>
+                <li>複数サーバーで同じエラー → 1件のアラート</li>
+            </ul>
+        </div>
+        
+        <div class="capability-card">
+            <h4>対策3: 重要度の明確化</h4>
+            <p><strong>方法:</strong> アラートに優先度をつける</p>
+            <ul>
+                <li>Critical: 赤色、電話通知</li>
+                <li>High: オレンジ色、Slack通知</li>
+                <li>Medium: 黄色、メール通知</li>
+                <li>Low: 青色、ログのみ</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>継続的改善サイクル</h2>
+    
+    <h3>1. PDCAサイクル</h3>
+    <div class="timeline">
+        <div class="timeline-item">
+            <h4>Plan（計画）</h4>
+            <p><strong>内容:</strong> 改善目標を設定</p>
+            <ul>
+                <li>現状分析（精度、レスポンスタイム、ユーザー満足度）</li>
+                <li>課題抽出（精度が5%低下、レスポンスタイムが遅い）</li>
+                <li>改善目標設定（精度を3%向上、レスポンスタイムを50%短縮）</li>
+            </ul>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>Do（実行）</h4>
+            <p><strong>内容:</strong> 改善施策を実行</p>
+            <ul>
+                <li>モデルの再学習（新しいデータで学習）</li>
+                <li>ハイパーパラメータの調整</li>
+                <li>インフラの最適化（キャッシュ、スケーリング）</li>
+            </ul>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>Check（評価）</h4>
+            <p><strong>内容:</strong> 改善効果を検証</p>
+            <ul>
+                <li>精度測定（3%向上したか？）</li>
+                <li>レスポンスタイム測定（50%短縮したか？）</li>
+                <li>ユーザー満足度測定（向上したか？）</li>
+            </ul>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>Act（改善）</h4>
+            <p><strong>内容:</strong> 結果を反映</p>
+            <ul>
+                <li>成功: 本番環境に適用</li>
+                <li>失敗: 原因分析、再度Plan</li>
+                <li>ナレッジ共有（成功事例、失敗事例）</li>
+            </ul>
+        </div>
+    </div>
+    
+    <h3>2. モデル再学習</h3>
+    <div class="capability-grid">
+        <div class="capability-card">
+            <h4>再学習のタイミング</h4>
+            <p><strong>定期的:</strong> 週1回、月1回</p>
+            <p><strong>トリガー:</strong></p>
+            <ul>
+                <li>精度が5%以上低下</li>
+                <li>データドリフト検知</li>
+                <li>新しいデータが1万件蓄積</li>
+            </ul>
+        </div>
+        
+        <div class="capability-card">
+            <h4>再学習のプロセス</h4>
+            <p><strong>1. データ収集:</strong> 新しいデータを収集</p>
+            <p><strong>2. データ前処理:</strong> クレンジング、正規化</p>
+            <p><strong>3. モデル学習:</strong> 新しいデータで学習</p>
+            <p><strong>4. 精度検証:</strong> テストデータで精度測定</p>
+            <p><strong>5. デプロイ:</strong> 本番環境に適用</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>A/Bテストで検証</h4>
+            <p><strong>方法:</strong></p>
+            <ul>
+                <li>A群: 現行モデル（50%）</li>
+                <li>B群: 新モデル（50%）</li>
+                <li>精度を比較</li>
+                <li>新モデルが優れていれば全体に適用</li>
+            </ul>
+        </div>
+        
+        <div class="capability-card">
+            <h4>ロールバック</h4>
+            <p><strong>条件:</strong> 新モデルで精度が低下</p>
+            <p><strong>方法:</strong> 前モデルに戻す</p>
+            <p><strong>時間:</strong> 10分以内</p>
+        </div>
+    </div>
+    
+    <h3>3. ユーザーフィードバック収集</h3>
+    <div class="capability-grid">
+        <div class="capability-card">
+            <h4>フィードバック収集方法</h4>
+            <p><strong>アンケート:</strong> 月1回、NPS、CSAT</p>
+            <p><strong>インタビュー:</strong> 四半期1回、深掘り</p>
+            <p><strong>ユーザーテスト:</strong> 新機能リリース前</p>
+            <p><strong>サポート問い合わせ:</strong> 日々の問い合わせを分析</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>フィードバック分析</h4>
+            <p><strong>定量分析:</strong> NPS、CSAT、利用率</p>
+            <p><strong>定性分析:</strong> コメント、インタビュー</p>
+            <p><strong>優先順位付け:</strong> 影響度×緊急度</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>改善施策の実行</h4>
+            <p><strong>高優先度:</strong> 即座に対応（1週間以内）</p>
+            <p><strong>中優先度:</strong> 次回リリースで対応（1ヶ月以内）</p>
+            <p><strong>低優先度:</strong> バックログに追加</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>フィードバックループ</h4>
+            <p><strong>1. 収集:</strong> ユーザーからフィードバック</p>
+            <p><strong>2. 分析:</strong> 課題を抽出</p>
+            <p><strong>3. 改善:</strong> 施策を実行</p>
+            <p><strong>4. 検証:</strong> 効果を測定</p>
+            <p><strong>5. 報告:</strong> ユーザーに報告</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>運用体制</h2>
+    
+    <h3>1. 運用チーム構成</h3>
+    <div class="capability-grid">
+        <div class="capability-card">
+            <h4>運用エンジニア</h4>
+            <p><strong>役割:</strong> 日々の運用、監視、障害対応</p>
+            <p><strong>人数:</strong> 3名（24時間体制）</p>
+            <p><strong>スキル:</strong> インフラ、ネットワーク、セキュリティ</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>データサイエンティスト</h4>
+            <p><strong>役割:</strong> モデルの再学習、精度改善</p>
+            <p><strong>人数:</strong> 2名</p>
+            <p><strong>スキル:</strong> 機械学習、統計、Python</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>開発エンジニア</h4>
+            <p><strong>役割:</strong> 新機能開発、バグ修正</p>
+            <p><strong>人数:</strong> 3名</p>
+            <p><strong>スキル:</strong> プログラミング、設計、テスト</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>プロダクトマネージャー</h4>
+            <p><strong>役割:</strong> ロードマップ策定、優先順位付け</p>
+            <p><strong>人数:</strong> 1名</p>
+            <p><strong>スキル:</strong> ビジネス、ユーザー理解、データ分析</p>
+        </div>
+    </div>
+    
+    <h3>2. オンコール体制</h3>
+    <div class="capability-grid">
+        <div class="capability-card">
+            <h4>24時間365日体制</h4>
+            <p><strong>シフト:</strong></p>
+            <ul>
+                <li>平日昼間: 運用エンジニアA</li>
+                <li>平日夜間: 運用エンジニアB</li>
+                <li>休日: 運用エンジニアC</li>
+            </ul>
+            <p><strong>エスカレーション:</strong> 対応できない場合は開発エンジニアに連絡</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>オンコール手当</h4>
+            <p><strong>平日夜間:</strong> 5,000円/日</p>
+            <p><strong>休日:</strong> 10,000円/日</p>
+            <p><strong>対応時:</strong> 時間外手当</p>
+        </div>
+    </div>
+    
+    <h3>3. ドキュメント整備</h3>
+    <div class="capability-grid">
+        <div class="capability-card">
+            <h4>運用手順書</h4>
+            <p><strong>内容:</strong></p>
+            <ul>
+                <li>日次運用手順</li>
+                <li>週次運用手順</li>
+                <li>月次運用手順</li>
+                <li>定期メンテナンス手順</li>
+            </ul>
+        </div>
+        
+        <div class="capability-card">
+            <h4>障害対応手順書</h4>
+            <p><strong>内容:</strong></p>
+            <ul>
+                <li>障害検知方法</li>
+                <li>初動対応</li>
+                <li>エスカレーション</li>
+                <li>復旧手順</li>
+            </ul>
+        </div>
+        
+        <div class="capability-card">
+            <h4>ナレッジベース</h4>
+            <p><strong>内容:</strong></p>
+            <ul>
+                <li>過去の障害事例</li>
+                <li>FAQ</li>
+                <li>トラブルシューティング</li>
+                <li>ベストプラクティス</li>
+            </ul>
+        </div>
+        
+        <div class="capability-card">
+            <h4>システム設計書</h4>
+            <p><strong>内容:</strong></p>
+            <ul>
+                <li>アーキテクチャ図</li>
+                <li>データフロー図</li>
+                <li>API仕様書</li>
+                <li>データベース設計書</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>運用コスト</h2>
+    
+    <h3>月間運用コスト（例）</h3>
+    <div class="comparison-table-wrapper">
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>内容</th>
+                    <th>月額コスト</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>インフラ</strong></td>
+                    <td>AWS（EC2、RDS、S3、SageMaker）</td>
+                    <td>100万円</td>
+                </tr>
+                <tr>
+                    <td><strong>監視ツール</strong></td>
+                    <td>Datadog、New Relic</td>
+                    <td>10万円</td>
+                </tr>
+                <tr>
+                    <td><strong>人件費</strong></td>
+                    <td>運用エンジニア3名、データサイエンティスト2名、開発エンジニア3名、PM1名</td>
+                    <td>500万円</td>
+                </tr>
+                <tr>
+                    <td><strong>その他</strong></td>
+                    <td>ライセンス、教育、外部委託</td>
+                    <td>50万円</td>
+                </tr>
+                <tr>
+                    <td><strong>合計</strong></td>
+                    <td></td>
+                    <td>660万円</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>運用チェックリスト</h2>
+    
+    <div class="capability-grid">
+        <div class="capability-card">
+            <h4>日次運用</h4>
+            <ul>
+                <li>☐ システム稼働状況確認</li>
+                <li>☐ エラーログ確認</li>
+                <li>☐ アラート確認</li>
+                <li>☐ バックアップ確認</li>
+            </ul>
+        </div>
+        
+        <div class="capability-card">
+            <h4>週次運用</h4>
+            <ul>
+                <li>☐ モデル精度確認</li>
+                <li>☐ データドリフト確認</li>
+                <li>☐ パフォーマンス確認</li>
+                <li>☐ セキュリティパッチ適用</li>
+            </ul>
+        </div>
+        
+        <div class="capability-card">
+            <h4>月次運用</h4>
+            <ul>
+                <li>☐ モデル再学習</li>
+                <li>☐ ユーザーフィードバック分析</li>
+                <li>☐ KPIレポート作成</li>
+                <li>☐ コスト分析</li>
+            </ul>
+        </div>
+        
+        <div class="capability-card">
+            <h4>四半期運用</h4>
+            <ul>
+                <li>☐ システム全体レビュー</li>
+                <li>☐ ロードマップ更新</li>
+                <li>☐ 運用体制見直し</li>
+                <li>☐ 災害対策訓練</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>FDEとしての提案ポイント</h2>
+    
+    <div class="insight-box">
+        <h4>💡 運用提案の5つのポイント</h4>
+        
+        <h5>1. 包括的なモニタリング</h5>
+        <p>システム、AIモデル、ビジネスの3つの観点でモニタリング。</p>
+        
+        <h5>2. 適切なアラート設計</h5>
+        <p>アラート疲れを防ぐため、閾値調整、集約、重要度の明確化。</p>
+        
+        <h5>3. 継続的改善サイクル</h5>
+        <p>PDCAサイクルで継続的に改善。モデル再学習、ユーザーフィードバック反映。</p>
+        
+        <h5>4. 運用体制の整備</h5>
+        <p>24時間365日体制、オンコール、ドキュメント整備。</p>
+        
+        <h5>5. 運用コストの明確化</h5>
+        <p>インフラ、ツール、人件費を明確に提示。経営層を説得。</p>
+    </div>
+</div>

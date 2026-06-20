@@ -1,0 +1,496 @@
+<div class="content-section">
+    <h2>小売業AI導入の現実: 予測精度80%でも大きな価値</h2>
+    
+    <div class="case-overview">
+        <h3>📋 ケース概要</h3>
+        <p><strong>顧客:</strong> 全国展開するコンビニチェーン（店舗数5,000店、年商1兆円）</p>
+        <p><strong>課題:</strong> 商品の発注量が適切でなく、廃棄ロスと機会損失が発生。月間廃棄ロス5億円、機会損失2億円。</p>
+        <p><strong>要望:</strong> AIで需要を予測し、在庫を最適化したい。目標は廃棄ロス50%削減。</p>
+        <p><strong>予算:</strong> 初期投資1億円、年間運用コスト2,000万円</p>
+        <p><strong>期間:</strong> PoC 3ヶ月、本番導入 1年</p>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 小売業AIの本質的な課題</h4>
+        <p>小売業では、<strong>「過去データだけでは予測できない」</strong>。天気、イベント、競合の動きなど、外部要因が大きく影響する。</p>
+        <p>さらに、<strong>商品ごとに予測精度が異なる</strong>。定番商品は予測しやすいが、新商品や季節商品は難しい。</p>
+        <p><strong>小売業特有の3つの制約:</strong></p>
+        <ul>
+            <li><strong>外部要因の影響:</strong> 天気、イベント、競合の動きが需要に大きく影響</li>
+            <li><strong>商品の多様性:</strong> 定番商品、季節商品、新商品で予測精度が異なる</li>
+            <li><strong>リアルタイム性:</strong> 発注は毎日行うため、予測も毎日更新が必要</li>
+        </ul>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>FDEとしての提案: 時系列予測 + 外部データ統合</h2>
+    
+    <div class="solution-architecture">
+        <h3>システム構成</h3>
+        <pre><code>【入力データ】
+内部データ:
+- 過去の販売データ（2年分、商品別・店舗別・時間帯別）
+- 在庫データ（現在の在庫量）
+- 価格データ（定価、セール価格）
+
+外部データ:
+- 天気予報（気温、降水確率、湿度）
+- イベント情報（祝日、地域イベント、スポーツ大会）
+- 競合情報（近隣店舗のセール情報）
+- SNSトレンド（話題の商品）
+    ↓
+【前処理】
+データクレンジング、欠損値補完、正規化
+特徴量エンジニアリング（曜日、時間帯、季節性）
+    ↓
+【AI予測】
+翌日の需要予測（商品別・店舗別）
+時系列予測モデル（LSTM + XGBoost）
+    ↓
+【発注最適化】
+予測に基づいて自動発注
+安全在庫を考慮した発注量計算
+    ↓
+【結果】
+廃棄ロス削減、機会損失削減、在庫回転率向上</code></pre>
+        
+        <h3>なぜこの構成なのか</h3>
+        <div class="capability-grid">
+            <div class="capability-card">
+                <h4>時系列予測（LSTM）</h4>
+                <p><strong>役割:</strong> 過去のトレンドを学習</p>
+                <p><strong>メリット:</strong></p>
+                <ul>
+                    <li>季節性、トレンドを捉える</li>
+                    <li>長期的なパターンを学習</li>
+                    <li>時系列データに最適</li>
+                </ul>
+                <p><strong>適用商品:</strong> 定番商品、季節商品</p>
+            </div>
+            
+            <div class="capability-card">
+                <h4>勾配ブースティング（XGBoost）</h4>
+                <p><strong>役割:</strong> 外部要因を考慮</p>
+                <p><strong>メリット:</strong></p>
+                <ul>
+                    <li>天気、イベントなどの外部要因を学習</li>
+                    <li>高精度</li>
+                    <li>特徴量の重要度を可視化</li>
+                </ul>
+                <p><strong>適用商品:</strong> 全商品</p>
+            </div>
+        </div>
+    </div>
+    
+    <h3>技術選定の詳細</h3>
+    <div class="comparison-table-wrapper">
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>選定技術</th>
+                    <th>理由</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>時系列予測</strong></td>
+                    <td>LSTM（Long Short-Term Memory）</td>
+                    <td>季節性、トレンドを捉える、長期的なパターンを学習</td>
+                </tr>
+                <tr>
+                    <td><strong>外部要因考慮</strong></td>
+                    <td>XGBoost</td>
+                    <td>天気、イベントなどの外部要因を学習、高精度</td>
+                </tr>
+                <tr>
+                    <td><strong>データベース</strong></td>
+                    <td>PostgreSQL + TimescaleDB</td>
+                    <td>時系列データに最適、高速クエリ</td>
+                </tr>
+                <tr>
+                    <td><strong>クラウド</strong></td>
+                    <td>AWS（S3 + SageMaker）</td>
+                    <td>スケーラビリティ、機械学習機能が充実</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>実装のポイント</h2>
+    
+    <h3>1. 外部データの統合</h3>
+    <div class="definition-box">
+        <h4>なぜ外部データが重要なのか</h4>
+        <p><strong>理由:</strong> 過去データだけでは予測できない要因が多い</p>
+        <p><strong>例:</strong></p>
+        <ul>
+            <li>気温が30度を超えるとアイスの売上が2倍になる</li>
+            <li>雨の日は傘の売上が5倍になる</li>
+            <li>祝日は来客数が1.5倍になる</li>
+        </ul>
+    </div>
+    
+    <div class="capability-grid">
+        <div class="capability-card">
+            <h4>外部データ1: 天気</h4>
+            <p><strong>取得方法:</strong> 気象庁API、OpenWeatherMap API</p>
+            <p><strong>データ項目:</strong></p>
+            <ul>
+                <li>気温（最高気温、最低気温）</li>
+                <li>降水確率</li>
+                <li>湿度</li>
+                <li>風速</li>
+            </ul>
+            <p><strong>影響例:</strong></p>
+            <ul>
+                <li>気温30度以上 → アイス売上2倍</li>
+                <li>降水確率80%以上 → 傘売上5倍</li>
+                <li>湿度80%以上 → 飲料売上1.5倍</li>
+            </ul>
+        </div>
+        
+        <div class="capability-card">
+            <h4>外部データ2: イベント</h4>
+            <p><strong>取得方法:</strong> カレンダーAPI、地域イベント情報</p>
+            <p><strong>データ項目:</strong></p>
+            <ul>
+                <li>祝日</li>
+                <li>地域イベント（祭り、花火大会）</li>
+                <li>スポーツ大会（野球、サッカー）</li>
+            </ul>
+            <p><strong>影響例:</strong></p>
+            <ul>
+                <li>祝日 → 来客数1.5倍</li>
+                <li>地域イベント → 来客数2倍</li>
+                <li>スポーツ大会 → ビール売上3倍</li>
+            </ul>
+        </div>
+        
+        <div class="capability-card">
+            <h4>外部データ3: 競合</h4>
+            <p><strong>取得方法:</strong> 競合店舗の調査、価格比較サイト</p>
+            <p><strong>データ項目:</strong></p>
+            <ul>
+                <li>近隣店舗のセール情報</li>
+                <li>価格情報</li>
+                <li>新商品情報</li>
+            </ul>
+            <p><strong>影響例:</strong></p>
+            <ul>
+                <li>競合がセール → 来客数20%減</li>
+                <li>競合が新商品 → 類似商品売上10%減</li>
+            </ul>
+        </div>
+        
+        <div class="capability-card">
+            <h4>外部データ4: SNSトレンド</h4>
+            <p><strong>取得方法:</strong> Twitter API、Google Trends</p>
+            <p><strong>データ項目:</strong></p>
+            <ul>
+                <li>話題の商品</li>
+                <li>トレンドワード</li>
+                <li>インフルエンサーの投稿</li>
+            </ul>
+            <p><strong>影響例:</strong></p>
+            <ul>
+                <li>SNSで話題 → 売上5倍</li>
+                <li>インフルエンサーが紹介 → 売上10倍</li>
+            </ul>
+        </div>
+    </div>
+    
+    <h3>2. 商品カテゴリ別の予測</h3>
+    <div class="capability-grid">
+        <div class="capability-card">
+            <h4>定番商品（おにぎり、飲料）</h4>
+            <p><strong>特徴:</strong> 毎日売れる、季節性が少ない</p>
+            <p><strong>予測精度:</strong> 90%</p>
+            <p><strong>予測手法:</strong> LSTM（過去のトレンドを学習）</p>
+            <p><strong>外部要因:</strong> 天気（気温、降水確率）</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>季節商品（アイス、おでん）</h4>
+            <p><strong>特徴:</strong> 季節によって売上が大きく変動</p>
+            <p><strong>予測精度:</strong> 70%</p>
+            <p><strong>予測手法:</strong> LSTM + XGBoost（季節性 + 外部要因）</p>
+            <p><strong>外部要因:</strong> 天気（気温）、季節</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>新商品</h4>
+            <p><strong>特徴:</strong> 過去データがない</p>
+            <p><strong>予測精度:</strong> 50%</p>
+            <p><strong>予測手法:</strong> 類似商品のデータで予測</p>
+            <p><strong>外部要因:</strong> SNSトレンド、広告効果</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>トレンド商品</h4>
+            <p><strong>特徴:</strong> SNSで話題、短期間で売上が急増</p>
+            <p><strong>予測精度:</strong> 60%</p>
+            <p><strong>予測手法:</strong> SNSトレンド分析 + XGBoost</p>
+            <p><strong>外部要因:</strong> SNSトレンド、インフルエンサー</p>
+        </div>
+    </div>
+    
+    <h3>3. 発注最適化</h3>
+    <div class="capability-grid">
+        <div class="capability-card">
+            <h4>発注量の計算</h4>
+            <p><strong>計算式:</strong></p>
+            <pre><code>発注量 = 予測需要 + 安全在庫 - 現在在庫
+
+安全在庫 = 予測誤差 × 安全係数
+
+予測誤差 = 過去の予測と実績の差の標準偏差
+安全係数 = 1.65（95%の確率で在庫切れを防ぐ）</code></pre>
+        </div>
+        
+        <div class="capability-card">
+            <h4>廃棄ロスと機会損失のトレードオフ</h4>
+            <p><strong>問題:</strong> 発注量を増やすと廃棄ロスが増え、減らすと機会損失が増える</p>
+            <p><strong>解決策:</strong> 最適化問題として解く</p>
+            <pre><code>最小化: 廃棄ロスコスト + 機会損失コスト
+
+廃棄ロスコスト = (発注量 - 実需要) × 原価
+機会損失コスト = (実需要 - 発注量) × 利益</code></pre>
+        </div>
+        
+        <div class="capability-card">
+            <h4>商品別の発注戦略</h4>
+            <p><strong>定番商品:</strong> 安全在庫を多めに（機会損失を防ぐ）</p>
+            <p><strong>季節商品:</strong> 安全在庫を少なめに（廃棄ロスを防ぐ）</p>
+            <p><strong>新商品:</strong> 少量発注で様子見（リスクを最小化）</p>
+        </div>
+        
+        <div class="capability-card">
+            <h4>リアルタイム調整</h4>
+            <p><strong>方法:</strong> 1日3回予測を更新</p>
+            <ul>
+                <li>朝6時: 当日の需要予測</li>
+                <li>昼12時: 午後の需要予測（午前の実績を反映）</li>
+                <li>夕方18時: 夜の需要予測（午後の実績を反映）</li>
+            </ul>
+        </div>
+    </div>
+    
+    <h3>4. 段階的導入</h3>
+    <div class="timeline">
+        <div class="timeline-item">
+            <h4>Phase 1: PoC（3ヶ月）</h4>
+            <p><strong>目標:</strong> 定番商品のみで検証</p>
+            <ul>
+                <li>10店舗で試験導入</li>
+                <li>定番商品100品目で予測</li>
+                <li>予測精度90%以上を目標</li>
+                <li>廃棄ロス30%削減を目標</li>
+            </ul>
+            <p><strong>成果物:</strong> PoC報告書、精度レポート</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>Phase 2: パイロット導入（3ヶ月）</h4>
+            <p><strong>目標:</strong> 季節商品を追加</p>
+            <ul>
+                <li>100店舗に拡大</li>
+                <li>季節商品50品目を追加</li>
+                <li>予測精度80%以上を目標</li>
+                <li>廃棄ロス50%削減を目標</li>
+            </ul>
+            <p><strong>成果物:</strong> パイロット報告書、改善提案リスト</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>Phase 3: 本番導入（6ヶ月）</h4>
+            <p><strong>目標:</strong> 全商品、全店舗に展開</p>
+            <ul>
+                <li>5,000店舗に展開</li>
+                <li>全商品1,000品目で予測</li>
+                <li>予測精度85%以上を目標</li>
+                <li>廃棄ロス50%削減を目標</li>
+            </ul>
+            <p><strong>成果物:</strong> 本番導入報告書、ROI報告書</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>Phase 4: 継続改善（継続）</h4>
+            <p><strong>目標:</strong> 精度向上と新機能追加</p>
+            <ul>
+                <li>週1回モデル再学習</li>
+                <li>月1回精度検証</li>
+                <li>新商品の予測精度向上</li>
+                <li>価格最適化への応用</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>失敗事例から学ぶ</h2>
+    
+    <div class="failure-cases">
+        <div class="failure-card">
+            <h4>❌ 失敗事例1: 過去データのみで予測</h4>
+            <p><strong>問題:</strong> 天気、イベントを考慮せず、予測精度が低い</p>
+            <p><strong>詳細:</strong></p>
+            <ul>
+                <li>過去の販売データのみで予測</li>
+                <li>天気、イベントを考慮せず</li>
+                <li>予測精度60%と低い</li>
+                <li>廃棄ロスが減らない</li>
+            </ul>
+            <p><strong>教訓:</strong> 外部データ（天気、イベント）を統合する。</p>
+        </div>
+        
+        <div class="failure-card">
+            <h4>❌ 失敗事例2: 全商品を同じ手法で予測</h4>
+            <p><strong>問題:</strong> 定番商品と季節商品を同じ手法で予測し、精度が低い</p>
+            <p><strong>詳細:</strong></p>
+            <ul>
+                <li>全商品をLSTMで予測</li>
+                <li>季節商品の予測精度が50%と低い</li>
+                <li>廃棄ロスが減らない</li>
+            </ul>
+            <p><strong>教訓:</strong> 商品カテゴリ別に予測手法を変える。</p>
+        </div>
+        
+        <div class="failure-card">
+            <h4>❌ 失敗事例3: 安全在庫を考慮せず</h4>
+            <p><strong>問題:</strong> 予測通りに発注し、在庫切れが多発</p>
+            <p><strong>詳細:</strong></p>
+            <ul>
+                <li>予測需要 = 発注量</li>
+                <li>予測誤差を考慮せず</li>
+                <li>在庫切れが多発</li>
+                <li>機会損失が増加</li>
+            </ul>
+            <p><strong>教訓:</strong> 安全在庫を考慮した発注量計算。</p>
+        </div>
+        
+        <div class="failure-card">
+            <h4>❌ 失敗事例4: 一度に全店舗に展開</h4>
+            <p><strong>問題:</strong> 予測精度が低く、全店舗で廃棄ロスが増加</p>
+            <p><strong>詳細:</strong></p>
+            <ul>
+                <li>PoCなしで全店舗に展開</li>
+                <li>予測精度が低い</li>
+                <li>全店舗で廃棄ロスが増加</li>
+                <li>損失10億円</li>
+            </ul>
+            <p><strong>教訓:</strong> 段階的導入（PoC → パイロット → 本番）。</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>成果と今後の展開</h2>
+    
+    <div class="results">
+        <h3>導入成果（1年後）</h3>
+        <div class="capability-grid">
+            <div class="capability-card">
+                <h4>廃棄ロス削減</h4>
+                <ul>
+                    <li><strong>廃棄ロス:</strong> 月5億円 → 2.5億円（50%削減）</li>
+                    <li><strong>年間削減:</strong> 30億円</li>
+                    <li><strong>廃棄率:</strong> 5% → 2.5%</li>
+                </ul>
+            </div>
+            
+            <div class="capability-card">
+                <h4>機会損失削減</h4>
+                <ul>
+                    <li><strong>機会損失:</strong> 月2億円 → 0.8億円（60%削減）</li>
+                    <li><strong>年間削減:</strong> 14.4億円</li>
+                    <li><strong>在庫切れ率:</strong> 3% → 1.2%</li>
+                </ul>
+            </div>
+            
+            <div class="capability-card">
+                <h4>在庫回転率向上</h4>
+                <ul>
+                    <li><strong>在庫回転率:</strong> 月10回 → 月15回（50%改善）</li>
+                    <li><strong>在庫金額:</strong> 100億円 → 70億円（30%削減）</li>
+                    <li><strong>キャッシュフロー:</strong> 30億円改善</li>
+                </ul>
+            </div>
+            
+            <div class="capability-card">
+                <h4>ROI</h4>
+                <ul>
+                    <li><strong>初期投資:</strong> 1億円</li>
+                    <li><strong>年間削減:</strong> 44.4億円（廃棄ロス30億円 + 機会損失14.4億円）</li>
+                    <li><strong>投資回収期間:</strong> 1週間</li>
+                    <li><strong>3年間ROI:</strong> 13,000%</li>
+                </ul>
+            </div>
+        </div>
+        
+        <h3>今後の展開</h3>
+        <div class="capability-grid">
+            <div class="capability-card">
+                <h4>価格最適化</h4>
+                <ul>
+                    <li>需要予測に基づいた動的価格設定</li>
+                    <li>セールのタイミング最適化</li>
+                    <li>利益最大化</li>
+                </ul>
+            </div>
+            
+            <div class="capability-card">
+                <h4>店舗レイアウト最適化</h4>
+                <ul>
+                    <li>売れ筋商品の配置最適化</li>
+                    <li>動線分析</li>
+                    <li>売上向上</li>
+                </ul>
+            </div>
+            
+            <div class="capability-card">
+                <h4>パーソナライゼーション</h4>
+                <ul>
+                    <li>顧客別のレコメンド</li>
+                    <li>クーポン配信最適化</li>
+                    <li>顧客満足度向上</li>
+                </ul>
+            </div>
+            
+            <div class="capability-card">
+                <h4>新技術導入</h4>
+                <ul>
+                    <li>画像認識（商品の自動認識）</li>
+                    <li>IoTセンサー（リアルタイム在庫管理）</li>
+                    <li>強化学習（発注戦略の最適化）</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>FDEとしての提案ポイント</h2>
+    
+    <div class="insight-box">
+        <h4>💡 小売業AI提案の5つのポイント</h4>
+        
+        <h5>1. 外部データを統合</h5>
+        <p>過去データだけでは予測できない。天気、イベント、競合の動きを考慮。</p>
+        
+        <h5>2. 商品カテゴリ別に予測</h5>
+        <p>定番商品、季節商品、新商品で予測手法を変える。</p>
+        
+        <h5>3. 安全在庫を考慮</h5>
+        <p>予測誤差を考慮した発注量計算。廃棄ロスと機会損失のトレードオフを最適化。</p>
+        
+        <h5>4. 段階的導入</h5>
+        <p>PoC → パイロット → 本番導入の3段階で、リスクを最小化。</p>
+        
+        <h5>5. ROIを明確に</h5>
+        <p>初期投資、年間削減、投資回収期間を明確に提示。経営層を説得。</p>
+    </div>
+</div>

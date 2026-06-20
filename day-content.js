@@ -27,6 +27,43 @@ window.dayContents = {
         現在: 顧客の成果にコミット → そのために現場に入る</p>
         <p>つまりFDEは、<strong>SaaSビジネスモデルの必然的な帰結</strong>である。顧客の成功なしに自社の成功はない。</p>
     </div>
+    
+    <h3>FDEという概念の起源</h3>
+    <p>FDEという職種は、2000年代後半にPalantir Technologiesが確立した概念である。当時、データ分析プラットフォームを政府機関や金融機関に導入する際、「製品を渡すだけでは使いこなせない」という課題に直面した。そこで、エンジニアが顧客の現場に入り込み、実際の業務フローの中で製品を使いこなす方法を一緒に作り上げるアプローチが生まれた。</p>
+    
+    <p>この成功モデルは、その後Snowflake、Databricks、OpenAIなどのエンタープライズ向けSaaS企業に広がり、現在では「顧客成功を技術で実現する専門職」として確立されている。特に日本では、IBMやAWSなどのクラウドベンダーが2010年代後半から本格的にFDE組織を立ち上げ、大手企業のDX推進を支援している。</p>
+</div>
+
+<div class="content-section">
+    <h2>FDEの実際の業務フロー</h2>
+    <p>FDEの仕事は、以下のような流れで進む:</p>
+    
+    <div class="workflow-steps">
+        <div class="workflow-step">
+            <h4>Phase 1: 課題発見（1-2週間）</h4>
+            <p>顧客の現場に入り、業務を観察しながら本質的な課題を特定する。表面的な要望（「AIを導入したい」）ではなく、根本的な問題（「ベテラン社員の知識が属人化している」）を見抜く。</p>
+        </div>
+        
+        <div class="workflow-step">
+            <h4>Phase 2: 技術検証（2-4週間）</h4>
+            <p>PoCを通じて、技術的な実現可能性を検証する。この段階で重要なのは、「完璧なシステム」ではなく「課題解決の可能性を示す最小限の実装」を作ること。</p>
+        </div>
+        
+        <div class="workflow-step">
+            <h4>Phase 3: 本番化支援（1-3ヶ月）</h4>
+            <p>PoCで検証した内容を、実際の業務で使える形に仕上げる。セキュリティ、パフォーマンス、運用性などの本番要件をクリアしながら、段階的にリリースする。</p>
+        </div>
+        
+        <div class="workflow-step">
+            <h4>Phase 4: 知見の資産化（継続的）</h4>
+            <p>プロジェクトで得た知見を、ドキュメント、テンプレート、再利用可能なコードとして整理し、次の案件に活かせる形にする。これがFDEの最も重要な仕事である。</p>
+        </div>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 重要な気づき</h4>
+        <p>FDEの価値は「個別案件の成功」だけでなく、<strong>「その知見を次の10件の案件に活かせる形にすること」</strong>にある。1件の成功を10件の成功に変える仕組みを作ることが、FDEの真の役割である。</p>
+    </div>
 </div>
 
 <div class="content-section">
@@ -1013,19 +1050,487 @@ print(f"高額顧客数: {len(high_value)}")</code></pre>`,
     8: {
         title: 'APIを理解する',
         subtitle: 'システム連携の基礎',
-        goals: ['REST APIの概念', 'HTTPメソッド理解', 'ステータスコード理解'],
-        content: `<div class="content-section"><h2>APIとは</h2><p>システム間でデータをやり取りする仕組み</p></div>`,
-        quiz: [{question: 'データ取得に使うHTTPメソッドは？', options: ['POST', 'GET', 'PUT', 'DELETE'], correct: 1, explanation: 'GETでデータを取得する。'}],
-        exercise: {title: 'APIを理解する', prompt: 'APIエンドポイントを説明せよ', sampleAnswer: '<div class="sample-answer"><p>GET /users でユーザー一覧を取得</p></div>'}
+        goals: [
+            'APIが生まれた歴史とREST APIの誕生背景を理解する',
+            'HTTPメソッド（GET/POST/PUT/DELETE）の使い分けを完全に理解する',
+            'ステータスコードの意味を理解し、エラー対応ができる',
+            'FDEとして顧客のAPI設計をレビューできる'
+        ],
+        content: `
+<div class="content-section">
+    <h2>APIの歴史: なぜREST APIが標準になったのか</h2>
+    
+    <div class="timeline-box">
+        <h3>APIの進化</h3>
+        <div class="timeline-item">
+            <h4>1990年代: SOAP（Simple Object Access Protocol）</h4>
+            <p>XMLベースの複雑なプロトコル。企業システム間の連携に使われた。</p>
+            <pre><code><soap:Envelope>
+  <soap:Body>
+    <GetUser>
+      <UserId>12345</UserId>
+    </GetUser>
+  </soap:Body>
+</soap:Envelope></code></pre>
+            <p><strong>問題点:</strong> 複雑すぎる、XMLが重い、学習コストが高い</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2000年: REST（Representational State Transfer）の提唱</h4>
+            <p>Roy Fieldingの博士論文で、Webの設計原則を体系化。</p>
+            <p><strong>核心的アイデア:</strong> URLでリソースを表現し、HTTPメソッドで操作を表現</p>
+            <pre><code>GET /users/12345  # ユーザー情報を取得
+POST /users       # 新規ユーザーを作成
+PUT /users/12345  # ユーザー情報を更新
+DELETE /users/12345  # ユーザーを削除</code></pre>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2010年代: REST APIの標準化</h4>
+            <p>Twitter、Facebook、GoogleなどがREST APIを公開し、事実上の標準に。</p>
+            <p><strong>決定的要因:</strong> シンプル、学習コストが低い、JSONで軽量</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2020年代: GraphQL、gRPCの登場</h4>
+            <p>REST APIの課題（Over-fetching、N+1問題）を解決する新技術。</p>
+            <p><strong>現状:</strong> REST APIは依然として最も広く使われている</p>
+        </div>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 なぜREST APIが勝ったのか</h4>
+        <p><strong>技術的理由:</strong> HTTPの標準機能を活用 = 新しいプロトコル不要</p>
+        <p><strong>ビジネス的理由:</strong> 学習コストが低い = 開発者が使いやすい</p>
+        <p><strong>歴史的理由:</strong> Web APIの黎明期に、大手企業が採用した</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>HTTPメソッドを完全理解する</h2>
+    
+    <div class="http-methods">
+        <div class="method-card get">
+            <h4>GET - データを取得する</h4>
+            <p><strong>用途:</strong> リソースの取得（読み取り専用）</p>
+            <p><strong>特徴:</strong> サーバーの状態を変更しない（冪等性）</p>
+            <pre><code>GET /api/users/12345
+→ {"id": 12345, "name": "山田太郎", "age": 30}
+
+GET /api/orders?status=pending
+→ [{"id": 1, "amount": 10000}, {"id": 2, "amount": 20000}]</code></pre>
+            <p><strong>FDEとして:</strong> 何度実行しても安全 = キャッシュ可能</p>
+        </div>
+        
+        <div class="method-card post">
+            <h4>POST - データを作成する</h4>
+            <p><strong>用途:</strong> 新しいリソースの作成</p>
+            <p><strong>特徴:</strong> サーバーの状態を変更する（非冪等）</p>
+            <pre><code>POST /api/users
+Body: {"name": "佐藤花子", "age": 25}
+→ {"id": 12346, "name": "佐藤花子", "age": 25}</code></pre>
+            <p><strong>FDEとして:</strong> 何度も実行すると重複データが作られる = 注意が必要</p>
+        </div>
+        
+        <div class="method-card put">
+            <h4>PUT - データを更新する</h4>
+            <p><strong>用途:</strong> 既存リソースの完全な置き換え</p>
+            <p><strong>特徴:</strong> 冪等性あり（何度実行しても同じ結果）</p>
+            <pre><code>PUT /api/users/12345
+Body: {"name": "山田太郎", "age": 31}
+→ {"id": 12345, "name": "山田太郎", "age": 31}</code></pre>
+        </div>
+        
+        <div class="method-card delete">
+            <h4>DELETE - データを削除する</h4>
+            <p><strong>用途:</strong> リソースの削除</p>
+            <p><strong>特徴:</strong> 冪等性あり（2回目以降は404）</p>
+            <pre><code>DELETE /api/users/12345
+→ 204 No Content</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>ステータスコードを完全理解する</h2>
+    
+    <div class="status-codes">
+        <div class="status-group success">
+            <h4>2xx: 成功</h4>
+            <ul>
+                <li><strong>200 OK:</strong> リクエスト成功（GET、PUT）</li>
+                <li><strong>201 Created:</strong> リソース作成成功（POST）</li>
+                <li><strong>204 No Content:</strong> 成功したが返すデータなし（DELETE）</li>
+            </ul>
+        </div>
+        
+        <div class="status-group client-error">
+            <h4>4xx: クライアントエラー</h4>
+            <ul>
+                <li><strong>400 Bad Request:</strong> リクエストが不正（必須パラメータ不足など）</li>
+                <li><strong>401 Unauthorized:</strong> 認証が必要</li>
+                <li><strong>403 Forbidden:</strong> 権限がない</li>
+                <li><strong>404 Not Found:</strong> リソースが存在しない</li>
+            </ul>
+        </div>
+        
+        <div class="status-group server-error">
+            <h4>5xx: サーバーエラー</h4>
+            <ul>
+                <li><strong>500 Internal Server Error:</strong> サーバー側のバグ</li>
+                <li><strong>503 Service Unavailable:</strong> サーバーが過負荷またはメンテナンス中</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 FDEとしてのステータスコード活用</h4>
+        <p><strong>4xxエラー:</strong> クライアント側の問題 = APIの使い方を確認</p>
+        <p><strong>5xxエラー:</strong> サーバー側の問題 = ログを確認してバグ修正</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>実践: FDEとしてAPI設計をレビューする</h2>
+    
+    <div class="scenario-box">
+        <h3>シナリオ: 顧客のAPI設計を確認する</h3>
+        <p><strong>状況:</strong> 顧客が「ユーザー削除API」を設計した</p>
+        <pre><code>GET /api/delete-user?id=12345</code></pre>
+        
+        <div class="analysis">
+            <h4>❌ 問題点:</h4>
+            <ol>
+                <li><strong>GETで削除:</strong> GETは読み取り専用であるべき。削除はDELETEを使う。</li>
+                <li><strong>キャッシュリスク:</strong> GETはキャッシュされる可能性があり、意図しない削除が起きる。</li>
+                <li><strong>ブラウザの先読み:</strong> ブラウザがリンクを先読みして、勝手に削除される可能性。</li>
+            </ol>
+            
+            <h4>✅ 改善案:</h4>
+            <pre><code>DELETE /api/users/12345</code></pre>
+            <p><strong>理由:</strong> RESTの原則に従い、HTTPメソッドで操作を表現する。</p>
+        </div>
+    </div>
+</div>
+        `,
+        quiz: [
+            {
+                question: 'REST APIが広く使われている最大の理由は？',
+                options: [
+                    'SOAPより新しいから',
+                    'HTTPの標準機能を活用しシンプルだから',
+                    'Googleが作ったから',
+                    '無料だから'
+                ],
+                correct: 1,
+                explanation: 'REST APIは、HTTPの標準機能（メソッド、ステータスコード）を活用し、新しいプロトコルを学ぶ必要がないため、学習コストが低く広く普及した。'
+            },
+            {
+                question: 'データ取得に使うHTTPメソッドは？',
+                options: ['POST', 'GET', 'PUT', 'DELETE'],
+                correct: 1,
+                explanation: 'GETはリソースの取得（読み取り専用）に使う。サーバーの状態を変更しないため、何度実行しても安全。'
+            },
+            {
+                question: '404エラーの意味は？',
+                options: [
+                    'サーバーエラー',
+                    'リソースが存在しない',
+                    '認証が必要',
+                    '権限がない'
+                ],
+                correct: 1,
+                explanation: '404 Not Foundは、指定されたリソース（URL）が存在しないことを示す。クライアント側のエラー（4xx）。'
+            }
+        ],
+        exercise: {
+            title: '実践演習: API設計をレビューする',
+            prompt: '顧客が以下のAPI設計を提案してきた。問題点を指摘し、改善案を提示せよ。\n\nGET /api/update-user?id=12345&name=山田太郎&age=31',
+            sampleAnswer: `
+<div class="sample-answer">
+    <h4>問題点:</h4>
+    <ol>
+        <li><strong>GETで更新:</strong> GETは読み取り専用であるべき。更新はPUTまたはPATCHを使う。</li>
+        <li><strong>URLにデータ:</strong> 更新内容をURLに含めるのは不適切。リクエストボディに含めるべき。</li>
+        <li><strong>セキュリティリスク:</strong> URLはログに残るため、個人情報が漏洩する可能性。</li>
+    </ol>
+    
+    <h4>改善案:</h4>
+    <pre><code>PUT /api/users/12345
+Content-Type: application/json
+
+{
+  "name": "山田太郎",
+  "age": 31
+}</code></pre>
+    
+    <h4>説明:</h4>
+    <p>「RESTの原則に従い、PUTメソッドでリソースを更新します。更新内容はリクエストボディに含めることで、セキュリティとログの問題を解決できます。」</p>
+</div>
+            `
+        },
+        nextSteps: [
+            'Code GymでAPI呼び出しを練習する',
+            'Day 9でYAMLを学び、API設定ファイルを理解する',
+            '実際のAPI仕様書（Swagger/OpenAPI）を読んでみる'
+        ]
     },
     
     9: {
         title: 'YAMLを読む',
         subtitle: '設定ファイルの理解',
-        goals: ['YAML構文理解', '設定の読み方', 'インデントの重要性'],
-        content: `<div class="content-section"><h2>YAMLとは</h2><p>設定ファイルでよく使われる形式</p></div>`,
-        quiz: [{question: 'YAMLで重要なのは？', options: ['括弧', 'インデント', 'セミコロン', 'カンマ'], correct: 1, explanation: 'YAMLはインデントで構造を表す。'}],
-        exercise: {title: 'YAMLを読む', prompt: '設定ファイルを解釈せよ', sampleAnswer: '<div class="sample-answer"><p>サーバー設定とポート番号を定義</p></div>'}
+        goals: [
+            'YAMLが生まれた歴史と設定ファイル形式の進化を理解する',
+            'YAML構文（リスト、辞書、ネスト）を完全に理解する',
+            'インデントの重要性とよくあるエラーを理解する',
+            'FDEとして顧客の設定ファイルを読み解ける'
+        ],
+        content: `
+<div class="content-section">
+    <h2>YAMLの歴史: なぜ設定ファイルの標準になったのか</h2>
+    
+    <div class="timeline-box">
+        <h3>設定ファイル形式の進化</h3>
+        <div class="timeline-item">
+            <h4>1990年代: .ini、.conf ファイル</h4>
+            <p>シンプルなキー=値の形式。ネスト構造を表現できない。</p>
+            <pre><code>[database]
+host=localhost
+port=5432
+username=admin</code></pre>
+            <p><strong>問題点:</strong> 階層構造を表現できない、リストが扱いにくい</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2000年代前半: XML設定ファイル</h4>
+            <p>階層構造を表現できるが、冗長で読みにくい。</p>
+            <pre><code><database>
+  <host>localhost</host>
+  <port>5432</port>
+  <username>admin</username>
+</database></code></pre>
+            <p><strong>問題点:</strong> タグが多すぎて読みにくい、手書きしにくい</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2001年: YAMLの誕生</h4>
+            <p>Clark Evans、Ingy döt Net、Oren Ben-Kariが開発。</p>
+            <p><strong>YAML = YAML Ain't Markup Language（YAMLはマークアップ言語ではない）</strong></p>
+            <pre><code>database:
+  host: localhost
+  port: 5432
+  username: admin</code></pre>
+            <p><strong>革新点:</strong> 人間が読みやすい、インデントで構造を表現、最小限の記号</p>
+        </div>
+        
+        <div class="timeline-item">
+            <h4>2010年代: Kubernetes、Docker Composeで標準化</h4>
+            <p>クラウドネイティブ時代に、YAMLが設定ファイルの事実上の標準に。</p>
+            <p><strong>現状:</strong> CI/CD、インフラ設定、アプリケーション設定で広く使われる</p>
+        </div>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 なぜYAMLが勝ったのか</h4>
+        <p><strong>技術的理由:</strong> 階層構造を表現でき、かつ人間が読みやすい</p>
+        <p><strong>ビジネス的理由:</strong> 手書きしやすい = 開発者の生産性が高い</p>
+        <p><strong>歴史的理由:</strong> Kubernetes（2014年）がYAMLを採用し、クラウド時代の標準に</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>YAML構文を完全理解する</h2>
+    
+    <h3>1. 基本: キーと値</h3>
+    <div class="code-explanation">
+        <pre><code>name: 山田太郎
+age: 30
+is_active: true</code></pre>
+        <div class="explanation">
+            <p><strong>形式:</strong> キー: 値（コロンの後にスペース必須）</p>
+            <p><strong>データ型:</strong> 文字列、数値、真偽値を自動判定</p>
+        </div>
+    </div>
+    
+    <h3>2. リスト（配列）</h3>
+    <div class="code-explanation">
+        <pre><code>fruits:
+  - apple
+  - banana
+  - orange
+
+# または1行で
+fruits: [apple, banana, orange]</code></pre>
+        <div class="explanation">
+            <p><strong>形式:</strong> ハイフン（-）でリスト項目を表現</p>
+            <p><strong>インデント:</strong> 2スペースが推奨（4スペースも可）</p>
+        </div>
+    </div>
+    
+    <h3>3. ネスト（階層構造）</h3>
+    <div class="code-explanation">
+        <pre><code>database:
+  host: localhost
+  port: 5432
+  credentials:
+    username: admin
+    password: secret123</code></pre>
+        <div class="explanation">
+            <p><strong>重要:</strong> インデントで階層を表現（タブ禁止、スペースのみ）</p>
+            <p><strong>読み方:</strong> database.credentials.username = "admin"</p>
+        </div>
+    </div>
+    
+    <h3>4. リストとネストの組み合わせ</h3>
+    <div class="code-explanation">
+        <pre><code>users:
+  - name: 山田太郎
+    age: 30
+    roles:
+      - admin
+      - developer
+  - name: 佐藤花子
+    age: 25
+    roles:
+      - developer</code></pre>
+        <div class="explanation">
+            <p><strong>構造:</strong> ユーザーのリスト、各ユーザーは複数のロールを持つ</p>
+            <p><strong>FDEとして:</strong> この構造を理解できれば、ほとんどの設定ファイルが読める</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>よくあるYAMLエラーと対処法</h2>
+    
+    <div class="error-patterns">
+        <div class="error-card">
+            <h4>❌ インデントエラー</h4>
+            <pre><code>database:
+  host: localhost
+   port: 5432  # インデントが1つ多い</code></pre>
+            <p><strong>原因:</strong> インデントが揃っていない</p>
+            <p><strong>対処:</strong> 同じ階層は同じインデント（2スペースまたは4スペース）</p>
+        </div>
+        
+        <div class="error-card">
+            <h4>❌ コロンの後のスペース忘れ</h4>
+            <pre><code>name:山田太郎  # スペースがない</code></pre>
+            <p><strong>原因:</strong> コロンの後にスペースが必要</p>
+            <p><strong>対処:</strong> <code>name: 山田太郎</code> のようにスペースを入れる</p>
+        </div>
+        
+        <div class="error-card">
+            <h4>❌ タブ文字の使用</h4>
+            <pre><code>database:
+ host: localhost  # タブ文字を使用</code></pre>
+            <p><strong>原因:</strong> YAMLではタブ文字は禁止</p>
+            <p><strong>対処:</strong> エディタの設定で「タブをスペースに変換」を有効化</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>実践: FDEとして設定ファイルを読む</h2>
+    
+    <div class="scenario-box">
+        <h3>シナリオ: Kubernetes設定ファイルを理解する</h3>
+        <p><strong>状況:</strong> 顧客が「このYAMLファイルの意味を教えてほしい」と相談</p>
+        <pre><code>apiVersion: v1
+kind: Service
+metadata:
+  name: my-app
+  labels:
+    app: web
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: web</code></pre>
+        
+        <div class="analysis">
+            <h4>FDEとしての読み方:</h4>
+            <ol>
+                <li><strong>apiVersion, kind:</strong> Kubernetesのリソース種別（Service）</li>
+                <li><strong>metadata:</strong> このサービスの名前は "my-app"、ラベルは "app: web"</li>
+                <li><strong>spec.type:</strong> LoadBalancer = 外部からアクセス可能</li>
+                <li><strong>spec.ports:</strong> 外部ポート80を、コンテナのポート8080に転送</li>
+                <li><strong>spec.selector:</strong> "app: web" ラベルを持つPodに接続</li>
+            </ol>
+            
+            <h4>顧客への説明:</h4>
+            <p>「このファイルは、Webアプリケーションを外部に公開する設定です。外部からポート80でアクセスすると、内部のアプリケーション（ポート8080）に転送されます。」</p>
+        </div>
+    </div>
+</div>
+        `,
+        quiz: [
+            {
+                question: 'YAMLが設定ファイルの標準になった最大の理由は？',
+                options: [
+                    'XMLより新しいから',
+                    '人間が読みやすく、階層構造を表現できるから',
+                    'Googleが作ったから',
+                    '無料だから'
+                ],
+                correct: 1,
+                explanation: 'YAMLは、XMLのように階層構造を表現でき、かつ人間が読みやすい（最小限の記号、インデントで構造表現）ため、設定ファイルの標準になった。'
+            },
+            {
+                question: 'YAMLで最も重要なのは？',
+                options: ['括弧', 'インデント', 'セミコロン', 'カンマ'],
+                correct: 1,
+                explanation: 'YAMLはインデント（字下げ）で階層構造を表現する。インデントが揃っていないとエラーになる。タブ文字は禁止で、スペースのみ使用可能。'
+            },
+            {
+                question: '次のYAMLの意味は？ users: [admin, developer]',
+                options: [
+                    'usersという文字列',
+                    'usersというリスト（配列）',
+                    'usersという辞書',
+                    'エラー'
+                ],
+                correct: 1,
+                explanation: '[ ] はリスト（配列）を表す。users: [admin, developer] は、usersというキーに、adminとdeveloperの2つの要素を持つリストが格納されている。'
+            }
+        ],
+        exercise: {
+            title: '実践演習: YAML設定ファイルを読んで説明する',
+            prompt: `顧客から「このYAML設定ファイルの意味を教えてほしい」と言われた。ビジネス的な意味を説明せよ。
+
+<pre><code>server:
+  host: 0.0.0.0
+  port: 8080
+  ssl:
+    enabled: true
+    certificate: /path/to/cert.pem
+database:
+  host: db.example.com
+  port: 5432
+  pool_size: 10</code></pre>`,
+            sampleAnswer: `
+<div class="sample-answer">
+    <h4>模範解答例（顧客向け）</h4>
+    <p>「この設定ファイルは、Webサーバーとデータベースの接続情報を定義しています。」</p>
+    
+    <h4>詳細説明:</h4>
+    <ul>
+        <li><strong>server:</strong> Webサーバーはポート8080で起動し、SSL（暗号化通信）が有効です。</li>
+        <li><strong>database:</strong> データベースサーバー（db.example.com）のポート5432に接続し、最大10個の接続を同時に保持します。</li>
+    </ul>
+    
+    <h4>ビジネス的な意味:</h4>
+    <p>「SSL有効 = セキュアな通信、pool_size=10 = 同時に10人のユーザーがアクセスできる、という設定です。」</p>
+</div>
+            `
+        },
+        nextSteps: [
+            'Code GymでYAML設定ファイルを読む練習をする',
+            'Day 10でログを学び、設定ファイルとログの関係を理解する',
+            '実際のKubernetes、Docker Compose設定ファイルを読んでみる'
+        ]
     },
     
     10: {

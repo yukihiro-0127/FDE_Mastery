@@ -364,7 +364,7 @@ greet("World")</code></pre>
             <p><strong>誕生:</strong> 1995年（Brendan Eich、Netscape）</p>
             <p><strong>特徴:</strong> ブラウザで動く唯一の言語、Node.jsでサーバーでも動く</p>
             <pre><code>function greet(name) {
-    console.log(`Hello, ${name}!`);
+    console.log("Hello, " + name + "!");
 }
 
 greet("World");</code></pre>
@@ -404,7 +404,7 @@ greet("World");</code></pre>
             <p><strong>誕生:</strong> 2012年（Microsoft）</p>
             <p><strong>特徴:</strong> JavaScriptに型安全性を追加</p>
             <pre><code>function greet(name: string): void {
-    console.log(`Hello, ${name}!`);
+    console.log("Hello, " + name + "!");
 }
 
 greet("World");</code></pre>
@@ -1786,7 +1786,7 @@ print("Hello")  # インデントがない</code></pre>
 
 df = pd.read_csv('customer_data.csv')
 high_value = df[df['purchase_amount'] > 100000]
-print(f"高額顧客数: {len(high_value)}")</code></pre>`,
+print("高額顧客数: " + str(len(high_value)))</code></pre>`,
             sampleAnswer: `
 <div class="sample-answer">
     <h4>模範解答例（顧客向け）</h4>

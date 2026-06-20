@@ -1,0 +1,407 @@
+/* Bob専用ページのスタイル */
+
+.bob-hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #0f62fe 0%, #0043ce 100%);
+    color: white;
+    margin-bottom: 40px;
+}
+
+.bob-logo {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.bob-hero h1 {
+    font-size: 36px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.bob-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 40px;
+}
+
+/* セクション一覧 */
+.bob-sections {
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+}
+
+.section-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.section-card:hover {
+    border-color: #0f62fe;
+    box-shadow: 0 2px 8px rgba(15, 98, 254, 0.1);
+    transform: translateY(-2px);
+}
+
+.section-card.active {
+    border-color: #0f62fe;
+    background: #f4f4f4;
+}
+
+.section-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.section-icon {
+    font-size: 24px;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #161616;
+    margin: 0;
+}
+
+.section-description {
+    font-size: 13px;
+    color: #525252;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* 詳細コンテンツ */
+.bob-detail {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 40px;
+    min-height: 600px;
+}
+
+.bob-detail h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #161616;
+    margin-top: 0;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #0f62fe;
+}
+
+.bob-detail h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #161616;
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
+
+.bob-detail h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #161616;
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+.bob-detail h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #161616;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.bob-detail p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #525252;
+    margin-bottom: 16px;
+}
+
+.bob-detail ul, .bob-detail ol {
+    margin-bottom: 16px;
+    padding-left: 24px;
+}
+
+.bob-detail li {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #525252;
+    margin-bottom: 8px;
+}
+
+/* 定義ボックス */
+.definition-box {
+    background: #f4f4f4;
+    border-left: 4px solid #0f62fe;
+    padding: 20px;
+    margin: 24px 0;
+    border-radius: 4px;
+}
+
+.definition-box h3 {
+    margin-top: 0;
+    color: #0f62fe;
+}
+
+/* 機能グリッド */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 24px 0;
+}
+
+.feature-card {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.feature-card h4 {
+    margin-top: 0;
+    color: #0f62fe;
+}
+
+/* キーポイント */
+.key-point {
+    background: #e8f4ff;
+    border: 1px solid #0f62fe;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 24px 0;
+}
+
+.key-point h3 {
+    margin-top: 0;
+    color: #0f62fe;
+}
+
+/* 比較テーブル */
+.comparison-table-wrapper {
+    overflow-x: auto;
+    margin: 24px 0;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #e0e0e0;
+}
+
+.comparison-table th {
+    background: #f4f4f4;
+    font-weight: 600;
+    color: #161616;
+}
+
+.comparison-table td {
+    color: #525252;
+}
+
+/* 優位性セクション */
+.advantages {
+    margin: 32px 0;
+}
+
+.advantage-item {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.advantage-item h4 {
+    color: #0f62fe;
+    margin-top: 0;
+}
+
+/* ステップ */
+.setup-steps {
+    margin: 32px 0;
+}
+
+.step {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.step-number {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: #0f62fe;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h4 {
+    margin-top: 0;
+}
+
+/* ショートカットテーブル */
+.shortcuts table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+}
+
+.shortcuts th,
+.shortcuts td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #e0e0e0;
+}
+
+.shortcuts th {
+    background: #f4f4f4;
+    font-weight: 600;
+}
+
+.shortcuts code {
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+}
+
+/* プラクティスセクション */
+.practice-section {
+    margin: 32px 0;
+}
+
+.comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 24px 0;
+}
+
+.bad-example,
+.good-example {
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.bad-example {
+    background: #fff1f1;
+    border: 1px solid #da1e28;
+}
+
+.good-example {
+    background: #defbe6;
+    border: 1px solid #24a148;
+}
+
+.bad-example h4 {
+    color: #da1e28;
+    margin-top: 0;
+}
+
+.good-example h4 {
+    color: #24a148;
+    margin-top: 0;
+}
+
+/* FAQ */
+.faq-item {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.faq-item h4 {
+    color: #0f62fe;
+    margin-top: 0;
+}
+
+/* コードブロック */
+.bob-detail pre {
+    background: #f4f4f4;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+}
+
+.bob-detail code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* レスポンシブ */
+@media (max-width: 1024px) {
+    .bob-content {
+        grid-template-columns: 1fr;
+    }
+
+    .bob-sections {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 16px;
+    }
+
+    .comparison {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .bob-hero {
+        padding: 40px 20px;
+    }
+
+    .bob-hero h1 {
+        font-size: 28px;
+    }
+
+    .bob-detail {
+        padding: 24px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Made with Bob */

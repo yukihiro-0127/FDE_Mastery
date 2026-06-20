@@ -42,20 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeBobPage() {
-    console.log('🚀 initializeBobPage called');
-    console.log('📦 window.bobSectionsMain:', window.bobSectionsMain);
-    console.log('📦 window.bobSectionsExtensions:', window.bobSectionsExtensions);
-    
-    // 2つのファイルからセクションを結合
-    if (window.bobSectionsMain && window.bobSectionsExtensions) {
-        window.bobSections = [...window.bobSectionsMain, ...window.bobSectionsExtensions];
-        console.log('✅ Sections merged:', window.bobSections.length);
-    } else {
-        console.error('❌ Failed to load sections');
-        console.error('bobSectionsMain:', window.bobSectionsMain);
-        console.error('bobSectionsExtensions:', window.bobSectionsExtensions);
-    }
-    
     renderSections();
     
     // デフォルトで最初のセクションを表示
@@ -110,7 +96,7 @@ function createSectionCard(section) {
     return card;
 }
 
-function showSection(sectionId) {
+async function showSection(sectionId) {
     // アクティブなカードを更新
     document.querySelectorAll('.section-card').forEach(card => {
         card.classList.remove('active');
@@ -124,7 +110,7 @@ function showSection(sectionId) {
     // コンテンツを表示
     const section = window.bobSections.find(s => s.id === sectionId);
     if (section) {
-        displaySectionContent(section);
+        await displaySectionContent(section);
     }
 
     // スムーズスクロール（モバイル対応）
@@ -136,11 +122,28 @@ function showSection(sectionId) {
     }
 }
 
-function displaySectionContent(section) {
+async function displaySectionContent(section) {
     const detailContainer = document.getElementById('bob-detail');
     if (!detailContainer) return;
 
-    detailContainer.innerHTML = section.content;
+    // 外部HTMLファイルを読み込む場合
+    if (section.contentFile) {
+        try {
+            const response = await fetch(section.contentFile);
+            if (!response.ok) {
+                throw new Error(`Failed to load ${section.contentFile}`);
+            }
+            const html = await response.text();
+            detailContainer.innerHTML = html;
+        } catch (error) {
+            console.error('Error loading content file:', error);
+            detailContainer.innerHTML = `<p>コンテンツの読み込みに失敗しました。</p>`;
+            return;
+        }
+    } else {
+        // 通常のcontentプロパティを使用
+        detailContainer.innerHTML = section.content;
+    }
 
     // コンテンツ内のリンクを処理
     detailContainer.querySelectorAll('a').forEach(link => {

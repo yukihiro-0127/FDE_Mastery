@@ -42,9 +42,18 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeBobPage() {
+    console.log('🚀 initializeBobPage called');
+    console.log('📦 window.bobSectionsMain:', window.bobSectionsMain);
+    console.log('📦 window.bobSectionsExtensions:', window.bobSectionsExtensions);
+    
     // 2つのファイルからセクションを結合
     if (window.bobSectionsMain && window.bobSectionsExtensions) {
         window.bobSections = [...window.bobSectionsMain, ...window.bobSectionsExtensions];
+        console.log('✅ Sections merged:', window.bobSections.length);
+    } else {
+        console.error('❌ Failed to load sections');
+        console.error('bobSectionsMain:', window.bobSectionsMain);
+        console.error('bobSectionsExtensions:', window.bobSectionsExtensions);
     }
     
     renderSections();

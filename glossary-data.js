@@ -286,6 +286,125 @@ const glossaryTerms = [
         customerExplanation: 'APIの利用回数には上限があります。大量のデータを処理する場合は、レート制限を考慮した設計が必要です。',
         relatedTerms: ['API', 'スロットリング'],
         ibmProduct: null
+    },
+    {
+        term: 'アジャイル',
+        reading: 'あじゃいる',
+        category: 'cloud',
+        definition: '短期間で開発とリリースを繰り返し、柔軟に変化に対応する開発手法。',
+        explanation: `
+            <p>アジャイルは、「素早く、柔軟に」開発する方法です。</p>
+            <p><strong>従来の開発（ウォーターフォール）:</strong></p>
+            <ul>
+                <li>要件定義→設計→開発→テスト→リリース（一方通行）</li>
+                <li>リリースまで数ヶ月〜数年</li>
+            </ul>
+            <p><strong>アジャイル開発:</strong></p>
+            <ul>
+                <li>1〜2週間のスプリントで開発</li>
+                <li>毎スプリントでリリース可能な成果物</li>
+                <li>顧客フィードバックを即座に反映</li>
+            </ul>
+            <p><strong>代表的な手法:</strong> スクラム、カンバン</p>
+        `,
+        customerExplanation: '短期間で開発とリリースを繰り返すことで、市場の変化に素早く対応できます。例えば、2週間ごとに新機能をリリースし、ユーザーの反応を見ながら改善していきます。',
+        relatedTerms: ['スクラム', 'DevOps', 'CI/CD'],
+        ibmProduct: null
+    },
+    {
+        term: 'MVP',
+        reading: 'えむぶいぴー',
+        category: 'ai',
+        definition: 'Minimum Viable Productの略。最小限の機能で市場検証を行う製品。',
+        explanation: `
+            <p>MVPは、「最小限の機能で、まず試してみる」アプローチです。</p>
+            <p><strong>目的:</strong></p>
+            <ul>
+                <li>市場ニーズの検証</li>
+                <li>早期のフィードバック獲得</li>
+                <li>開発コストの最小化</li>
+            </ul>
+            <p><strong>例:</strong></p>
+            <ul>
+                <li>完璧なECサイトを作る前に、まず商品一覧と購入機能だけ実装</li>
+                <li>ユーザーの反応を見てから、レコメンド機能などを追加</li>
+            </ul>
+        `,
+        customerExplanation: '最小限の機能で市場に出し、ユーザーの反応を見てから本格開発します。大規模投資の前に、本当に需要があるか確認できます。',
+        relatedTerms: ['PoC', 'アジャイル', 'リーンスタートアップ'],
+        ibmProduct: null
+    },
+    {
+        term: 'テスト自動化',
+        reading: 'てすとじどうか',
+        category: 'cloud',
+        definition: 'ソフトウェアのテストを自動的に実行する仕組み。',
+        explanation: `
+            <p>テスト自動化は、人手でのテストを自動化することです。</p>
+            <p><strong>テストの種類:</strong></p>
+            <ul>
+                <li><strong>単体テスト:</strong> 個々の関数をテスト</li>
+                <li><strong>統合テスト:</strong> 複数の機能の連携をテスト</li>
+                <li><strong>E2Eテスト:</strong> ユーザー操作をシミュレート</li>
+            </ul>
+            <p><strong>メリット:</strong></p>
+            <ul>
+                <li>テスト時間の短縮</li>
+                <li>人的ミスの削減</li>
+                <li>リグレッション（既存機能の劣化）の早期発見</li>
+            </ul>
+        `,
+        customerExplanation: 'テストを自動化することで、品質を保ちながら開発スピードを上げられます。新機能を追加しても、既存機能が壊れていないか自動的に確認できます。',
+        relatedTerms: ['CI/CD', 'DevOps', '品質保証'],
+        ibmProduct: null
+    },
+    {
+        term: 'AI倫理',
+        reading: 'えーあいりんり',
+        category: 'ai',
+        definition: 'AIの開発・利用における倫理的配慮。公平性、透明性、説明責任などを重視。',
+        explanation: `
+            <p>AI倫理は、AIを「正しく」使うための指針です。</p>
+            <p><strong>主要な原則:</strong></p>
+            <ul>
+                <li><strong>公平性:</strong> 特定の属性で差別しない</li>
+                <li><strong>透明性:</strong> AIの判断プロセスを説明できる</li>
+                <li><strong>説明責任:</strong> AIの判断に責任を持つ</li>
+                <li><strong>プライバシー:</strong> 個人情報を適切に保護</li>
+            </ul>
+            <p><strong>具体例:</strong></p>
+            <ul>
+                <li>採用AIが性別で差別しないようにする</li>
+                <li>融資審査AIの判断理由を説明できるようにする</li>
+            </ul>
+        `,
+        customerExplanation: 'AIを業務に導入する際、倫理的な配慮が必要です。例えば、採用AIが特定の属性（性別、年齢など）で不当に差別しないよう、設計段階から配慮します。',
+        relatedTerms: ['XAI', 'バイアス', 'ガバナンス'],
+        ibmProduct: 'watsonx.governance'
+    },
+    {
+        term: 'バイアス',
+        reading: 'ばいあす',
+        category: 'ai',
+        definition: 'AIの学習データや判断に含まれる偏り。不公平な結果を生む原因。',
+        explanation: `
+            <p>バイアスは、AIの「偏見」です。</p>
+            <p><strong>発生原因:</strong></p>
+            <ul>
+                <li><strong>データバイアス:</strong> 学習データに偏りがある</li>
+                <li><strong>アルゴリズムバイアス:</strong> モデル設計に問題がある</li>
+                <li><strong>人間のバイアス:</strong> 開発者の先入観が反映される</li>
+            </ul>
+            <p><strong>例:</strong></p>
+            <ul>
+                <li>採用AIが男性を優遇（過去の採用データが男性中心だったため）</li>
+                <li>顔認識AIが特定の人種で精度が低い（学習データの偏り）</li>
+            </ul>
+            <p><strong>対策:</strong> データの多様性確保、定期的な監査</p>
+        `,
+        customerExplanation: 'AIが不公平な判断をしないよう、学習データの偏りに注意が必要です。例えば、過去の採用データが男性中心だった場合、AIも男性を優遇する可能性があります。',
+        relatedTerms: ['AI倫理', 'XAI', '公平性'],
+        ibmProduct: 'watsonx.governance'
     }
 ];
 

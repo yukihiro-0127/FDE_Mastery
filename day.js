@@ -18,7 +18,7 @@ class DayContentManager {
         this.updateProgress();
     }
     
-    loadDayContent() {
+    async loadDayContent() {
         const dayData = window.dayContents[this.currentDay];
         
         if (!dayData) {
@@ -36,12 +36,27 @@ class DayContentManager {
         
         // Update goals
         const goalsContainer = document.getElementById('learning-goals');
-        goalsContainer.innerHTML = dayData.goals.map(goal => 
+        goalsContainer.innerHTML = dayData.goals.map(goal =>
             `<li><i class="fas fa-check-circle"></i> ${goal}</li>`
         ).join('');
         
-        // Update main content
-        document.getElementById('main-content').innerHTML = dayData.content;
+        // Update main content - support external HTML files
+        const mainContent = document.getElementById('main-content');
+        if (dayData.contentFile) {
+            try {
+                const response = await fetch(dayData.contentFile);
+                if (!response.ok) {
+                    throw new Error(`Failed to load ${dayData.contentFile}`);
+                }
+                const html = await response.text();
+                mainContent.innerHTML = html;
+            } catch (error) {
+                console.error('Error loading content file:', error);
+                mainContent.innerHTML = '<p>コンテンツの読み込みに失敗しました。</p>';
+            }
+        } else {
+            mainContent.innerHTML = dayData.content;
+        }
         
         // Update quiz
         if (dayData.quiz && dayData.quiz.length > 0) {

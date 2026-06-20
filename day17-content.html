@@ -1,0 +1,307 @@
+<div class="content-section">
+    <h2>📊 データ品質評価 - AI成功の前提条件</h2>
+    <p class="intro">AIプロジェクトの成否は、データ品質で80%決まります。どんなに優れたアルゴリズムでも、データが悪ければ良い結果は出ません。</p>
+
+    <div class="key-concept">
+        <h3>💡 核心メッセージ</h3>
+        <p><strong>「Garbage In, Garbage Out」</strong> - 悪いデータを入れれば、悪い結果しか出ない。データ品質評価は、AIプロジェクトの最初の関門です。</p>
+    </div>
+
+    <h3>1. データ品質の6つの評価軸</h3>
+    
+    <div class="quality-dimension">
+        <h4>① 完全性（Completeness）</h4>
+        <p><strong>定義：</strong> 必要なデータがすべて揃っているか</p>
+        <div class="example-box">
+            <h5>評価方法</h5>
+            <pre><code>欠損率 = (欠損値の数 / 全データ数) × 100%
+
+【判定基準】
+- 欠損率 < 5%: 優良
+- 欠損率 5-15%: 要注意（補完可能）
+- 欠損率 > 15%: 危険（追加収集必要）</code></pre>
+            
+            <h5>実例：顧客データベース</h5>
+            <pre><code>全レコード: 10,000件
+メールアドレス欠損: 500件 → 欠損率5%（要注意）
+電話番号欠損: 2,000件 → 欠損率20%（危険）
+
+【対策】
+- メールアドレス: 平均値補完または削除
+- 電話番号: 追加収集キャンペーン実施</code></pre>
+        </div>
+    </div>
+
+    <div class="quality-dimension">
+        <h4>② 正確性（Accuracy）</h4>
+        <p><strong>定義：</strong> データが現実を正しく反映しているか</p>
+        <div class="example-box">
+            <h5>評価方法</h5>
+            <pre><code>【サンプリング検証】
+1. ランダムに100件抽出
+2. 人間が正解データと照合
+3. 正解率を計算
+
+正解率 = (正しいデータ数 / 検証データ数) × 100%
+
+【判定基準】
+- 正解率 > 95%: 優良
+- 正解率 90-95%: 要注意
+- 正解率 < 90%: 危険</code></pre>
+            
+            <h5>実例：住所データ</h5>
+            <pre><code>検証結果:
+- 正しい住所: 85件
+- 誤った住所: 10件（旧住所、誤入力）
+- 不明: 5件
+→ 正解率85%（危険）
+
+【対策】
+- 住所正規化ツールで自動修正
+- 郵便番号との整合性チェック
+- ユーザーに確認メール送信</code></pre>
+        </div>
+    </div>
+
+    <div class="quality-dimension">
+        <h4>③ 一貫性（Consistency）</h4>
+        <p><strong>定義：</strong> データ間で矛盾がないか</p>
+        <div class="example-box">
+            <h5>チェック項目</h5>
+            <pre><code>【形式の一貫性】
+- 日付: 2024/01/01 vs 2024-01-01 vs 01/01/2024
+- 電話番号: 03-1234-5678 vs 0312345678
+- 性別: 男/女 vs M/F vs 1/0
+
+【論理的一貫性】
+- 生年月日 > 入社日（矛盾）
+- 退職日 < 入社日（矛盾）
+- 年齢と生年月日の不一致</code></pre>
+            
+            <h5>実例：ECサイトの注文データ</h5>
+            <pre><code>矛盾検出:
+- 注文日: 2024/01/15
+- 配送日: 2024/01/10（注文日より前！）
+→ データ入力ミス
+
+【対策】
+- バリデーションルール追加
+- 自動チェックスクリプト実行
+- 入力画面の改善</code></pre>
+        </div>
+    </div>
+
+    <div class="quality-dimension">
+        <h4>④ 適時性（Timeliness）</h4>
+        <p><strong>定義：</strong> データが最新か、更新頻度は適切か</p>
+        <div class="example-box">
+            <h5>評価方法</h5>
+            <pre><code>【更新頻度チェック】
+- 最終更新日を確認
+- 業務要件と照合
+
+【判定基準】
+- リアルタイム系: 1時間以内
+- 日次バッチ系: 24時間以内
+- 月次レポート系: 1ヶ月以内</code></pre>
+            
+            <h5>実例：在庫管理システム</h5>
+            <pre><code>要件: リアルタイム在庫管理
+現状: 最終更新が3日前
+
+【影響】
+- 在庫切れ商品を販売してしまう
+- 顧客クレーム発生
+- 売上機会損失
+
+【対策】
+- リアルタイム連携API実装
+- 更新頻度を1時間→5分に変更</code></pre>
+        </div>
+    </div>
+
+    <div class="quality-dimension">
+        <h4>⑤ 妥当性（Validity）</h4>
+        <p><strong>定義：</strong> データが業務ルールに従っているか</p>
+        <div class="example-box">
+            <h5>チェック項目</h5>
+            <pre><code>【範囲チェック】
+- 年齢: 0-120歳
+- 価格: 0円以上
+- 在庫数: 0個以上
+
+【フォーマットチェック】
+- メール: xxx@xxx.xxx
+- 郵便番号: 123-4567
+- 電話番号: 03-1234-5678</code></pre>
+            
+            <h5>実例：商品マスタ</h5>
+            <pre><code>異常値検出:
+- 商品価格: -1000円（マイナス！）
+- 在庫数: 999999999（異常に多い）
+- 商品名: 空白
+
+【対策】
+- 入力時のバリデーション強化
+- 異常値アラート設定
+- データクレンジング実施</code></pre>
+        </div>
+    </div>
+
+    <div class="quality-dimension">
+        <h4>⑥ 一意性（Uniqueness）</h4>
+        <p><strong>定義：</strong> 重複データがないか</p>
+        <div class="example-box">
+            <h5>評価方法</h5>
+            <pre><code>【重複検出】
+1. 主キー（ID）の重複チェック
+2. 実質的な重複チェック（名前、住所など）
+
+重複率 = (重複レコード数 / 全レコード数) × 100%</code></pre>
+            
+            <h5>実例：顧客マスタ</h5>
+            <pre><code>重複検出結果:
+- 完全一致: 50件（同じ顧客が2回登録）
+- 類似一致: 200件（表記ゆれ）
+  例: 「株式会社IBM」vs「IBM株式会社」
+
+【対策】
+- 名寄せツール導入
+- 登録時の重複チェック強化
+- マスタデータ統合</code></pre>
+        </div>
+    </div>
+
+    <h3>2. データ品質評価の実践手順</h3>
+    
+    <div class="step-by-step">
+        <div class="step">
+            <h4>Step 1: データプロファイリング</h4>
+            <pre><code>【実施内容】
+1. データの基本統計を取得
+   - レコード数、カラム数
+   - データ型、値の範囲
+   - 欠損値の数
+
+2. ツール例
+   - Python: pandas.describe()
+   - SQL: COUNT, AVG, MIN, MAX
+   - BI Tool: Tableau, Power BI
+
+【サンプルコード】
+import pandas as pd
+
+df = pd.read_csv('customer_data.csv')
+print(df.info())  # データ型、欠損値
+print(df.describe())  # 基本統計
+print(df.isnull().sum())  # 欠損値カウント</code></pre>
+        </div>
+
+        <div class="step">
+            <h4>Step 2: 品質スコアリング</h4>
+            <pre><code>【スコア計算式】
+品質スコア = (完全性 × 0.2) + (正確性 × 0.3) + 
+             (一貫性 × 0.2) + (適時性 × 0.1) + 
+             (妥当性 × 0.1) + (一意性 × 0.1)
+
+【判定基準】
+- 90点以上: そのまま使用可能
+- 70-90点: 前処理後に使用可能
+- 70点未満: 追加収集または使用不可
+
+【実例】
+完全性: 95点（欠損率5%）
+正確性: 85点（正解率85%）
+一貫性: 90点（矛盾少ない）
+適時性: 80点（更新遅延あり）
+妥当性: 95点（異常値少ない）
+一意性: 90点（重複少ない）
+
+→ 品質スコア = 89点（前処理後に使用可能）</code></pre>
+        </div>
+
+        <div class="step">
+            <h4>Step 3: 改善計画立案</h4>
+            <pre><code>【優先順位付け】
+1. 影響度 × 改善容易性でマトリクス作成
+2. 高影響・高容易性から着手
+
+【改善アクション例】
+- 欠損値補完: 平均値、中央値、予測モデル
+- 異常値除去: 外れ値検出、ルールベース
+- 重複削除: 名寄せ、マージ
+- 形式統一: 正規化、標準化</code></pre>
+        </div>
+    </div>
+
+    <h3>3. FDEとしての実践ポイント</h3>
+    
+    <div class="fde-tips">
+        <h4>💼 顧客への説明方法</h4>
+        <div class="tip-box">
+            <p><strong>NG例：</strong> 「データの欠損率が15%あるので、前処理が必要です」</p>
+            <p><strong>OK例：</strong> 「お客様のデータを分析したところ、10件中1.5件で情報が不足しています。このままAIに学習させると、精度が20%低下する可能性があります。追加で○○のデータを収集いただくか、既存データから推定する方法があります。どちらがご希望ですか？」</p>
+        </div>
+
+        <h4>🎯 データ品質改善のROI提示</h4>
+        <div class="tip-box">
+            <pre><code>【改善前】
+- データ品質スコア: 70点
+- AI精度: 75%
+- 誤判定による損失: 月100万円
+
+【改善後】
+- データ品質スコア: 90点
+- AI精度: 90%
+- 誤判定による損失: 月20万円
+
+【投資対効果】
+- 改善コスト: 200万円（1回）
+- 削減効果: 月80万円
+- 回収期間: 2.5ヶ月</code></pre>
+        </div>
+
+        <h4>⚠️ よくある失敗パターン</h4>
+        <div class="warning-box">
+            <p><strong>失敗1：</strong> データ品質評価をスキップして、いきなりAI開発開始</p>
+            <p><strong>結果：</strong> 精度が出ず、プロジェクト炎上</p>
+            <p><strong>対策：</strong> 必ず最初にデータ品質評価を実施</p>
+            
+            <p><strong>失敗2：</strong> 完璧なデータを求めすぎて、プロジェクトが進まない</p>
+            <p><strong>結果：</strong> データクレンジングに時間がかかりすぎる</p>
+            <p><strong>対策：</strong> 80点を目指す。100点は不要</p>
+            
+            <p><strong>失敗3：</strong> データ品質の責任を顧客に押し付ける</p>
+            <p><strong>結果：</strong> 顧客との関係悪化</p>
+            <p><strong>対策：</strong> 一緒に改善する姿勢を示す</p>
+        </div>
+    </div>
+
+    <h3>4. 実践ツール</h3>
+    
+    <div class="tools-section">
+        <h4>🛠️ データ品質評価ツール</h4>
+        <ul>
+            <li><strong>Great Expectations（Python）：</strong> データバリデーションフレームワーク</li>
+            <li><strong>Pandas Profiling：</strong> 自動レポート生成</li>
+            <li><strong>Talend Data Quality：</strong> エンタープライズ向け</li>
+            <li><strong>AWS Glue DataBrew：</strong> クラウドベース</li>
+        </ul>
+
+        <h4>📊 サンプルコード：自動品質チェック</h4>
+        <pre><code>import pandas as pd
+import great_expectations as ge
+
+# データ読み込み
+df = ge.read_csv('customer_data.csv')
+
+# 品質チェック
+df.expect_column_values_to_not_be_null('email')  # 欠損チェック
+df.expect_column_values_to_be_unique('customer_id')  # 一意性チェック
+df.expect_column_values_to_be_between('age', 0, 120)  # 範囲チェック
+
+# レポート生成
+df.save_expectation_suite('quality_check.json')
+</code></pre>
+    </div>
+</div>

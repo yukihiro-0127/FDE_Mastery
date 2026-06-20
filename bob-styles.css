@@ -1454,3 +1454,173 @@
     position: absolute;
     left: 0;
 }
+
+
+/* 拡張機能セクションのスタイル */
+.extensions-overview {
+    background: #f4f4f4;
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.category-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.category-item {
+    background: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    border-left: 4px solid #0f62fe;
+    font-weight: 500;
+}
+
+.extensions-section {
+    margin-bottom: 60px;
+}
+
+.extensions-section h3 {
+    font-size: 26px;
+    color: #161616;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #0f62fe;
+}
+
+.ext-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+
+.ext-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.ext-card h4 {
+    font-size: 20px;
+    color: #0f62fe;
+    margin: 0 0 10px 0;
+}
+
+.ext-meta {
+    color: #525252;
+    font-size: 14px;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.ext-card p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.ext-card strong {
+    color: #161616;
+}
+
+.extensions-summary {
+    background: linear-gradient(135deg, #f4f4f4 0%, #ffffff 100%);
+    border: 2px solid #0f62fe;
+    border-radius: 8px;
+    padding: 30px;
+    margin: 40px 0;
+}
+
+.extensions-summary h3 {
+    font-size: 24px;
+    color: #0f62fe;
+    margin: 0 0 25px 0;
+}
+
+.combo-section {
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border-left: 4px solid #0f62fe;
+}
+
+.combo-section h4 {
+    font-size: 18px;
+    color: #161616;
+    margin: 0 0 15px 0;
+}
+
+.combo-section ol {
+    margin: 15px 0;
+    padding-left: 25px;
+}
+
+.combo-section li {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.extensions-tips {
+    margin: 40px 0;
+}
+
+.extensions-tips h3 {
+    font-size: 24px;
+    color: #161616;
+    margin-bottom: 25px;
+}
+
+.tip-section {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border-left: 4px solid #0f62fe;
+}
+
+.tip-section h4 {
+    font-size: 18px;
+    color: #161616;
+    margin: 0 0 10px 0;
+}
+
+.tip-section p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.extensions-faq {
+    margin: 40px 0;
+}
+
+.extensions-faq h3 {
+    font-size: 24px;
+    color: #161616;
+    margin-bottom: 25px;
+}
+
+.faq-item {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.faq-item h4 {
+    font-size: 18px;
+    color: #0f62fe;
+    margin: 0 0 15px 0;
+}
+
+.faq-item p {
+    margin: 10px 0;
+    line-height: 1.6;
+}

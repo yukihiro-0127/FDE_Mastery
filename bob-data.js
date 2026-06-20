@@ -1173,6 +1173,289 @@ window.bobSections = [
                 </div>
             </div>
         `
+    },
+    {
+        id: 'extensions',
+        title: 'おすすめVS Code拡張機能',
+        icon: '🔌',
+        description: '開発効率を劇的に向上させる20の必須拡張機能',
+        content: `
+            <h2>おすすめVS Code拡張機能 20選</h2>
+            <p>開発効率を劇的に向上させる、厳選された20の必須拡張機能を様々な角度から紹介します。</p>
+
+            <div class="extensions-overview">
+                <h3>📊 カテゴリ別拡張機能マップ</h3>
+                <div class="category-summary">
+                    <div class="category-item">🤖 AI・コード生成：5個</div>
+                    <div class="category-item">🎨 UI・テーマ：3個</div>
+                    <div class="category-item">⚡ 生産性向上：4個</div>
+                    <div class="category-item">🔍 コード品質：4個</div>
+                    <div class="category-item">🌐 Web開発：2個</div>
+                    <div class="category-item">🔧 その他：2個</div>
+                </div>
+            </div>
+
+            <div class="extensions-section">
+                <h3>🤖 AI・コード生成系（5個）</h3>
+
+                <div class="ext-card">
+                    <h4>1. GitHub Copilot ⭐⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 10M+ | 💰 $10/月</p>
+                    <p><strong>概要：</strong> OpenAI Codexを使用したAIペアプログラマー。コメントから自動的にコードを生成。</p>
+                    <p><strong>主な機能：</strong> リアルタイムコード補完、関数全体の生成、複数の提案、テストコード生成</p>
+                    <p><strong>こんな時に：</strong> 定型的なコードを書くのが面倒、テストコードを素早く作りたい</p>
+                </div>
+
+                <div class="ext-card">
+                    <h4>2. Tabnine ⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 5M+ | 💰 無料版あり / Pro $12/月</p>
+                    <p><strong>概要：</strong> プライバシー重視のAIコード補完。ローカルモデルとクラウドモデルを選択可能。</p>
+                    <p><strong>差別化：</strong> コードを外部に送信しないローカルモード、自社コードベースで学習可能</p>
+                    <p><strong>Copilotとの違い：</strong> プライバシー◎、カスタマイズ◎、補完精度○</p>
+                </div>
+
+                <div class="ext-card">
+                    <h4>3. CodeGPT ⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 500K+ | 💰 無料（OpenAI APIキー必要）</p>
+                    <p><strong>概要：</strong> VS Code内でChatGPTと対話。コード説明、リファクタリング、バグ修正を支援。</p>
+                    <p><strong>実践例：</strong> レガシーコードを選択 → 右クリック → "Explain" → 詳細な説明が表示</p>
+                </div>
+
+                <div class="ext-card">
+                    <h4>4. IntelliCode ⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 8M+ | 💰 完全無料（Microsoft公式）</p>
+                    <p><strong>概要：</strong> GitHubの数千のOSSプロジェクトから学習したAI補完。</p>
+                    <p><strong>特徴：</strong> Python、TypeScript、JavaScriptで特に効果的。Copilotと併用可能。</p>
+                </div>
+
+                <div class="ext-card">
+                    <h4>5. Codeium ⭐⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 1M+ | 💰 完全無料（個人・商用）</p>
+                    <p><strong>概要：</strong> GitHub Copilotの無料代替として急成長中。</p>
+                    <p><strong>なぜ選ぶべきか：</strong> Copilotと同等の精度で完全無料、企業でも無料、プライバシー重視</p>
+                </div>
+            </div>
+
+            <div class="extensions-section">
+                <h3>🎨 UI・テーマ系（3個）</h3>
+
+                <div class="ext-card">
+                    <h4>6. One Dark Pro ⭐⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 7M+ | 💰 無料</p>
+                    <p><strong>概要：</strong> 人気No.1ダークテーマ。目に優しい配色で長時間のコーディングでも疲れにくい。</p>
+                    <p><strong>Pro Tip：</strong> フォントは「Fira Code」または「JetBrains Mono」と組み合わせると最高</p>
+                </div>
+
+                <div class="ext-card">
+                    <h4>7. Material Icon Theme ⭐⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 6M+ | 💰 無料</p>
+                    <p><strong>概要：</strong> 1000+のMaterial Designアイコン。ファイルとフォルダの視認性が劇的に向上。</p>
+                    <p><strong>効果：</strong> ファイル発見速度が約30%向上（ユーザー調査より）</p>
+                </div>
+
+                <div class="ext-card">
+                    <h4>8. Peacock ⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 1M+ | 💰 無料</p>
+                    <p><strong>概要：</strong> 複数のVS Codeウィンドウを色で区別。プロジェクトごとに異なる色を設定。</p>
+                    <p><strong>こんな時に：</strong> 本番環境とステージング環境を同時に開いている時の誤操作防止</p>
+                </div>
+            </div>
+
+            <div class="extensions-section">
+                <h3>⚡ 生産性向上系（4個）</h3>
+
+                <div class="ext-card">
+                    <h4>9. Live Share ⭐⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 5M+ | 💰 無料（Microsoft公式）</p>
+                    <p><strong>概要：</strong> リアルタイムでコードを共同編集。リモートペアプログラミングに最適。</p>
+                    <p><strong>主な機能：</strong> リアルタイム共同編集、音声通話、ターミナル共有、サーバー共有</p>
+                    <p><strong>活用例：</strong> 新人教育、オンボーディング、リモートワークでのペアプロ</p>
+                </div>
+
+                <div class="ext-card">
+                    <h4>10. Todo Tree ⭐⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 2M+ | 💰 無料</p>
+                    <p><strong>概要：</strong> コード内のTODO、FIXME、HACKコメントを一覧表示。タスク管理が簡単に。</p>
+                    <p><strong>使い方：</strong> // TODO: 実装する → サイドバーに自動表示</p>
+                </div>
+
+                <div class="ext-card">
+                    <h4>11. Bookmarks ⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 1.5M+ | 💰 無料</p>
+                    <p><strong>概要：</strong> コード内に「しおり」を設定して、重要な箇所に素早くジャンプ。</p>
+                    <p><strong>活用シーン：</strong> 大規模ファイルの重要箇所をマーク、複数ファイル間を頻繁に行き来</p>
+                </div>
+
+                <div class="ext-card">
+                    <h4>12. Path Intellisense ⭐⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 4M+ | 💰 無料</p>
+                    <p><strong>概要：</strong> ファイルパスを自動補完。import文やrequire文の入力が劇的に速くなる。</p>
+                    <p><strong>効果：</strong> import文の入力時間が約50%削減。タイポによるエラーも防止。</p>
+                </div>
+            </div>
+
+            <div class="extensions-section">
+                <h3>🔍 コード品質系（4個）</h3>
+
+                <div class="ext-card">
+                    <h4>13. ESLint ⭐⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 20M+ | 💰 無料</p>
+                    <p><strong>概要：</strong> JavaScript/TypeScriptの静的解析ツール。コーディング規約違反やバグを自動検出。</p>
+                    <p><strong>必須設定：</strong> 保存時に自動修正を有効化（editor.codeActionsOnSave）</p>
+                </div>
+
+                <div class="ext-card">
+                    <h4>14. Prettier ⭐⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 15M+ | 💰 無料</p>
+                    <p><strong>概要：</strong> コードフォーマッター。保存時に自動でコードを整形し、チーム全体のスタイルを統一。</p>
+                    <p><strong>メリット：</strong> コードレビューでスタイルの議論が不要、新メンバーのオンボーディングが簡単</p>
+                </div>
+
+                <div class="ext-card">
+                    <h4>15. Error Lens ⭐⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 2M+ | 💰 無料</p>
+                    <p><strong>概要：</strong> エラーと警告をコード行の右側に直接表示。エラーの見落としを防止。</p>
+                    <p><strong>効果：</strong> エラーの発見速度が約40%向上。特に大規模ファイルで効果的。</p>
+                </div>
+
+                <div class="ext-card">
+                    <h4>16. SonarLint ⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 1M+ | 💰 無料（Enterprise版は有料）</p>
+                    <p><strong>概要：</strong> セキュリティ脆弱性とコード品質の問題を検出。エンタープライズ開発に必須。</p>
+                    <p><strong>検出例：</strong> SQLインジェクション、XSS、ハードコードされたパスワード、Null参照</p>
+                </div>
+            </div>
+
+            <div class="extensions-section">
+                <h3>🌐 Web開発系（2個）</h3>
+
+                <div class="ext-card">
+                    <h4>17. Live Server ⭐⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 25M+ | 💰 無料</p>
+                    <p><strong>概要：</strong> ローカル開発サーバーを起動し、ファイル保存時に自動リロード。Web開発の必須ツール。</p>
+                    <p><strong>使い方：</strong> HTMLファイルを右クリック → "Open with Live Server" → 自動リロード開始</p>
+                </div>
+
+                <div class="ext-card">
+                    <h4>18. Auto Rename Tag ⭐⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 10M+ | 💰 無料</p>
+                    <p><strong>概要：</strong> HTMLタグの開始タグを変更すると、終了タグも自動で変更。地味だが超便利。</p>
+                    <p><strong>効果：</strong> タグ変更時のミスが激減。特にReact/Vue開発で威力を発揮。</p>
+                </div>
+            </div>
+
+            <div class="extensions-section">
+                <h3>🔧 その他便利ツール（2個）</h3>
+
+                <div class="ext-card">
+                    <h4>19. Docker ⭐⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 10M+ | 💰 無料（Microsoft公式）</p>
+                    <p><strong>概要：</strong> Dockerコンテナの管理をVS Code内で完結。Dockerfile、docker-compose.ymlの編集支援。</p>
+                    <p><strong>主な機能：</strong> コンテナの起動・停止、イメージ管理、ログ表示、シェル接続</p>
+                </div>
+
+                <div class="ext-card">
+                    <h4>20. GitLens ⭐⭐⭐⭐⭐</h4>
+                    <p class="ext-meta">📥 15M+ | 💰 無料版あり / Pro $10/月</p>
+                    <p><strong>概要：</strong> Gitの機能を大幅に強化。コードの変更履歴を視覚的に表示。</p>
+                    <p><strong>主な機能：</strong> 行ごとのBlame表示、ファイル履歴、コミット検索、ブランチ比較</p>
+                    <p><strong>Pro Tip：</strong> 「誰がいつこのコードを書いたか」が一目でわかる</p>
+                </div>
+            </div>
+
+            <div class="extensions-summary">
+                <h3>🎯 まとめ：必須拡張機能の組み合わせ</h3>
+                
+                <div class="combo-section">
+                    <h4>🏆 初心者向け最小構成（5個）</h4>
+                    <ol>
+                        <li><strong>GitHub Copilot / Codeium</strong> - AI補完</li>
+                        <li><strong>ESLint</strong> - コード品質</li>
+                        <li><strong>Prettier</strong> - フォーマット</li>
+                        <li><strong>Live Server</strong> - Web開発</li>
+                        <li><strong>Material Icon Theme</strong> - 視認性向上</li>
+                    </ol>
+                </div>
+
+                <div class="combo-section">
+                    <h4>💼 プロフェッショナル構成（10個）</h4>
+                    <p>初心者向け5個 + 以下5個</p>
+                    <ol start="6">
+                        <li><strong>Error Lens</strong> - エラー可視化</li>
+                        <li><strong>GitLens</strong> - Git強化</li>
+                        <li><strong>Todo Tree</strong> - タスク管理</li>
+                        <li><strong>Path Intellisense</strong> - パス補完</li>
+                        <li><strong>Live Share</strong> - リモート協業</li>
+                    </ol>
+                </div>
+
+                <div class="combo-section">
+                    <h4>🚀 エンタープライズ構成（全20個）</h4>
+                    <p>プロフェッショナル構成10個 + 残り10個すべて</p>
+                    <p><strong>特に追加すべき：</strong> SonarLint（セキュリティ）、Docker（コンテナ管理）、Peacock（複数プロジェクト管理）</p>
+                </div>
+            </div>
+
+            <div class="extensions-tips">
+                <h3>💡 拡張機能活用のベストプラクティス</h3>
+                
+                <div class="tip-section">
+                    <h4>1. 入れすぎ注意</h4>
+                    <p>拡張機能が多すぎるとVS Codeが重くなります。本当に使うものだけを厳選しましょう。</p>
+                    <p><strong>目安：</strong> 10〜15個程度が最適</p>
+                </div>
+
+                <div class="tip-section">
+                    <h4>2. 定期的な見直し</h4>
+                    <p>使っていない拡張機能は無効化または削除しましょう。</p>
+                    <p><strong>方法：</strong> 拡張機能タブ → 歯車アイコン → "無効にする"</p>
+                </div>
+
+                <div class="tip-section">
+                    <h4>3. プロジェクトごとに推奨拡張機能を設定</h4>
+                    <p>.vscode/extensions.jsonファイルでチーム全体の推奨拡張機能を共有できます。</p>
+                    <div class="code-example">
+                        <pre><code>{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "github.copilot"
+  ]
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="tip-section">
+                    <h4>4. ワークスペース固有の設定</h4>
+                    <p>プロジェクトごとに異なる拡張機能を有効化できます。</p>
+                    <p><strong>例：</strong> Reactプロジェクトでは React関連拡張機能を有効、Pythonプロジェクトでは無効</p>
+                </div>
+            </div>
+
+            <div class="extensions-faq">
+                <h3>❓ よくある質問</h3>
+                
+                <div class="faq-item">
+                    <h4>Q1: GitHub CopilotとCodeiumどちらを選ぶべき？</h4>
+                    <p><strong>A:</strong> 予算があればCopilot（精度が若干高い）、無料で使いたいならCodeium（ほぼ同等の精度）。両方試して好みで選ぶのがベスト。</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Q2: 拡張機能が重くてVS Codeが遅い</h4>
+                    <p><strong>A:</strong> 開発者ツール（Cmd+Shift+P → "Developer: Show Running Extensions"）で重い拡張機能を特定し、無効化または代替を検討。</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Q3: チームで拡張機能を統一したい</h4>
+                    <p><strong>A:</strong> .vscode/extensions.jsonで推奨拡張機能を設定し、Gitで共有。チームメンバーがVS Codeを開くと自動的にインストールを促される。</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Q4: 有料拡張機能は買うべき？</h4>
+                    <p><strong>A:</strong> GitHub Copilot（$10/月）は投資価値あり。GitLens Pro（$10/月）は無料版で十分な場合が多い。まず無料版を試してから判断。</p>
+                </div>
+            </div>
+        `
     }
 ];
 

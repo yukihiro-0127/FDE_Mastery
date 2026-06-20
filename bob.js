@@ -1,7 +1,44 @@
 // Bob専用ページのJavaScript
 
+// Hamburger Menu Functionality
+function initHamburgerMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (!hamburger || !navLinks) return;
+    
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+    
+    document.addEventListener('click', (e) => {
+        if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
+    });
+    
+    const links = navLinks.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+    
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     initializeBobPage();
+    initHamburgerMenu();
 });
 
 function initializeBobPage() {
@@ -14,15 +51,29 @@ function initializeBobPage() {
 }
 
 function renderSections() {
+    console.log('🔍 renderSections called');
+    console.log('📊 window.bobSections:', window.bobSections);
+    console.log('📏 bobSections length:', window.bobSections?.length);
+    
     const sectionsContainer = document.getElementById('bob-sections');
-    if (!sectionsContainer || !window.bobSections) return;
+    if (!sectionsContainer) {
+        console.error('❌ sectionsContainer not found');
+        return;
+    }
+    if (!window.bobSections) {
+        console.error('❌ window.bobSections is undefined');
+        return;
+    }
 
     sectionsContainer.innerHTML = '';
 
-    window.bobSections.forEach(section => {
+    window.bobSections.forEach((section, index) => {
+        console.log(`📝 Rendering section ${index + 1}:`, section.id, section.title);
         const card = createSectionCard(section);
         sectionsContainer.appendChild(card);
     });
+    
+    console.log('✅ All sections rendered');
 }
 
 function createSectionCard(section) {

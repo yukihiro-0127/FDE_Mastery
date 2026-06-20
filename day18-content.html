@@ -1,0 +1,582 @@
+<div class="content-section">
+    <h2>システム連携とは何か: なぜ連携が必要なのか</h2>
+    
+    <div class="definition-box">
+        <h3>システム連携の定義</h3>
+        <p><strong>システム連携</strong>とは、異なるシステム同士がデータをやり取りし、協調して動作することである。</p>
+    </div>
+    
+    <div class="insight-box">
+        <h4>💡 なぜシステム連携が必要なのか</h4>
+        <p><strong>ビジネス的理由:</strong> 企業には既に多くのシステムが存在する（基幹システム、CRM、会計システムなど）。新しいAIシステムは、これらと連携しなければ価値を発揮できない。</p>
+        <p><strong>技術的理由:</strong> データは分散している。顧客データはCRM、売上データは基幹システム、製品データは在庫管理システムにある。AIはこれらを統合して分析する必要がある。</p>
+        <p><strong>組織的理由:</strong> 既存システムを全て置き換えるのは現実的ではない。既存システムを活かしながら、新しい価値を追加する必要がある。</p>
+    </div>
+    
+    <div class="real-example">
+        <h4>実例: 連携がないとどうなるか</h4>
+        <p><strong>悪い例:</strong> AIチャットボットを導入したが、顧客情報はCRMにあり、AIからアクセスできない。結果、「お客様の情報を確認できません」と回答するだけの無意味なチャットボットになった。</p>
+        <p><strong>良い例:</strong> AIチャットボットがCRMと連携し、顧客情報を参照できる。「山田様、前回のご注文は〇〇でしたね。今回も同じ商品をご希望ですか？」と個別対応できる。</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>システム連携の3つの方式</h2>
+    
+    <div class="integration-methods">
+        <div class="method-card">
+            <h4>方式1: API連携（最も一般的）</h4>
+            <p><strong>仕組み:</strong> システムAがシステムBのAPIを呼び出し、データを取得・送信する。</p>
+            <pre><code>【例: 顧客情報の取得】
+AIシステム → GET /api/customers/12345 → CRM
+            ← {"name": "山田太郎", "email": "yamada@example.com"}</code></pre>
+            
+            <p><strong>メリット:</strong></p>
+            <ul>
+                <li>リアルタイムでデータを取得できる</li>
+                <li>標準的な技術（REST API、JSON）で実装できる</li>
+                <li>セキュリティ対策（認証・認可）が容易</li>
+            </ul>
+            
+            <p><strong>デメリット:</strong></p>
+            <ul>
+                <li>連携先システムがAPIを提供していない場合、実装が必要</li>
+                <li>大量データの取得には不向き（1件ずつ取得するため）</li>
+                <li>ネットワーク遅延の影響を受ける</li>
+            </ul>
+            
+            <p><strong>適用シーン:</strong> リアルタイム性が必要な場合（チャットボット、リアルタイム分析）</p>
+        </div>
+        
+        <div class="method-card">
+            <h4>方式2: バッチ連携（大量データ向け）</h4>
+            <p><strong>仕組み:</strong> 定期的（毎日、毎時など）にデータをファイル（CSV、JSON）で受け渡す。</p>
+            <pre><code>【例: 売上データの連携】
+基幹システム → 毎日0時にCSVファイルを生成 → FTPサーバー
+AIシステム   → 毎日1時にCSVファイルを取得 → データベースに格納</code></pre>
+            
+            <p><strong>メリット:</strong></p>
+            <ul>
+                <li>大量データを効率的に転送できる</li>
+                <li>実装が簡単（ファイル転送のみ）</li>
+                <li>連携先システムへの負荷が低い</li>
+            </ul>
+            
+            <p><strong>デメリット:</strong></p>
+            <ul>
+                <li>リアルタイム性がない（最大24時間の遅延）</li>
+                <li>ファイル転送の失敗時の対応が必要</li>
+                <li>データ形式の不一致が発生しやすい</li>
+            </ul>
+            
+            <p><strong>適用シーン:</strong> 大量データの分析、日次レポート生成</p>
+        </div>
+        
+        <div class="method-card">
+            <h4>方式3: データベース直接連携（非推奨だが現実的）</h4>
+            <p><strong>仕組み:</strong> AIシステムが連携先システムのデータベースに直接アクセスする。</p>
+            <pre><code>【例: 顧客データの取得】
+AIシステム → SELECT * FROM customers WHERE id = 12345 → CRMのDB</code></pre>
+            
+            <p><strong>メリット:</strong></p>
+            <ul>
+                <li>実装が簡単（SQLで直接取得）</li>
+                <li>リアルタイムでデータを取得できる</li>
+                <li>APIを実装する必要がない</li>
+            </ul>
+            
+            <p><strong>デメリット:</strong></p>
+            <ul>
+                <li>セキュリティリスクが高い（DBの認証情報を共有）</li>
+                <li>連携先システムのDB構造変更の影響を受ける</li>
+                <li>連携先システムへの負荷が高い（直接DBアクセス）</li>
+                <li>保守性が低い（密結合）</li>
+            </ul>
+            
+            <p><strong>適用シーン:</strong> 社内システム間の連携で、API実装が困難な場合（ただし、可能な限りAPI連携を推奨）</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>API連携の実践: REST APIの設計</h2>
+    
+    <h3>REST APIの基本原則</h3>
+    
+    <div class="rest-principles">
+        <div class="principle-card">
+            <h4>原則1: リソース指向</h4>
+            <p>URLでリソース（データ）を表現し、HTTPメソッドで操作を表現する。</p>
+            <pre><code>【良い例】
+GET    /api/customers/12345      # 顧客情報を取得
+POST   /api/customers            # 新規顧客を作成
+PUT    /api/customers/12345      # 顧客情報を更新
+DELETE /api/customers/12345      # 顧客を削除
+
+【悪い例】
+GET /api/getCustomer?id=12345    # 動詞を使っている
+POST /api/createCustomer         # 動詞を使っている</code></pre>
+        </div>
+        
+        <div class="principle-card">
+            <h4>原則2: ステートレス</h4>
+            <p>各リクエストは独立しており、サーバーは状態を保持しない。</p>
+            <pre><code>【良い例】
+GET /api/customers/12345
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+# 毎回認証トークンを送信
+
+【悪い例】
+GET /api/login?user=yamada&password=xxx  # ログイン
+GET /api/customers/12345                 # セッションに依存</code></pre>
+        </div>
+        
+        <div class="principle-card">
+            <h4>原則3: 統一されたインターフェース</h4>
+            <p>一貫性のあるURL設計、レスポンス形式を使用する。</p>
+            <pre><code>【良い例】
+GET /api/customers      # 顧客一覧
+GET /api/orders         # 注文一覧
+GET /api/products       # 製品一覧
+
+# 全て同じ形式のレスポンス
+{
+  "data": [...],
+  "total": 100,
+  "page": 1
+}
+
+【悪い例】
+GET /api/getCustomers   # 命名規則が不統一
+GET /api/order-list     # 命名規則が不統一</code></pre>
+        </div>
+    </div>
+    
+    <h3>API設計の実践例: RAGシステムとCRMの連携</h3>
+    
+    <div class="api-design-example">
+        <h4>要件</h4>
+        <p>RAGシステムが顧客からの質問に回答する際、CRMから顧客情報を取得して個別対応する。</p>
+        
+        <h4>API設計</h4>
+        <pre><code>【エンドポイント1: 顧客情報の取得】
+GET /api/v1/customers/{customer_id}
+
+リクエスト:
+GET /api/v1/customers/12345
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+レスポンス:
+{
+  "id": 12345,
+  "name": "山田太郎",
+  "email": "yamada@example.com",
+  "phone": "090-1234-5678",
+  "tier": "premium",
+  "last_order_date": "2024-01-15"
+}
+
+【エンドポイント2: 顧客の注文履歴の取得】
+GET /api/v1/customers/{customer_id}/orders
+
+リクエスト:
+GET /api/v1/customers/12345/orders?limit=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+レスポンス:
+{
+  "data": [
+    {
+      "order_id": 98765,
+      "date": "2024-01-15",
+      "total": 10000,
+      "status": "delivered"
+    },
+    ...
+  ],
+  "total": 50,
+  "page": 1
+}</code></pre>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>セキュリティ: API連携で最も重要な要素</h2>
+    
+    <div class="security-layers">
+        <div class="security-card">
+            <h4>レイヤー1: 認証（Authentication）</h4>
+            <p><strong>目的:</strong> 「誰がアクセスしているか」を確認する</p>
+            
+            <h5>方式1: APIキー（最もシンプル）</h5>
+            <pre><code>GET /api/customers/12345
+X-API-Key: sk_live_1234567890abcdef
+
+【メリット】実装が簡単
+【デメリット】キーが漏れると全てのデータにアクセスされる</code></pre>
+            
+            <h5>方式2: OAuth 2.0（推奨）</h5>
+            <pre><code>1. クライアントがトークンを取得
+POST /oauth/token
+{
+  "client_id": "xxx",
+  "client_secret": "yyy",
+  "grant_type": "client_credentials"
+}
+
+→ {"access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...", "expires_in": 3600}
+
+2. トークンを使ってAPIにアクセス
+GET /api/customers/12345
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+【メリット】トークンに有効期限がある、権限を細かく制御できる
+【デメリット】実装が複雑</code></pre>
+        </div>
+        
+        <div class="security-card">
+            <h4>レイヤー2: 認可（Authorization）</h4>
+            <p><strong>目的:</strong> 「何ができるか」を制御する</p>
+            <pre><code>【例: 権限の設定】
+ユーザーA: 顧客情報の読み取りのみ（GET）
+ユーザーB: 顧客情報の読み取り・更新（GET、PUT）
+ユーザーC: 全ての操作（GET、POST、PUT、DELETE）
+
+【実装例】
+GET /api/customers/12345
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+# トークンに権限情報が含まれている
+{
+  "user_id": "user_a",
+  "permissions": ["customers:read"]
+}
+
+# サーバー側で権限をチェック
+if "customers:read" not in token.permissions:
+    return 403 Forbidden</code></pre>
+        </div>
+        
+        <div class="security-card">
+            <h4>レイヤー3: 通信の暗号化（HTTPS）</h4>
+            <p><strong>目的:</strong> 通信内容を盗聴されないようにする</p>
+            <pre><code>【必須】
+https://api.example.com/customers/12345  # HTTPS（暗号化）
+
+【NG】
+http://api.example.com/customers/12345   # HTTP（平文）
+
+【理由】
+HTTPは通信内容が平文で送信されるため、APIキーやトークンが盗聴される</code></pre>
+        </div>
+        
+        <div class="security-card">
+            <h4>レイヤー4: レート制限（Rate Limiting）</h4>
+            <p><strong>目的:</strong> 過剰なアクセスを防ぐ</p>
+            <pre><code>【設定例】
+1分間に100リクエストまで
+1日に10,000リクエストまで
+
+【実装例】
+GET /api/customers/12345
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+レスポンスヘッダー:
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 95
+X-RateLimit-Reset: 1640000000
+
+# 制限を超えた場合
+429 Too Many Requests
+{
+  "error": "Rate limit exceeded. Try again in 60 seconds."
+}</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>エラーハンドリング: 連携が失敗した時の対応</h2>
+    
+    <div class="error-handling">
+        <div class="error-card">
+            <h4>パターン1: タイムアウト</h4>
+            <p><strong>原因:</strong> 連携先システムの応答が遅い、またはネットワーク障害</p>
+            <pre><code>【対策1: リトライ】
+try:
+    response = requests.get(url, timeout=5)
+except requests.Timeout:
+    # 3回までリトライ
+    for i in range(3):
+        try:
+            response = requests.get(url, timeout=5)
+            break
+        except requests.Timeout:
+            time.sleep(2 ** i)  # 指数バックオフ（2秒、4秒、8秒）
+    else:
+        # 3回失敗したらエラー
+        raise Exception("API timeout after 3 retries")
+
+【対策2: フォールバック】
+try:
+    customer_data = get_from_crm(customer_id)
+except Exception:
+    # CRMから取得できない場合、キャッシュから取得
+    customer_data = get_from_cache(customer_id)</code></pre>
+        </div>
+        
+        <div class="error-card">
+            <h4>パターン2: 認証エラー</h4>
+            <p><strong>原因:</strong> トークンの有効期限切れ、APIキーの誤り</p>
+            <pre><code>【対策: トークンの自動更新】
+def get_customer(customer_id):
+    response = requests.get(
+        f"/api/customers/{customer_id}",
+        headers={"Authorization": f"Bearer {token}"}
+    )
+    
+    if response.status_code == 401:  # Unauthorized
+        # トークンを再取得
+        token = refresh_token()
+        # 再度リクエスト
+        response = requests.get(
+            f"/api/customers/{customer_id}",
+            headers={"Authorization": f"Bearer {token}"}
+        )
+    
+    return response.json()</code></pre>
+        </div>
+        
+        <div class="error-card">
+            <h4>パターン3: データ不整合</h4>
+            <p><strong>原因:</strong> 連携先システムのデータ形式が変更された</p>
+            <pre><code>【対策: バリデーション】
+def get_customer(customer_id):
+    response = requests.get(f"/api/customers/{customer_id}")
+    data = response.json()
+    
+    # データ形式をチェック
+    required_fields = ["id", "name", "email"]
+    for field in required_fields:
+        if field not in data:
+            raise ValueError(f"Missing required field: {field}")
+    
+    # データ型をチェック
+    if not isinstance(data["id"], int):
+        raise ValueError("Invalid data type for id")
+    
+    return data</code></pre>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>FDEとしてのシステム連携設計</h2>
+    
+    <div class="fde-approach">
+        <div class="approach-card">
+            <h4>ステップ1: 連携要件の整理</h4>
+            <p>顧客と一緒に、以下を明確にする：</p>
+            <ul>
+                <li><strong>何のデータが必要か:</strong> 顧客情報、注文履歴、製品情報など</li>
+                <li><strong>どのシステムにあるか:</strong> CRM、基幹システム、在庫管理システムなど</li>
+                <li><strong>リアルタイム性:</strong> リアルタイムが必要か、日次バッチでOKか</li>
+                <li><strong>データ量:</strong> 1日何件のデータを取得するか</li>
+            </ul>
+        </div>
+        
+        <div class="approach-card">
+            <h4>ステップ2: 連携方式の選定</h4>
+            <p>要件に基づいて、最適な連携方式を選ぶ：</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>要件</th>
+                        <th>推奨方式</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>リアルタイム性が必要</td>
+                        <td>API連携</td>
+                    </tr>
+                    <tr>
+                        <td>大量データ（1日1万件以上）</td>
+                        <td>バッチ連携</td>
+                    </tr>
+                    <tr>
+                        <td>連携先がAPIを提供していない</td>
+                        <td>DB直接連携（または新規API開発）</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="approach-card">
+            <h4>ステップ3: セキュリティ要件の確認</h4>
+            <p>顧客のセキュリティポリシーを確認：</p>
+            <ul>
+                <li><strong>認証方式:</strong> APIキー、OAuth 2.0、SAML など</li>
+                <li><strong>ネットワーク:</strong> インターネット経由OK、VPN必須、専用線必須</li>
+                <li><strong>データ暗号化:</strong> HTTPS必須、データベース暗号化必須</li>
+                <li><strong>監査ログ:</strong> アクセスログの保存期間、監査要件</li>
+            </ul>
+        </div>
+        
+        <div class="approach-card">
+            <h4>ステップ4: エラーハンドリングの設計</h4>
+            <p>連携が失敗した時の対応を事前に決める：</p>
+            <ul>
+                <li><strong>リトライ:</strong> 何回リトライするか、間隔はどうするか</li>
+                <li><strong>フォールバック:</strong> キャッシュを使うか、デフォルト値を返すか</li>
+                <li><strong>アラート:</strong> 誰に通知するか、どのタイミングで通知するか</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>実践例: RAGシステムとCRMの連携設計</h2>
+    
+    <div class="practical-example">
+        <h4>要件</h4>
+        <ul>
+            <li>RAGシステムが顧客からの質問に回答する際、CRMから顧客情報を取得</li>
+            <li>リアルタイム性が必要（チャットボット）</li>
+            <li>1日1,000件程度のアクセス</li>
+            <li>セキュリティ: OAuth 2.0、HTTPS必須</li>
+        </ul>
+        
+        <h4>連携設計</h4>
+        <pre><code>【システム構成】
+ユーザー → RAGシステム → CRM API
+                      ↓
+                   キャッシュ（Redis）
+
+【API設計】
+GET /api/v1/customers/{customer_id}
+Authorization: Bearer {access_token}
+
+【エラーハンドリング】
+1. タイムアウト（5秒）: 3回リトライ
+2. 認証エラー: トークン再取得
+3. CRM障害: キャッシュから取得（最大24時間前のデータ）
+
+【セキュリティ】
+1. OAuth 2.0でトークン取得（有効期限1時間）
+2. HTTPS通信
+3. レート制限: 1分間に100リクエスト
+
+【監視】
+1. API応答時間を監視（閾値: 1秒）
+2. エラー率を監視（閾値: 5%）
+3. アラート: Slackに通知</code></pre>
+        
+        <h4>実装例（Python）</h4>
+        <pre><code>import requests
+import time
+from functools import wraps
+
+class CRMClient:
+    def __init__(self, base_url, client_id, client_secret):
+        self.base_url = base_url
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.access_token = None
+        self.token_expires_at = 0
+    
+    def get_access_token(self):
+        """OAuth 2.0でアクセストークンを取得"""
+        if time.time() < self.token_expires_at:
+            return self.access_token
+        
+        response = requests.post(
+            f"{self.base_url}/oauth/token",
+            json={
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "grant_type": "client_credentials"
+            }
+        )
+        data = response.json()
+        self.access_token = data["access_token"]
+        self.token_expires_at = time.time() + data["expires_in"] - 60  # 1分前に更新
+        return self.access_token
+    
+    def retry_on_failure(max_retries=3):
+        """リトライデコレーター"""
+        def decorator(func):
+            @wraps(func)
+            def wrapper(*args, **kwargs):
+                for i in range(max_retries):
+                    try:
+                        return func(*args, **kwargs)
+                    except requests.Timeout:
+                        if i == max_retries - 1:
+                            raise
+                        time.sleep(2 ** i)  # 指数バックオフ
+                    except requests.HTTPError as e:
+                        if e.response.status_code == 401:
+                            # トークン再取得
+                            args[0].get_access_token()
+                        else:
+                            raise
+            return wrapper
+        return decorator
+    
+    @retry_on_failure(max_retries=3)
+    def get_customer(self, customer_id):
+        """顧客情報を取得"""
+        token = self.get_access_token()
+        response = requests.get(
+            f"{self.base_url}/api/v1/customers/{customer_id}",
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=5
+        )
+        response.raise_for_status()
+        return response.json()
+
+# 使用例
+client = CRMClient(
+    base_url="https://crm.example.com",
+    client_id="your_client_id",
+    client_secret="your_client_secret"
+)
+
+try:
+    customer = client.get_customer(12345)
+    print(f"顧客名: {customer['name']}")
+except Exception as e:
+    print(f"エラー: {e}")
+    # フォールバック: キャッシュから取得
+    customer = get_from_cache(12345)</code></pre>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>よくある失敗パターンと対策</h2>
+    
+    <div class="failure-patterns">
+        <div class="failure-card">
+            <h4>❌ 失敗パターン1: セキュリティを後回しにする</h4>
+            <p><strong>例:</strong> 「まずは動くものを作って、セキュリティは後で」</p>
+            <p><strong>問題:</strong> 後からセキュリティを追加するのは困難。設計からやり直しになる。</p>
+            <p><strong>対策:</strong> 最初からOAuth 2.0、HTTPS、レート制限を実装する。</p>
+        </div>
+        
+        <div class="failure-card">
+            <h4>❌ 失敗パターン2: エラーハンドリングを考えない</h4>
+            <p><strong>例:</strong> 「APIは常に成功する前提で実装」</p>
+            <p><strong>問題:</strong> 本番環境でAPIが失敗し、システム全体が停止。</p>
+            <p><strong>対策:</strong> タイムアウト、リトライ、フォールバックを最初から実装する。</p>
+        </div>
+        
+        <div class="failure-card">
+            <h4>❌ 失敗パターン3: 連携先システムの負荷を考えない</h4>
+            <p><strong>例:</strong> 「1秒間に1000回APIを呼び出す」</p>
+            <p><strong>問題:</strong> 連携先システムがダウンし、全社に影響。</p>
+            <p><strong>対策:</strong> レート制限を設定し、キャッシュを活用する。</p>
+        </div>
+    </div>
+</div>

@@ -4029,45 +4029,45 @@ grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
         title: 'システム連携設計',
         subtitle: '既存システムとの統合',
         goals: ['連携方式の選定', 'API設計', 'セキュリティ考慮'],
-        content: `<div class="content-section"><h2>システム連携</h2><p>既存システムとどう繋ぐか</p></div>`,
-        quiz: [{question: 'システム連携で重要なのは？', options: ['速度', 'セキュリティ', '見た目', '価格'], correct: 1, explanation: 'セキュリティが最優先。'}],
-        exercise: {title: '連携設計', prompt: '連携方式を提案せよ', sampleAnswer: '<div class="sample-answer"><p>REST API経由、認証はOAuth2</p></div>'}
+        contentFile: 'day18-content.html',
+        quiz: [{question: 'システム連携で重要なのは？', options: ['速度', 'セキュリティ', '見た目', '価格'], correct: 1, explanation: 'セキュリティが最優先。OAuth 2.0、HTTPS、レート制限は必須。'}],
+        exercise: {title: '連携設計', prompt: '連携方式を提案せよ', sampleAnswer: '<div class="sample-answer"><p>REST API経由、認証はOAuth2、HTTPS通信、レート制限を実装</p></div>'}
     },
     
     19: {
         title: 'コスト試算',
         subtitle: 'TCOの見積もり',
         goals: ['初期コスト算出', 'ランニングコスト算出', 'ROI計算'],
-        content: `<div class="content-section"><h2>コスト構造</h2><p>初期費用とランニングコストを分けて考える</p></div>`,
-        quiz: [{question: 'AIのコストで見落としがちなのは？', options: ['ライセンス', 'トークン課金', '人件費', '電気代'], correct: 1, explanation: 'トークン課金は従量課金で膨らみやすい。'}],
-        exercise: {title: 'コスト試算', prompt: '月間コストを試算せよ', sampleAnswer: '<div class="sample-answer"><p>API費用10万円、保守費用5万円</p></div>'}
+        contentFile: 'day19-content.html',
+        quiz: [{question: 'AIのコストで見落としがちなのは？', options: ['ライセンス', 'トークン課金', '人件費', '電気代'], correct: 1, explanation: 'トークン課金は従量課金で膨らみやすい。見積もりに安全率（1.5〜3倍）を掛ける必要がある。'}],
+        exercise: {title: 'コスト試算', prompt: '月間コストを試算せよ', sampleAnswer: '<div class="sample-answer"><p>初期コスト420万円、月間コスト50.5万円（API利用料36万円、インフラ1.5万円、保守運用13万円）、年間総コスト1,026万円</p></div>'}
     },
     
     20: {
         title: 'リスク管理',
         subtitle: '失敗を防ぐ',
         goals: ['技術リスク特定', '対策立案', 'コンティンジェンシープラン'],
-        content: `<div class="content-section"><h2>リスク管理</h2><p>何が失敗の原因になるか</p></div>`,
-        quiz: [{question: 'AIプロジェクトの最大リスクは？', options: ['技術', 'データ', '人', '予算'], correct: 1, explanation: 'データ品質が最大のリスク。'}],
-        exercise: {title: 'リスク分析', prompt: 'リスクと対策を列挙せよ', sampleAnswer: '<div class="sample-answer"><p>データ不足→追加収集、精度不足→人間確認</p></div>'}
+        contentFile: 'day20-content.html',
+        quiz: [{question: 'AIプロジェクトの最大リスクは？', options: ['技術', 'データ', '人', '予算'], correct: 1, explanation: 'データ品質が最大のリスク。AIプロジェクトの失敗の40%はデータ品質が原因。'}],
+        exercise: {title: 'リスク分析', prompt: 'リスクと対策を列挙せよ', sampleAnswer: '<div class="sample-answer"><p>データ不足（高/致命的）→過去データから追加収集、精度不足（中/大）→PoCで検証・人間確認フロー追加、コスト超過（中/中）→安全率2倍・上限設定</p></div>'}
     },
     
     21: {
         title: 'ステークホルダー管理',
         subtitle: '関係者の調整',
         goals: ['利害関係者の特定', '期待値調整', 'コミュニケーション計画'],
-        content: `<div class="content-section"><h2>ステークホルダー</h2><p>誰が何を期待しているか</p></div>`,
-        quiz: [{question: 'ステークホルダー管理で重要なのは？', options: ['全員を満足させる', '期待値を調整する', '無視する', '説得する'], correct: 1, explanation: '期待値を現実的に調整することが重要。'}],
-        exercise: {title: 'ステークホルダー分析', prompt: '関係者と期待値を整理せよ', sampleAnswer: '<div class="sample-answer"><p>経営層:ROI、現場:使いやすさ、IT:保守性</p></div>'}
+        contentFile: 'day21-content.html',
+        quiz: [{question: 'ステークホルダー管理で重要なのは？', options: ['全員を満足させる', '期待値を調整する', '無視する', '説得する'], correct: 1, explanation: '期待値を現実的に調整することが重要。プロジェクト失敗の最大要因は「ステークホルダーの期待値のズレ」。'}],
+        exercise: {title: 'ステークホルダー分析', prompt: '関係者と期待値を整理せよ', sampleAnswer: '<div class="sample-answer"><p>経営層（月1回報告）:ROI・コスト削減、IT部門（週1回MTG）:技術的実現可能性・保守性、現場ユーザー（週1回デモ）:使いやすさ・業務効率化、法務・セキュリティ（月1回レビュー）:法令遵守・データ保護</p></div>'}
     },
     
     22: {
         title: 'Week 3 総復習',
         subtitle: '実装設計の総まとめ',
         goals: ['Week 3の知識統合', 'PoC設計の実践', '次週への準備'],
-        content: `<div class="content-section"><h2>Week 3 まとめ</h2><p>PoC設計、データ評価、システム連携、コスト、リスク、ステークホルダー管理を学んだ</p></div>`,
-        quiz: [{question: 'Week 3で学んだ最も重要なことは？', options: ['技術', '設計', '管理', '全て'], correct: 3, explanation: '技術・設計・管理の全てが重要。'}],
-        exercise: {title: '総復習', prompt: 'Week 3の学びを振り返れ', sampleAnswer: '<div class="sample-answer"><p>実装前の設計と準備の重要性を理解</p></div>'}
+        contentFile: 'day22-content.html',
+        quiz: [{question: 'Week 3で学んだ最も重要なことは？', options: ['技術', '設計', '管理', '全て'], correct: 3, explanation: '技術・設計・管理の全てが重要。PoCは成功基準が全て、データ品質がAI成功の前提、セキュリティは後回しにしない、コストは安全率を掛ける、リスクは事前に特定、期待値は早期に調整。'}],
+        exercise: {title: '総復習', prompt: 'Week 3の学びを振り返れ', sampleAnswer: '<div class="sample-answer"><p>実装前の設計と準備の重要性を理解。PoC設計、データ品質評価、システム連携設計、コスト試算、リスク管理、ステークホルダー管理の6つの要素を統合し、AIプロジェクトの成功確率を高める方法を習得。</p></div>'}
     },
     
     23: {

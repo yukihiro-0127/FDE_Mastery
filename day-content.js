@@ -3033,11 +3033,47 @@ grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
     
     13: {
         title: 'ベクトルデータベース',
-        subtitle: '類似検索の仕組み',
-        goals: ['ベクトル化理解', '類似度計算理解', 'ユースケース理解'],
-        content: `<div class="content-section"><h2>ベクトルDBとは</h2><p>意味的に類似した情報を検索するDB</p></div>`,
-        quiz: [{question: 'ベクトルDBの主な用途は？', options: ['数値計算', '類似検索', 'データ集計', 'バックアップ'], correct: 1, explanation: '類似検索に使う。'}],
-        exercise: {title: 'ベクトルDBを説明する', prompt: '顧客に説明せよ', sampleAnswer: '<div class="sample-answer"><p>キーワードではなく意味で検索</p></div>'}
+        subtitle: '類似検索の仕組みと実装',
+        goals: [
+            'ベクトル化（Embedding）の仕組みを理解する',
+            '類似度計算の3つの方法を説明できる',
+            '主要なベクトルDBの特徴を比較できる',
+            'ベクトルDBのユースケースを提案できる'
+        ],
+        contentFile: 'day13-content.html',
+        quiz: [
+            {
+                question: 'ベクトルデータベースの主な用途は？',
+                options: ['数値計算', '意味的類似検索', 'データ集計', 'バックアップ'],
+                correct: 1,
+                explanation: 'ベクトルDBは意味的に類似した情報を検索するために使用されます。キーワード完全一致ではなく、意味の近さで検索できます。'
+            },
+            {
+                question: 'コサイン類似度の特徴は？',
+                options: ['ベクトルの大きさを考慮', 'ベクトルの方向だけを見る', '直線距離を計算', '要素の積を計算'],
+                correct: 1,
+                explanation: 'コサイン類似度はベクトルの角度（方向）を計算し、大きさには影響されません。'
+            }
+        ],
+        exercise: {
+            title: 'ベクトルDBを顧客に提案する',
+            prompt: '社内文書検索システムの改善を検討している顧客に、ベクトルDBの導入を提案してください。課題、解決策、ROIを含めて説明してください。',
+            sampleAnswer: `<div class="sample-answer">
+                <h4>提案内容</h4>
+                <p><strong>課題:</strong> 現在のキーワード検索では、「退職金」で検索しても「退職一時金」がヒットせず、従業員が必要な情報を見つけられない</p>
+                <p><strong>解決策:</strong> ベクトルDBを導入し、意味的類似検索を実現</p>
+                <ul>
+                    <li>「退職金」で検索 → 「退職一時金」「退職手当」「離職給付」もヒット</li>
+                    <li>「エラーが出た」で検索 → 「問題が発生」「不具合」「バグ」もヒット</li>
+                </ul>
+                <p><strong>ROI:</strong></p>
+                <ul>
+                    <li>検索時間50%削減 → 従業員1人あたり月10時間削減 → 年間120時間×1000人 = 12万時間削減</li>
+                    <li>問い合わせ削減 → カスタマーサポートコスト30%削減</li>
+                    <li>初期コスト: Pinecone無料枠で開始 → 月額$70〜</li>
+                </ul>
+            </div>`
+        }
     },
     
     14: {
@@ -3380,11 +3416,70 @@ grep ERROR application.log | sort | uniq -c | sort -nr</code></pre>
     
     15: {
         title: 'Week 2 総復習',
-        subtitle: 'コード読解とAI技術',
-        goals: ['Week 2の知識統合', '実践的な課題解決', '次週への準備'],
-        content: `<div class="content-section"><h2>Week 2 まとめ</h2><p>JSON/SQL/Python/API/YAML/Logsの読み方とRAG/プロンプトの基礎を学んだ</p></div>`,
-        quiz: [{question: 'Week 2で学んだ最も重要なことは？', options: ['コードを書く', 'コードを読む', 'コードを消す', 'コードを隠す'], correct: 1, explanation: 'FDEはコードを読む力が重要。'}],
-        exercise: {title: '総復習', prompt: 'Week 2の学びを振り返れ', sampleAnswer: '<div class="sample-answer"><p>技術的な会話に参加できるようになった</p></div>'}
+        subtitle: 'コード読解とAI技術の完全マスター',
+        goals: [
+            'Week 2の知識を統合して説明できる',
+            'コード読解の実践的な課題を解決できる',
+            'AI技術の選定判断ができる',
+            'Week 3への準備ができている'
+        ],
+        contentFile: 'day15-content.html',
+        quiz: [
+            {
+                question: 'Week 2で学んだ最も重要なことは？',
+                options: ['コードを書く力', 'コードを読む力', 'コードを消す力', 'コードを隠す力'],
+                correct: 1,
+                explanation: 'FDEにとって最も重要なのは「コードを読む力」です。顧客との会話、エンジニアとの会話、提案書作成、すべてにおいてコードを読めることが前提になります。'
+            },
+            {
+                question: 'RAGとFine-tuningの選定基準で正しいものは？',
+                options: [
+                    'データ更新頻度が高い場合はFine-tuning',
+                    'データ更新頻度が高い場合はRAG',
+                    'コストが低い場合はFine-tuning',
+                    '透明性が必要な場合はFine-tuning'
+                ],
+                correct: 1,
+                explanation: 'データ更新頻度が高い場合はRAGが適しています。Fine-tuningは再学習に時間とコストがかかるため、頻繁な更新には向きません。'
+            }
+        ],
+        exercise: {
+            title: 'Week 2の総合演習',
+            prompt: '製造業の顧客から「製品マニュアルを検索できるAIチャットボットを作りたい」と相談されました。以下の要件を満たす技術を提案してください。\n\n要件:\n- マニュアルは毎月更新される\n- 日本語で書かれている\n- 回答の根拠を示したい\n- 予算は月額10万円以内\n\n提案内容に含めるべき項目:\n1. 推奨技術（RAG or Fine-tuning）\n2. システム構成\n3. コスト試算\n4. 段階的な導入計画',
+            sampleAnswer: `<div class="sample-answer">
+                <h4>提案内容</h4>
+                <p><strong>1. 推奨技術: RAG（検索拡張生成）</strong></p>
+                <p>理由:</p>
+                <ul>
+                    <li>毎月更新 → RAGは即座に反映可能（Fine-tuningは再学習が必要）</li>
+                    <li>根拠を示したい → RAGは参照元を追跡可能</li>
+                    <li>予算制約 → RAGは低コストで開始可能</li>
+                </ul>
+                
+                <p><strong>2. システム構成</strong></p>
+                <ul>
+                    <li>ベクトルDB: Chroma（無料、セルフホスト）</li>
+                    <li>Embedding: OpenAI text-embedding-3-small</li>
+                    <li>LLM: GPT-3.5-turbo（コスト重視）</li>
+                    <li>フロントエンド: Streamlit（無料）</li>
+                </ul>
+                
+                <p><strong>3. コスト試算</strong></p>
+                <ul>
+                    <li>Chroma: 無料（セルフホスト）</li>
+                    <li>OpenAI API: 月額$500〜（Embedding + LLM）</li>
+                    <li>サーバー: 月額$50〜（AWS EC2 t3.medium）</li>
+                    <li>合計: 月額約$550（約8万円）→ 予算内</li>
+                </ul>
+                
+                <p><strong>4. 段階的な導入計画</strong></p>
+                <ul>
+                    <li>Phase 1（1ヶ月）: PoC - 100件のマニュアルで効果検証</li>
+                    <li>Phase 2（2ヶ月）: パイロット - 全マニュアルで社内テスト</li>
+                    <li>Phase 3（3ヶ月）: 本番導入 - 全社展開</li>
+                </ul>
+            </div>`
+        }
     },
     
     16: {

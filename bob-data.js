@@ -1447,6 +1447,49 @@ app.get('/api/users', async (req, res) => {
                     <p><strong>概要：</strong> プライバシー重視のAIコード補完。ローカルモデルとクラウドモデルを選択可能。</p>
                     <p><strong>差別化：</strong> コードを外部に送信しないローカルモード、自社コードベースで学習可能</p>
                     <p><strong>Copilotとの違い：</strong> プライバシー◎、カスタマイズ◎、補完精度○</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「Tabnine」を検索してインストール</li>
+                            <li><strong>モード選択：</strong> 初回起動時にローカルモード or クラウドモードを選択
+                                <ul>
+                                    <li><strong>ローカルモード：</strong> コードが外部に送信されない（企業向け）</li>
+                                    <li><strong>クラウドモード：</strong> より高精度な補完（個人向け）</li>
+                                </ul>
+                            </li>
+                            <li><strong>自動補完：</strong> コードを書き始めると自動的に提案が表示される</li>
+                            <li><strong>Tabで採用：</strong> 提案をTabキーで採用</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <p><strong>シナリオ：</strong> React Hooksを使ったコンポーネント作成</p>
+                        <pre><code>// "useState"と入力し始めると...
+const [count, setCount] = useState(0); // ← 自動補完
+
+// "useEffect"と入力すると...
+useEffect(() => {
+  // 副作用の処理
+  return () => {
+    // クリーンアップ
+  };
+}, [dependencies]); // ← 依存配列まで提案</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>チーム学習：</strong> Pro版ではチームのコードベースから学習し、チーム固有のパターンを提案</li>
+                            <li><strong>プライバシー重視：</strong> 金融・医療など機密性の高いプロジェクトではローカルモードを使用</li>
+                            <li><strong>複数言語対応：</strong> 30以上のプログラミング言語に対応</li>
+                            <li><strong>設定カスタマイズ：</strong> 提案の頻度や表示方法を細かく調整可能</li>
+                        </ul>
+                        
+                        <h5>🆚 Copilotとの使い分け</h5>
+                        <ul>
+                            <li><strong>Tabnineを選ぶ場合：</strong> プライバシーが最優先、企業の機密コード、オフライン環境</li>
+                            <li><strong>Copilotを選ぶ場合：</strong> 最新のAI技術を使いたい、複雑なロジックの生成、英語ドキュメントが豊富</li>
+                            <li><strong>併用も可能：</strong> 両方インストールして、プロジェクトごとに使い分けることも可能</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="ext-card">
@@ -1454,6 +1497,41 @@ app.get('/api/users', async (req, res) => {
                     <p class="ext-meta">📥 500K+ | 💰 無料（OpenAI APIキー必要）</p>
                     <p><strong>概要：</strong> VS Code内でChatGPTと対話。コード説明、リファクタリング、バグ修正を支援。</p>
                     <p><strong>実践例：</strong> レガシーコードを選択 → 右クリック → "Explain" → 詳細な説明が表示</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「CodeGPT」を検索してインストール</li>
+                            <li><strong>APIキー設定：</strong> OpenAI APIキーを設定（<a href="https://platform.openai.com/api-keys" target="_blank">https://platform.openai.com/api-keys</a>で取得）</li>
+                            <li><strong>コードを選択：</strong> 説明やリファクタリングしたいコードを選択</li>
+                            <li><strong>右クリックメニュー：</strong> CodeGPTメニューから操作を選択</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <p><strong>シナリオ1：</strong> レガシーコードの理解</p>
+                        <pre><code>// 複雑なコードを選択 → 右クリック → "CodeGPT: Explain"
+function processData(arr) {
+  return arr.reduce((acc, val) =>
+    acc.concat(val.filter(x => x > 0)), []);
+}
+// ↓ 説明が表示される
+「この関数は配列の配列を受け取り、正の数のみをフラット化して返します」</code></pre>
+                        
+                        <p><strong>シナリオ2：</strong> コードのリファクタリング</p>
+                        <pre><code>// 改善したいコードを選択 → "CodeGPT: Refactor"
+// より読みやすく、効率的なコードに変換してくれる</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>バグ修正：</strong> エラーが出ているコードを選択 → "Find Problems" でバグを特定</li>
+                            <li><strong>ドキュメント生成：</strong> 関数を選択 → "Add Comments" でJSDoc形式のコメントを自動生成</li>
+                            <li><strong>テスト生成：</strong> 関数を選択 → "Generate Tests" でユニットテストを自動生成</li>
+                            <li><strong>コード変換：</strong> JavaScriptをTypeScriptに変換、など言語間の変換も可能</li>
+                        </ul>
+                        
+                        <h5>💰 コスト管理</h5>
+                        <p>OpenAI APIは従量課金制。月$5-10程度で十分使えます。使いすぎ防止のため、OpenAIダッシュボードで使用量上限を設定しましょう。</p>
+                    </div>
                 </div>
 
                 <div class="ext-card">
@@ -1461,6 +1539,35 @@ app.get('/api/users', async (req, res) => {
                     <p class="ext-meta">📥 8M+ | 💰 完全無料（Microsoft公式）</p>
                     <p><strong>概要：</strong> GitHubの数千のOSSプロジェクトから学習したAI補完。</p>
                     <p><strong>特徴：</strong> Python、TypeScript、JavaScriptで特に効果的。Copilotと併用可能。</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「IntelliCode」を検索してインストール</li>
+                            <li><strong>自動有効化：</strong> インストール後、自動的に有効化される</li>
+                            <li><strong>⭐マークの提案：</strong> コード補完候補に⭐マークが付いた提案が表示される</li>
+                            <li><strong>優先表示：</strong> ⭐付きの提案が最上位に表示され、採用しやすい</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <p><strong>シナリオ：</strong> Pythonでpandasを使用</p>
+                        <pre><code>import pandas as pd
+df = pd.read_csv('data.csv')
+df.  # ← ここで「.」を入力すると...
+# ⭐ head()  ← よく使われるメソッドが⭐付きで最上位に表示
+# ⭐ describe()
+# ⭐ info()
+# groupby()
+# sort_values()</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>コンテキスト理解：</strong> 現在のコードの文脈を理解し、最適なメソッドを提案</li>
+                            <li><strong>チーム学習：</strong> チームのコードベースから学習し、チーム固有のパターンを提案（Enterprise版）</li>
+                            <li><strong>Copilotと併用：</strong> IntelliCodeは短い補完、Copilotは長いコード生成と使い分け</li>
+                            <li><strong>完全無料：</strong> Microsoftが提供する完全無料のAI補完ツール</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="ext-card">
@@ -1468,6 +1575,47 @@ app.get('/api/users', async (req, res) => {
                     <p class="ext-meta">📥 1M+ | 💰 完全無料（個人・商用）</p>
                     <p><strong>概要：</strong> GitHub Copilotの無料代替として急成長中。</p>
                     <p><strong>なぜ選ぶべきか：</strong> Copilotと同等の精度で完全無料、企業でも無料、プライバシー重視</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「Codeium」を検索してインストール</li>
+                            <li><strong>アカウント作成：</strong> 無料アカウントを作成（メールアドレスのみ）</li>
+                            <li><strong>自動補完：</strong> コードを書き始めると自動的に提案が表示される</li>
+                            <li><strong>Tabで採用：</strong> 提案をTabキーで採用</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <p><strong>シナリオ：</strong> React Componentの作成</p>
+                        <pre><code>// "function UserCard"と入力すると...
+function UserCard({ user }) {
+  return (
+    <div className="user-card">
+      <img src={user.avatar} alt={user.name} />
+      <h3>{user.name}</h3>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+// ↑ ここまで自動生成される</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>完全無料：</strong> 個人・商用問わず完全無料。企業でも追加料金なし</li>
+                            <li><strong>70+言語対応：</strong> Python、JavaScript、TypeScript、Go、Rustなど主要言語すべてに対応</li>
+                            <li><strong>高速：</strong> Copilotより応答が速いという評価も</li>
+                            <li><strong>プライバシー：</strong> コードを学習に使用しないオプションあり</li>
+                            <li><strong>Copilotからの移行：</strong> Copilotの代替として多くの開発者が移行中</li>
+                        </ul>
+                        
+                        <h5>🆚 なぜCopilotより優れているか</h5>
+                        <ul>
+                            <li>✅ 完全無料（Copilotは$10/月）</li>
+                            <li>✅ 企業でも無料（Copilotは企業版$19/月）</li>
+                            <li>✅ より多くの言語に対応</li>
+                            <li>✅ プライバシー設定が柔軟</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -1479,6 +1627,34 @@ app.get('/api/users', async (req, res) => {
                     <p class="ext-meta">📥 7M+ | 💰 無料</p>
                     <p><strong>概要：</strong> 人気No.1ダークテーマ。目に優しい配色で長時間のコーディングでも疲れにくい。</p>
                     <p><strong>Pro Tip：</strong> フォントは「Fira Code」または「JetBrains Mono」と組み合わせると最高</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「One Dark Pro」を検索してインストール</li>
+                            <li><strong>テーマ適用：</strong> <code>Cmd/Ctrl + K → Cmd/Ctrl + T</code> でテーマ選択画面を開く</li>
+                            <li><strong>One Dark Proを選択：</strong> リストから「One Dark Pro」を選択</li>
+                            <li><strong>バリエーション：</strong> One Dark Pro、One Dark Pro Flat、One Dark Pro Vivid から選択可能</li>
+                        </ol>
+                        
+                        <h5>💡 カスタマイズ</h5>
+                        <p><strong>推奨フォント設定：</strong></p>
+                        <pre><code>// settings.json
+{
+  "editor.fontFamily": "Fira Code, JetBrains Mono",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.lineHeight": 22
+}</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>目の疲労軽減：</strong> ブルーライトを抑えた配色で、長時間作業でも目が疲れにくい</li>
+                            <li><strong>コントラスト最適化：</strong> シンタックスハイライトが見やすく、コードの構造を把握しやすい</li>
+                            <li><strong>Atom由来：</strong> Atomエディタの人気テーマをVS Codeに移植</li>
+                            <li><strong>カスタマイズ可能：</strong> settings.jsonで色をカスタマイズ可能</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="ext-card">
@@ -1486,6 +1662,35 @@ app.get('/api/users', async (req, res) => {
                     <p class="ext-meta">📥 6M+ | 💰 無料</p>
                     <p><strong>概要：</strong> 1000+のMaterial Designアイコン。ファイルとフォルダの視認性が劇的に向上。</p>
                     <p><strong>効果：</strong> ファイル発見速度が約30%向上（ユーザー調査より）</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「Material Icon Theme」を検索してインストール</li>
+                            <li><strong>アイコンテーマ適用：</strong> <code>Cmd/Ctrl + Shift + P</code> → 「Preferences: File Icon Theme」</li>
+                            <li><strong>Material Icon Themeを選択：</strong> リストから選択</li>
+                            <li><strong>即座に反映：</strong> ファイルエクスプローラーのアイコンが変更される</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <p><strong>ファイル種類の視認性：</strong></p>
+                        <ul>
+                            <li>📄 <code>.js</code> → 黄色のJavaScriptアイコン</li>
+                            <li>📘 <code>.ts</code> → 青色のTypeScriptアイコン</li>
+                            <li>⚛️ <code>.jsx/.tsx</code> → Reactアイコン</li>
+                            <li>🎨 <code>.css/.scss</code> → スタイルシートアイコン</li>
+                            <li>📦 <code>package.json</code> → npmアイコン</li>
+                            <li>🔧 <code>.env</code> → 環境変数アイコン</li>
+                        </ul>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>フォルダアイコン：</strong> <code>components/</code>、<code>utils/</code>など、フォルダ名に応じたアイコンが表示</li>
+                            <li><strong>カスタマイズ：</strong> 設定でアイコンの色や形をカスタマイズ可能</li>
+                            <li><strong>ファイル発見：</strong> アイコンで視覚的に識別できるため、目的のファイルを素早く発見</li>
+                            <li><strong>プロジェクト構造理解：</strong> 新しいプロジェクトでも、アイコンで構造を直感的に理解</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="ext-card">
@@ -1493,6 +1698,42 @@ app.get('/api/users', async (req, res) => {
                     <p class="ext-meta">📥 1M+ | 💰 無料</p>
                     <p><strong>概要：</strong> 複数のVS Codeウィンドウを色で区別。プロジェクトごとに異なる色を設定。</p>
                     <p><strong>こんな時に：</strong> 本番環境とステージング環境を同時に開いている時の誤操作防止</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「Peacock」を検索してインストール</li>
+                            <li><strong>色を変更：</strong> <code>Cmd/Ctrl + Shift + P</code> → 「Peacock: Change to a favorite color」</li>
+                            <li><strong>色を選択：</strong> プリセットカラーから選択、またはカスタムカラーを入力</li>
+                            <li><strong>自動保存：</strong> プロジェクトごとに色が保存される</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <p><strong>環境別の色分け：</strong></p>
+                        <ul>
+                            <li>🔴 <strong>本番環境：</strong> 赤色（危険を示す）</li>
+                            <li>🟡 <strong>ステージング：</strong> 黄色（注意を示す）</li>
+                            <li>🟢 <strong>開発環境：</strong> 緑色（安全を示す）</li>
+                            <li>🔵 <strong>テスト環境：</strong> 青色</li>
+                        </ul>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>誤操作防止：</strong> 本番環境を赤色にすることで、誤って変更するリスクを軽減</li>
+                            <li><strong>複数プロジェクト：</strong> 複数のプロジェクトを同時に開いている時、どのウィンドウがどのプロジェクトか一目瞭然</li>
+                            <li><strong>チーム共有：</strong> チームで色のルールを決めておくと、画面共有時に分かりやすい</li>
+                            <li><strong>カスタマイズ：</strong> タイトルバー、ステータスバー、アクティビティバーの色を個別に設定可能</li>
+                        </ul>
+                        
+                        <h5>🎨 推奨カラー設定</h5>
+                        <pre><code>// .vscode/settings.json（プロジェクトごと）
+{
+  "peacock.color": "#f44336",  // 本番環境は赤
+  "peacock.affectActivityBar": true,
+  "peacock.affectStatusBar": true,
+  "peacock.affectTitleBar": true
+}</code></pre>
+                    </div>
                 </div>
             </div>
 

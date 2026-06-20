@@ -1095,6 +1095,430 @@ const glossaryTerms = [
         customerExplanation: 'デバイス上でAI処理を実行します。リアルタイム性が求められる用途や、プライバシーが重要な場合に有効です。',
         relatedTerms: ['IoT', 'モデル圧縮', 'リアルタイム処理'],
         ibmProduct: null
+    },
+    {
+        term: 'CI/CD',
+        reading: 'しーあいしーでぃー',
+        category: 'devops',
+        definition: 'Continuous Integration/Continuous Deliveryの略。コードの統合とデプロイを自動化する手法。',
+        explanation: `
+            <p>CI/CDは、開発からリリースまでを自動化する仕組みです。</p>
+            <p><strong>CI（継続的インテグレーション）:</strong></p>
+            <ul>
+                <li>コードをコミットするたびに自動テスト</li>
+                <li>バグを早期発見</li>
+                <li>チーム全体のコード品質を維持</li>
+            </ul>
+            <p><strong>CD（継続的デリバリー）:</strong></p>
+            <ul>
+                <li>テストに合格したコードを自動デプロイ</li>
+                <li>リリース頻度を上げる</li>
+                <li>手動作業によるミスを削減</li>
+            </ul>
+        `,
+        customerExplanation: '開発からリリースまでを自動化することで、品質を保ちながら迅速にサービスを改善できます。',
+        relatedTerms: ['DevOps', 'Jenkins', 'GitHub Actions'],
+        ibmProduct: 'IBM Cloud Continuous Delivery'
+    },
+    {
+        term: 'コンテナ',
+        reading: 'こんてな',
+        category: 'infrastructure',
+        definition: 'アプリケーションとその実行環境を一つのパッケージにまとめた技術。',
+        explanation: `
+            <p>コンテナは、アプリケーションを「箱詰め」して、どこでも同じように動かせる技術です。</p>
+            <p><strong>メリット:</strong></p>
+            <ul>
+                <li>環境の違いによる動作不良を防ぐ</li>
+                <li>起動が速い（数秒）</li>
+                <li>リソース効率が良い</li>
+                <li>スケールしやすい</li>
+            </ul>
+            <p><strong>代表的なツール:</strong> Docker、Kubernetes</p>
+        `,
+        customerExplanation: 'アプリケーションを「箱詰め」することで、開発環境でも本番環境でも同じように動作します。',
+        relatedTerms: ['Docker', 'Kubernetes', 'マイクロサービス'],
+        ibmProduct: 'IBM Cloud Kubernetes Service'
+    },
+    {
+        term: 'マイクロサービス',
+        reading: 'まいくろさーびす',
+        category: 'architecture',
+        definition: 'アプリケーションを小さな独立したサービスに分割する設計手法。',
+        explanation: `
+            <p>マイクロサービスは、大きなシステムを小さな部品に分ける設計です。</p>
+            <p><strong>メリット:</strong></p>
+            <ul>
+                <li>部分的な更新が可能</li>
+                <li>障害の影響範囲が限定される</li>
+                <li>チームごとに独立して開発できる</li>
+                <li>技術スタックを自由に選べる</li>
+            </ul>
+            <p><strong>課題:</strong></p>
+            <ul>
+                <li>サービス間の通信が複雑</li>
+                <li>運用管理が難しい</li>
+                <li>分散トレーシングが必要</li>
+            </ul>
+        `,
+        customerExplanation: 'システムを小さな部品に分けることで、柔軟性と保守性が向上します。',
+        relatedTerms: ['API', 'コンテナ', 'Kubernetes'],
+        ibmProduct: 'IBM Cloud Pak for Applications'
+    },
+    {
+        term: 'サーバーレス',
+        reading: 'さーばーれす',
+        category: 'infrastructure',
+        definition: 'サーバーの管理を意識せずにアプリケーションを実行できる仕組み。',
+        explanation: `
+            <p>サーバーレスは、「サーバーがない」のではなく「サーバー管理が不要」という意味です。</p>
+            <p><strong>メリット:</strong></p>
+            <ul>
+                <li>サーバー管理不要</li>
+                <li>自動スケーリング</li>
+                <li>使った分だけ課金</li>
+                <li>開発に集中できる</li>
+            </ul>
+            <p><strong>代表的なサービス:</strong> AWS Lambda、Azure Functions、IBM Cloud Functions</p>
+        `,
+        customerExplanation: 'サーバーの管理を気にせず、アプリケーションの開発に集中できます。',
+        relatedTerms: ['FaaS', 'イベント駆動', 'スケーリング'],
+        ibmProduct: 'IBM Cloud Functions'
+    },
+    {
+        term: 'GraphQL',
+        reading: 'ぐらふきゅーえる',
+        category: 'api',
+        definition: 'REST APIの代替となる、柔軟なデータ取得が可能なクエリ言語。',
+        explanation: `
+            <p>GraphQLは、必要なデータだけを取得できるAPI技術です。</p>
+            <p><strong>REST APIとの違い:</strong></p>
+            <ul>
+                <li>REST: 複数のエンドポイントから複数回リクエスト</li>
+                <li>GraphQL: 1回のリクエストで必要なデータをすべて取得</li>
+            </ul>
+            <p><strong>メリット:</strong></p>
+            <ul>
+                <li>過不足なくデータを取得</li>
+                <li>通信回数を削減</li>
+                <li>フロントエンドの開発効率向上</li>
+            </ul>
+        `,
+        customerExplanation: '必要なデータだけを効率的に取得できるため、アプリケーションの高速化に貢献します。',
+        relatedTerms: ['API', 'REST API', 'クエリ'],
+        ibmProduct: null
+    },
+    {
+        term: 'WebSocket',
+        reading: 'うぇぶそけっと',
+        category: 'api',
+        definition: 'サーバーとクライアント間で双方向通信を実現するプロトコル。',
+        explanation: `
+            <p>WebSocketは、リアルタイムな双方向通信を可能にする技術です。</p>
+            <p><strong>HTTPとの違い:</strong></p>
+            <ul>
+                <li>HTTP: クライアントからのリクエストに対してレスポンス（一方向）</li>
+                <li>WebSocket: サーバーからもクライアントにデータを送信可能（双方向）</li>
+            </ul>
+            <p><strong>用途:</strong> チャット、リアルタイム通知、株価表示、オンラインゲーム</p>
+        `,
+        customerExplanation: 'リアルタイムな双方向通信が必要な場合に使用します。チャットやライブ配信などに最適です。',
+        relatedTerms: ['HTTP', 'リアルタイム', 'プッシュ通知'],
+        ibmProduct: null
+    },
+    {
+        term: 'OAuth',
+        reading: 'おーおーす',
+        category: 'security',
+        definition: '第三者アプリケーションに安全にアクセス権限を委譲する認証プロトコル。',
+        explanation: `
+            <p>OAuthは、「パスワードを教えずにログインを許可する」仕組みです。</p>
+            <p><strong>例:</strong> 「Googleアカウントでログイン」</p>
+            <ul>
+                <li>パスワードを第三者アプリに教えない</li>
+                <li>必要な権限だけを許可</li>
+                <li>いつでも権限を取り消せる</li>
+            </ul>
+            <p><strong>OAuth 2.0:</strong> 現在の標準バージョン</p>
+        `,
+        customerExplanation: 'ユーザーがパスワードを入力せずに、安全にログインできる仕組みです。',
+        relatedTerms: ['認証', 'JWT', 'SSO'],
+        ibmProduct: 'IBM Security Verify'
+    },
+    {
+        term: 'JWT',
+        reading: 'じぇいだぶりゅーてぃー',
+        category: 'security',
+        definition: 'JSON Web Tokenの略。認証情報を安全に伝達するためのトークン形式。',
+        explanation: `
+            <p>JWTは、ユーザー情報を暗号化して持ち運べる「デジタル身分証明書」です。</p>
+            <p><strong>構造:</strong></p>
+            <ul>
+                <li>Header: トークンの種類と暗号化方式</li>
+                <li>Payload: ユーザー情報（ID、権限など）</li>
+                <li>Signature: 改ざん防止の署名</li>
+            </ul>
+            <p><strong>メリット:</strong></p>
+            <ul>
+                <li>サーバー側でセッション管理不要</li>
+                <li>スケーラブル</li>
+                <li>異なるドメイン間でも使用可能</li>
+            </ul>
+        `,
+        customerExplanation: 'ユーザー認証情報を安全に管理し、APIアクセスを制御します。',
+        relatedTerms: ['OAuth', '認証', 'トークン'],
+        ibmProduct: 'IBM Security Verify'
+    },
+    {
+        term: 'SSO',
+        reading: 'えすえすおー',
+        category: 'security',
+        definition: 'Single Sign-Onの略。一度のログインで複数のシステムにアクセスできる仕組み。',
+        explanation: `
+            <p>SSOは、「一度のログインで全てのシステムにアクセス」できる仕組みです。</p>
+            <p><strong>メリット:</strong></p>
+            <ul>
+                <li>ユーザーの利便性向上（パスワード管理が楽）</li>
+                <li>セキュリティ向上（パスワードの使い回しを防ぐ）</li>
+                <li>IT部門の管理コスト削減</li>
+            </ul>
+            <p><strong>実装方式:</strong> SAML、OAuth、OpenID Connect</p>
+        `,
+        customerExplanation: '社員が一度ログインするだけで、全ての業務システムにアクセスできるようになります。',
+        relatedTerms: ['OAuth', 'SAML', '認証'],
+        ibmProduct: 'IBM Security Verify'
+    },
+    {
+        term: 'SAML',
+        reading: 'さむる',
+        category: 'security',
+        definition: 'Security Assertion Markup Languageの略。企業向けSSOの標準プロトコル。',
+        explanation: `
+            <p>SAMLは、企業向けSSOで広く使われる認証プロトコルです。</p>
+            <p><strong>仕組み:</strong></p>
+            <ul>
+                <li>IdP（Identity Provider）: 認証を行うサーバー</li>
+                <li>SP（Service Provider）: サービスを提供するサーバー</li>
+                <li>ユーザーはIdPで一度認証すれば、複数のSPにアクセス可能</li>
+            </ul>
+            <p><strong>用途:</strong> 企業の社内システム、クラウドサービスへのSSO</p>
+        `,
+        customerExplanation: '企業の複数システムに一度のログインでアクセスできるようにします。',
+        relatedTerms: ['SSO', 'OAuth', '認証'],
+        ibmProduct: 'IBM Security Verify'
+    },
+    {
+        term: 'ゼロトラスト',
+        reading: 'ぜろとらすと',
+        category: 'security',
+        definition: '「信頼しない、常に検証する」を原則とするセキュリティモデル。',
+        explanation: `
+            <p>ゼロトラストは、「社内ネットワークも信頼しない」セキュリティ思想です。</p>
+            <p><strong>従来のセキュリティ:</strong></p>
+            <ul>
+                <li>社内ネットワークは安全</li>
+                <li>外部からの侵入を防ぐ（境界防御）</li>
+            </ul>
+            <p><strong>ゼロトラスト:</strong></p>
+            <ul>
+                <li>社内も社外も信頼しない</li>
+                <li>全てのアクセスを検証</li>
+                <li>最小権限の原則</li>
+            </ul>
+        `,
+        customerExplanation: 'リモートワークが増えた現代に適したセキュリティモデルです。',
+        relatedTerms: ['認証', 'アクセス制御', 'セキュリティ'],
+        ibmProduct: 'IBM Security Verify'
+    },
+    {
+        term: 'データレイク',
+        reading: 'でーたれいく',
+        category: 'data',
+        definition: '構造化・非構造化を問わず、あらゆるデータを保存できるストレージ。',
+        explanation: `
+            <p>データレイクは、「データの湖」です。あらゆる形式のデータを保存できます。</p>
+            <p><strong>データウェアハウスとの違い:</strong></p>
+            <ul>
+                <li>データウェアハウス: 構造化データのみ、事前に整理</li>
+                <li>データレイク: 全てのデータ、生データのまま保存</li>
+            </ul>
+            <p><strong>メリット:</strong></p>
+            <ul>
+                <li>柔軟なデータ保存</li>
+                <li>後から分析方法を決められる</li>
+                <li>AI/機械学習に活用しやすい</li>
+            </ul>
+        `,
+        customerExplanation: 'あらゆる形式のデータを一箇所に集約し、後から自由に分析できます。',
+        relatedTerms: ['データウェアハウス', 'ビッグデータ', 'ETL'],
+        ibmProduct: 'watsonx.data'
+    },
+    {
+        term: 'ETL',
+        reading: 'いーてぃーえる',
+        category: 'data',
+        definition: 'Extract, Transform, Loadの略。データを抽出・変換・格納する処理。',
+        explanation: `
+            <p>ETLは、データを「取り出して、整えて、保存する」処理です。</p>
+            <p><strong>Extract（抽出）:</strong> 複数のデータソースからデータを取得</p>
+            <p><strong>Transform（変換）:</strong> データを分析しやすい形に整形</p>
+            <p><strong>Load（格納）:</strong> データウェアハウスやデータレイクに保存</p>
+            <p><strong>用途:</strong> データ統合、データ分析基盤の構築</p>
+        `,
+        customerExplanation: '複数のシステムからデータを集めて、分析しやすい形に整えます。',
+        relatedTerms: ['データレイク', 'データウェアハウス', 'データパイプライン'],
+        ibmProduct: 'IBM DataStage'
+    },
+    {
+        term: 'データガバナンス',
+        reading: 'でーたがばなんす',
+        category: 'data',
+        definition: 'データの品質、セキュリティ、利用を管理する仕組み。',
+        explanation: `
+            <p>データガバナンスは、「データの管理ルール」です。</p>
+            <p><strong>管理対象:</strong></p>
+            <ul>
+                <li>データ品質: 正確性、完全性</li>
+                <li>データセキュリティ: アクセス制御、暗号化</li>
+                <li>データプライバシー: 個人情報保護</li>
+                <li>データライフサイクル: 保存期間、削除ルール</li>
+            </ul>
+            <p><strong>重要性:</strong> GDPR、個人情報保護法などの法規制対応に必須</p>
+        `,
+        customerExplanation: 'データを適切に管理し、法規制に対応しながら、ビジネスに活用します。',
+        relatedTerms: ['データ品質', 'コンプライアンス', 'GDPR'],
+        ibmProduct: 'IBM Cloud Pak for Data'
+    },
+    {
+        term: 'GDPR',
+        reading: 'じーでぃーぴーあーる',
+        category: 'compliance',
+        definition: 'EU一般データ保護規則。EU市民の個人データ保護を定めた法律。',
+        explanation: `
+            <p>GDPRは、EU市民の個人データを保護する法律です。</p>
+            <p><strong>主な要件:</strong></p>
+            <ul>
+                <li>個人データの収集には明示的な同意が必要</li>
+                <li>データ主体の権利（アクセス権、削除権など）</li>
+                <li>データ侵害時の72時間以内の報告義務</li>
+                <li>違反時の高額な罰金（最大2000万ユーロまたは全世界売上の4%）</li>
+            </ul>
+            <p><strong>影響:</strong> EU市民を対象とするビジネスは全て対象</p>
+        `,
+        customerExplanation: 'EU市民の個人データを扱う場合、GDPRへの対応が必須です。',
+        relatedTerms: ['個人情報保護', 'データガバナンス', 'コンプライアンス'],
+        ibmProduct: 'IBM Security Guardium'
+    },
+    {
+        term: 'SLA',
+        reading: 'えすえるえー',
+        category: 'operations',
+        definition: 'Service Level Agreementの略。サービス品質の保証レベルを定めた契約。',
+        explanation: `
+            <p>SLAは、「サービスの品質保証」です。</p>
+            <p><strong>主な指標:</strong></p>
+            <ul>
+                <li>稼働率: 99.9%（年間8.76時間のダウンタイム）</li>
+                <li>応答時間: APIレスポンスが100ms以内</li>
+                <li>サポート対応時間: 問い合わせから24時間以内に回答</li>
+            </ul>
+            <p><strong>違反時:</strong> 返金、ペナルティなどが発生</p>
+        `,
+        customerExplanation: 'サービスの品質を保証する契約です。稼働率や応答時間などを明確に定めます。',
+        relatedTerms: ['稼働率', 'ダウンタイム', 'サービス品質'],
+        ibmProduct: 'IBM Cloud SLA'
+    },
+    {
+        term: 'RPA',
+        reading: 'あーるぴーえー',
+        category: 'automation',
+        definition: 'Robotic Process Automationの略。定型業務を自動化するソフトウェアロボット。',
+        explanation: `
+            <p>RPAは、「人間の作業を真似するロボット」です。</p>
+            <p><strong>自動化できる作業:</strong></p>
+            <ul>
+                <li>データ入力</li>
+                <li>ファイルのコピー・移動</li>
+                <li>メール送信</li>
+                <li>Webサイトからのデータ収集</li>
+            </ul>
+            <p><strong>AIとの違い:</strong></p>
+            <ul>
+                <li>RPA: ルールベース、決まった手順を実行</li>
+                <li>AI: 学習ベース、状況に応じて判断</li>
+            </ul>
+        `,
+        customerExplanation: '定型的な事務作業を自動化し、人間はより創造的な業務に集中できます。',
+        relatedTerms: ['自動化', 'ワークフロー', 'AI'],
+        ibmProduct: 'IBM Robotic Process Automation'
+    },
+    {
+        term: 'ブロックチェーン',
+        reading: 'ぶろっくちぇーん',
+        category: 'technology',
+        definition: '改ざんが困難な分散型台帳技術。',
+        explanation: `
+            <p>ブロックチェーンは、「改ざんできない記録」を作る技術です。</p>
+            <p><strong>特徴:</strong></p>
+            <ul>
+                <li>分散管理: 中央管理者が不要</li>
+                <li>改ざん困難: 過去の記録を変更できない</li>
+                <li>透明性: 全ての取引が記録される</li>
+            </ul>
+            <p><strong>用途:</strong></p>
+            <ul>
+                <li>暗号通貨（Bitcoin、Ethereum）</li>
+                <li>サプライチェーン管理</li>
+                <li>デジタル証明書</li>
+            </ul>
+        `,
+        customerExplanation: '改ざんできない記録を作ることで、信頼性の高い取引を実現します。',
+        relatedTerms: ['分散台帳', 'スマートコントラクト', '暗号通貨'],
+        ibmProduct: 'IBM Blockchain Platform'
+    },
+    {
+        term: 'スマートコントラクト',
+        reading: 'すまーとこんとらくと',
+        category: 'technology',
+        definition: 'ブロックチェーン上で自動実行される契約プログラム。',
+        explanation: `
+            <p>スマートコントラクトは、「自動で実行される契約」です。</p>
+            <p><strong>仕組み:</strong></p>
+            <ul>
+                <li>契約条件をプログラムで記述</li>
+                <li>条件が満たされると自動実行</li>
+                <li>ブロックチェーンに記録され、改ざん不可</li>
+            </ul>
+            <p><strong>例:</strong> 「商品が配達されたら、自動で代金を支払う」</p>
+            <p><strong>メリット:</strong> 仲介者不要、透明性、自動実行</p>
+        `,
+        customerExplanation: '契約を自動化し、仲介者なしで信頼性の高い取引を実現します。',
+        relatedTerms: ['ブロックチェーン', 'Ethereum', '自動化'],
+        ibmProduct: 'IBM Blockchain Platform'
+    },
+    {
+        term: 'Quantum Computing',
+        reading: 'くぁんたむこんぴゅーてぃんぐ',
+        category: 'technology',
+        definition: '量子力学の原理を利用した、従来のコンピュータを超える計算能力を持つ技術。',
+        explanation: `
+            <p>量子コンピュータは、「従来のコンピュータでは不可能な計算」を実現します。</p>
+            <p><strong>従来のコンピュータとの違い:</strong></p>
+            <ul>
+                <li>従来: 0か1のビット</li>
+                <li>量子: 0と1の重ね合わせ（量子ビット）</li>
+            </ul>
+            <p><strong>応用分野:</strong></p>
+            <ul>
+                <li>暗号解読</li>
+                <li>創薬（分子シミュレーション）</li>
+                <li>最適化問題（物流、金融）</li>
+            </ul>
+            <p><strong>現状:</strong> 研究段階、実用化は数年先</p>
+        `,
+        customerExplanation: '従来のコンピュータでは解けない複雑な問題を解決できる可能性があります。',
+        relatedTerms: ['量子ビット', '最適化', '暗号'],
+        ibmProduct: 'IBM Quantum'
     }
 ];
 

@@ -1746,6 +1746,34 @@ function UserCard({ user }) {
                     <p><strong>概要：</strong> リアルタイムでコードを共同編集。リモートペアプログラミングに最適。</p>
                     <p><strong>主な機能：</strong> リアルタイム共同編集、音声通話、ターミナル共有、サーバー共有</p>
                     <p><strong>活用例：</strong> 新人教育、オンボーディング、リモートワークでのペアプロ</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「Live Share」を検索してインストール</li>
+                            <li><strong>サインイン：</strong> Microsoft/GitHubアカウントでサインイン</li>
+                            <li><strong>セッション開始：</strong> ステータスバーの「Live Share」をクリック → 「Start collaboration session」</li>
+                            <li><strong>リンク共有：</strong> 生成されたリンクをチームメンバーに共有</li>
+                            <li><strong>共同編集開始：</strong> メンバーがリンクをクリックすると、リアルタイム共同編集が開始</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <p><strong>シナリオ：</strong> リモートでペアプログラミング</p>
+                        <ul>
+                            <li><strong>コード共同編集：</strong> 2人が同時に同じファイルを編集。カーソル位置が色分けされて表示</li>
+                            <li><strong>音声通話：</strong> VS Code内で音声通話しながらコーディング（別途Zoom不要）</li>
+                            <li><strong>ターミナル共有：</strong> ホストのターミナルをゲストも操作可能</li>
+                            <li><strong>サーバー共有：</strong> localhost:3000をゲストも閲覧可能</li>
+                        </ul>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>新人教育：</strong> 先輩が新人のコードをリアルタイムで見ながら指導</li>
+                            <li><strong>バグ修正：</strong> 複雑なバグを2人で協力して解決</li>
+                            <li><strong>コードレビュー：</strong> PRレビュー時に、実際にコードを動かしながらレビュー</li>
+                            <li><strong>読み取り専用モード：</strong> ゲストを読み取り専用にして、デモやプレゼンに活用</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="ext-card">
@@ -1753,6 +1781,45 @@ function UserCard({ user }) {
                     <p class="ext-meta">📥 2M+ | 💰 無料</p>
                     <p><strong>概要：</strong> コード内のTODO、FIXME、HACKコメントを一覧表示。タスク管理が簡単に。</p>
                     <p><strong>使い方：</strong> // TODO: 実装する → サイドバーに自動表示</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「Todo Tree」を検索してインストール</li>
+                            <li><strong>コメント追加：</strong> コードに<code>// TODO:</code>、<code>// FIXME:</code>などのコメントを追加</li>
+                            <li><strong>サイドバー確認：</strong> サイドバーの「Todo Tree」アイコンをクリック</li>
+                            <li><strong>一覧表示：</strong> プロジェクト全体のTODOが階層表示される</li>
+                            <li><strong>ジャンプ：</strong> TODOをクリックすると該当箇所にジャンプ</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <pre><code>// TODO: ユーザー認証機能を実装
+// FIXME: パフォーマンス改善が必要
+// HACK: 一時的な回避策、後で修正
+// NOTE: この処理は重要
+// [ ]: チェックボックス形式のTODO</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>優先度管理：</strong> TODO（通常）、FIXME（バグ）、HACK（技術的負債）で優先度を分ける</li>
+                            <li><strong>担当者明記：</strong> <code>// TODO(@username): タスク内容</code> で担当者を明記</li>
+                            <li><strong>期限設定：</strong> <code>// TODO(2024-12-31): 年内に完了</code> で期限を設定</li>
+                            <li><strong>カスタムタグ：</strong> 設定で独自のタグ（REVIEW、QUESTIONなど）を追加可能</li>
+                        </ul>
+                        
+                        <h5>🎨 カスタマイズ</h5>
+                        <pre><code>// settings.json
+{
+  "todo-tree.general.tags": [
+    "TODO", "FIXME", "HACK", "NOTE", "REVIEW"
+  ],
+  "todo-tree.highlights.defaultHighlight": {
+    "foreground": "white",
+    "background": "green",
+    "icon": "check"
+  }
+}</code></pre>
+                    </div>
                 </div>
 
                 <div class="ext-card">
@@ -1760,6 +1827,40 @@ function UserCard({ user }) {
                     <p class="ext-meta">📥 1.5M+ | 💰 無料</p>
                     <p><strong>概要：</strong> コード内に「しおり」を設定して、重要な箇所に素早くジャンプ。</p>
                     <p><strong>活用シーン：</strong> 大規模ファイルの重要箇所をマーク、複数ファイル間を頻繁に行き来</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「Bookmarks」を検索してインストール</li>
+                            <li><strong>ブックマーク追加：</strong> <code>Cmd/Ctrl + Alt + K</code> で現在行にブックマークを追加</li>
+                            <li><strong>ジャンプ：</strong> <code>Cmd/Ctrl + Alt + L</code> で次のブックマークにジャンプ</li>
+                            <li><strong>一覧表示：</strong> サイドバーの「Bookmarks」アイコンで全ブックマークを表示</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <p><strong>シナリオ：</strong> 大規模なレガシーコードの解析</p>
+                        <ul>
+                            <li>重要な関数定義にブックマーク</li>
+                            <li>バグが発生している箇所にブックマーク</li>
+                            <li>修正が必要な箇所にブックマーク</li>
+                            <li>ブックマーク間を素早く移動して効率的に作業</li>
+                        </ul>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>ラベル付け：</strong> ブックマークにラベルを付けて管理（右クリック → Label）</li>
+                            <li><strong>複数ファイル：</strong> 複数ファイルにまたがるブックマークも一覧で管理</li>
+                            <li><strong>ショートカット：</strong> 次/前のブックマークに素早くジャンプ</li>
+                            <li><strong>永続化：</strong> ブックマークはプロジェクトごとに保存される</li>
+                        </ul>
+                        
+                        <h5>⌨️ 便利なショートカット</h5>
+                        <ul>
+                            <li><code>Cmd/Ctrl + Alt + K</code>: ブックマーク追加/削除</li>
+                            <li><code>Cmd/Ctrl + Alt + L</code>: 次のブックマークへ</li>
+                            <li><code>Cmd/Ctrl + Alt + J</code>: 前のブックマークへ</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="ext-card">
@@ -1767,6 +1868,42 @@ function UserCard({ user }) {
                     <p class="ext-meta">📥 4M+ | 💰 無料</p>
                     <p><strong>概要：</strong> ファイルパスを自動補完。import文やrequire文の入力が劇的に速くなる。</p>
                     <p><strong>効果：</strong> import文の入力時間が約50%削減。タイポによるエラーも防止。</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「Path Intellisense」を検索してインストール</li>
+                            <li><strong>自動有効化：</strong> インストール後、自動的に有効化される</li>
+                            <li><strong>パス入力：</strong> import文やrequire文でパスを入力し始める</li>
+                            <li><strong>自動補完：</strong> ファイルとフォルダの候補が自動表示される</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <pre><code>// "import { Button } from './"と入力すると...
+import { Button } from './components/Button';
+// ↑ components/Button.tsxが自動補完される
+
+// 相対パスも絶対パスも対応
+import { api } from '@/utils/api';
+import logo from '../assets/logo.png';</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>タイポ防止：</strong> 手入力によるパスのタイポを完全に防止</li>
+                            <li><strong>ファイル移動：</strong> ファイルを移動した後も、正しいパスを提案</li>
+                            <li><strong>画像パス：</strong> 画像ファイルのパスも補完（src属性など）</li>
+                            <li><strong>エイリアス対応：</strong> @/や~/などのパスエイリアスにも対応</li>
+                        </ul>
+                        
+                        <h5>🔧 設定例</h5>
+                        <pre><code>// settings.json
+{
+  "path-intellisense.mappings": {
+    "@": "${workspaceFolder}/src",
+    "~": "${workspaceFolder}"
+  }
+}</code></pre>
+                    </div>
                 </div>
             </div>
 
@@ -1778,6 +1915,49 @@ function UserCard({ user }) {
                     <p class="ext-meta">📥 20M+ | 💰 無料</p>
                     <p><strong>概要：</strong> JavaScript/TypeScriptの静的解析ツール。コーディング規約違反やバグを自動検出。</p>
                     <p><strong>必須設定：</strong> 保存時に自動修正を有効化（editor.codeActionsOnSave）</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「ESLint」を検索してインストール</li>
+                            <li><strong>プロジェクト設定：</strong> <code>npm install --save-dev eslint</code></li>
+                            <li><strong>初期化：</strong> <code>npx eslint --init</code> で設定ファイル作成</li>
+                            <li><strong>自動修正設定：</strong> settings.jsonに保存時の自動修正を追加</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <pre><code>// 検出される問題の例
+const x = 1;  // ❌ 未使用変数
+console.log(y);  // ❌ 未定義変数
+if (x = 1) {}  // ❌ 代入演算子（==の誤り）
+var name = "test";  // ❌ varの使用（letを推奨）
+
+// ESLintが自動修正
+const name = "test";  // ✅ constに修正
+if (x === 1) {}  // ✅ 厳密等価演算子に修正</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>保存時自動修正：</strong> ファイル保存時に自動でルール違反を修正</li>
+                            <li><strong>チーム共有：</strong> .eslintrc.jsをGitで共有し、チーム全体で統一</li>
+                            <li><strong>カスタムルール：</strong> プロジェクトに合わせてルールをカスタマイズ</li>
+                            <li><strong>Prettier連携：</strong> eslint-config-prettierでPrettierと併用</li>
+                        </ul>
+                        
+                        <h5>🔧 推奨設定</h5>
+                        <pre><code>// settings.json
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ]
+}</code></pre>
+                    </div>
                 </div>
 
                 <div class="ext-card">
@@ -1785,6 +1965,53 @@ function UserCard({ user }) {
                     <p class="ext-meta">📥 15M+ | 💰 無料</p>
                     <p><strong>概要：</strong> コードフォーマッター。保存時に自動でコードを整形し、チーム全体のスタイルを統一。</p>
                     <p><strong>メリット：</strong> コードレビューでスタイルの議論が不要、新メンバーのオンボーディングが簡単</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「Prettier」を検索してインストール</li>
+                            <li><strong>プロジェクト設定：</strong> <code>npm install --save-dev prettier</code></li>
+                            <li><strong>デフォルト設定：</strong> settings.jsonでPrettierをデフォルトフォーマッターに設定</li>
+                            <li><strong>保存時フォーマット：</strong> 保存時に自動整形を有効化</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <pre><code>// フォーマット前
+const user={name:"John",age:30,email:"john@example.com"};
+
+// フォーマット後（保存時に自動整形）
+const user = {
+  name: "John",
+  age: 30,
+  email: "john@example.com"
+};</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>チーム統一：</strong> .prettierrc.jsonで全員が同じスタイルを使用</li>
+                            <li><strong>保存時整形：</strong> ファイル保存時に自動でフォーマット</li>
+                            <li><strong>ESLint連携：</strong> ESLintとPrettierを併用してコード品質とスタイルを両立</li>
+                            <li><strong>Git Hook：</strong> コミット前に自動フォーマット（husky + lint-staged）</li>
+                        </ul>
+                        
+                        <h5>🔧 推奨設定</h5>
+                        <pre><code>// settings.json
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
+
+// .prettierrc.json
+{
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5"
+}</code></pre>
+                    </div>
                 </div>
 
                 <div class="ext-card">
@@ -1792,6 +2019,41 @@ function UserCard({ user }) {
                     <p class="ext-meta">📥 2M+ | 💰 無料</p>
                     <p><strong>概要：</strong> エラーと警告をコード行の右側に直接表示。エラーの見落としを防止。</p>
                     <p><strong>効果：</strong> エラーの発見速度が約40%向上。特に大規模ファイルで効果的。</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「Error Lens」を検索してインストール</li>
+                            <li><strong>自動有効化：</strong> インストール後、自動的にエラーが行末に表示される</li>
+                            <li><strong>カスタマイズ：</strong> 色や表示位置を設定で変更可能</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <p><strong>通常のVS Code：</strong></p>
+                        <pre><code>const result = data.map(item => item.value);
+// ↑ エラーは下部の「問題」パネルに表示（見落としやすい）</code></pre>
+                        
+                        <p><strong>Error Lens使用時：</strong></p>
+                        <pre><code>const result = data.map(item => item.value);
+// ↑ 🔴 'data' is not defined  ← 行末に直接表示！</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>即座に気づく：</strong> エラーを書いた瞬間に行末に表示されるため、すぐに修正可能</li>
+                            <li><strong>大規模ファイル：</strong> 1000行以上のファイルでも、エラー箇所を見逃さない</li>
+                            <li><strong>警告も表示：</strong> エラーだけでなく、警告やヒントも表示</li>
+                            <li><strong>色分け：</strong> エラー（赤）、警告（黄）、情報（青）で色分け表示</li>
+                        </ul>
+                        
+                        <h5>🎨 カスタマイズ</h5>
+                        <pre><code>// settings.json
+{
+  "errorLens.enabled": true,
+  "errorLens.fontSize": "12px",
+  "errorLens.fontWeight": "bold",
+  "errorLens.delay": 500  // 0.5秒後に表示
+}</code></pre>
+                    </div>
                 </div>
 
                 <div class="ext-card">
@@ -1799,6 +2061,42 @@ function UserCard({ user }) {
                     <p class="ext-meta">📥 1M+ | 💰 無料（Enterprise版は有料）</p>
                     <p><strong>概要：</strong> セキュリティ脆弱性とコード品質の問題を検出。エンタープライズ開発に必須。</p>
                     <p><strong>検出例：</strong> SQLインジェクション、XSS、ハードコードされたパスワード、Null参照</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「SonarLint」を検索してインストール</li>
+                            <li><strong>自動解析：</strong> ファイルを開くと自動的にコード解析が開始</li>
+                            <li><strong>問題確認：</strong> 問題パネルで検出された問題を確認</li>
+                            <li><strong>修正提案：</strong> 各問題に対する修正方法を確認</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <pre><code>// ❌ セキュリティ問題を検出
+const password = "admin123";  // ハードコードされたパスワード
+const query = "SELECT * FROM users WHERE id=" + userId;  // SQLインジェクション
+document.innerHTML = userInput;  // XSS脆弱性
+
+// ✅ SonarLintの修正提案
+const password = process.env.DB_PASSWORD;  // 環境変数を使用
+const query = "SELECT * FROM users WHERE id=?";  // プリペアドステートメント
+document.textContent = userInput;  // XSS対策</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>セキュリティ重視：</strong> OWASP Top 10の脆弱性を自動検出</li>
+                            <li><strong>コード品質：</strong> バグの原因となるコードパターンを検出</li>
+                            <li><strong>ベストプラクティス：</strong> 言語ごとのベストプラクティスを提案</li>
+                            <li><strong>SonarQube連携：</strong> Enterprise版でSonarQubeサーバーと連携可能</li>
+                        </ul>
+                        
+                        <h5>🔍 検出される問題の例</h5>
+                        <ul>
+                            <li><strong>セキュリティ：</strong> SQLインジェクション、XSS、CSRF、ハードコードされた認証情報</li>
+                            <li><strong>バグ：</strong> Null参照、無限ループ、リソースリーク</li>
+                            <li><strong>コード臭：</strong> 重複コード、複雑すぎる関数、マジックナンバー</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -1810,6 +2108,51 @@ function UserCard({ user }) {
                     <p class="ext-meta">📥 25M+ | 💰 無料</p>
                     <p><strong>概要：</strong> ローカル開発サーバーを起動し、ファイル保存時に自動リロード。Web開発の必須ツール。</p>
                     <p><strong>使い方：</strong> HTMLファイルを右クリック → "Open with Live Server" → 自動リロード開始</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「Live Server」を検索してインストール</li>
+                            <li><strong>サーバー起動：</strong> HTMLファイルを右クリック → "Open with Live Server"</li>
+                            <li><strong>自動リロード：</strong> ファイルを保存すると、ブラウザが自動的にリロード</li>
+                            <li><strong>停止：</strong> ステータスバーの「Port: 5500」をクリックして停止</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <p><strong>シナリオ：</strong> HTML/CSS/JSの開発</p>
+                        <pre><code>// index.html を編集
+<h1>Hello World</h1>
+// ↓ 保存すると...
+// ブラウザが自動リロードされて変更が即座に反映！
+
+// styles.css を編集
+h1 { color: blue; }
+// ↓ 保存すると...
+// ブラウザが自動リロードされて色が変わる！</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>デュアルモニター：</strong> 片方でコード編集、もう片方でブラウザ表示</li>
+                            <li><strong>カスタムポート：</strong> 設定でポート番号を変更可能（デフォルト: 5500）</li>
+                            <li><strong>HTTPS対応：</strong> 設定でHTTPSサーバーとして起動可能</li>
+                            <li><strong>プロキシ設定：</strong> APIサーバーへのプロキシ設定も可能</li>
+                        </ul>
+                        
+                        <h5>🔧 便利な設定</h5>
+                        <pre><code>// settings.json
+{
+  "liveServer.settings.port": 5500,
+  "liveServer.settings.root": "/",
+  "liveServer.settings.CustomBrowser": "chrome",
+  "liveServer.settings.donotShowInfoMsg": true
+}</code></pre>
+                        
+                        <h5>⚠️ 注意点</h5>
+                        <ul>
+                            <li>React/Vue/Angularなどのフレームワークは、それぞれの開発サーバー（npm run dev）を使用</li>
+                            <li>Live Serverは静的HTML/CSS/JSの開発に最適</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="ext-card">
@@ -1817,6 +2160,47 @@ function UserCard({ user }) {
                     <p class="ext-meta">📥 10M+ | 💰 無料</p>
                     <p><strong>概要：</strong> HTMLタグの開始タグを変更すると、終了タグも自動で変更。地味だが超便利。</p>
                     <p><strong>効果：</strong> タグ変更時のミスが激減。特にReact/Vue開発で威力を発揮。</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「Auto Rename Tag」を検索してインストール</li>
+                            <li><strong>自動有効化：</strong> インストール後、自動的に有効化される</li>
+                            <li><strong>タグ変更：</strong> 開始タグを変更すると、終了タグも自動で変更される</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <pre><code>// 開始タグを変更
+<div>Hello</div>
+// ↓ <div> を <span> に変更すると...
+<span>Hello</span>
+// ↑ 終了タグも自動で </span> に変更される！
+
+// React/JSXでも動作
+<Button>Click</Button>
+// ↓ <Button> を <Link> に変更すると...
+<Link>Click</Link>
+// ↑ 終了タグも自動で </Link> に変更される！</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>タイポ防止：</strong> 終了タグの変更忘れによるバグを完全に防止</li>
+                            <li><strong>リファクタリング：</strong> タグの種類を変更する際に、終了タグを手動で変更する手間が不要</li>
+                            <li><strong>React/Vue対応：</strong> JSX/TSXファイルでも動作</li>
+                            <li><strong>ネストされたタグ：</strong> 複雑にネストされたタグでも正確に動作</li>
+                        </ul>
+                        
+                        <h5>🎯 活用シーン</h5>
+                        <ul>
+                            <li><code><div></code> を <code><section></code> に変更</li>
+                            <li><code><span></code> を <code><strong></code> に変更</li>
+                            <li><code><Button></code> を <code><Link></code> に変更（React）</li>
+                            <li><code><v-btn></code> を <code><v-card></code> に変更（Vue）</li>
+                        </ul>
+                        
+                        <h5>💡 Pro Tip</h5>
+                        <p>この拡張機能は地味だが、一度使うと手放せなくなる。特にHTML/JSXを大量に書く開発者には必須。</p>
+                    </div>
                 </div>
             </div>
 
@@ -1828,6 +2212,54 @@ function UserCard({ user }) {
                     <p class="ext-meta">📥 10M+ | 💰 無料（Microsoft公式）</p>
                     <p><strong>概要：</strong> Dockerコンテナの管理をVS Code内で完結。Dockerfile、docker-compose.ymlの編集支援。</p>
                     <p><strong>主な機能：</strong> コンテナの起動・停止、イメージ管理、ログ表示、シェル接続</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「Docker」を検索してインストール</li>
+                            <li><strong>Docker起動：</strong> Docker Desktopを起動（事前にインストール必要）</li>
+                            <li><strong>サイドバー：</strong> サイドバーのDockerアイコンをクリック</li>
+                            <li><strong>コンテナ管理：</strong> コンテナ、イメージ、ボリューム、ネットワークを管理</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <p><strong>シナリオ：</strong> Node.jsアプリをDockerで開発</p>
+                        <pre><code>// Dockerfile を作成（拡張機能が補完してくれる）
+FROM node:18
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]
+
+// docker-compose.yml も補完
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>右クリック操作：</strong> コンテナを右クリックして、起動・停止・削除・ログ表示</li>
+                            <li><strong>シェル接続：</strong> コンテナ内にシェルで接続して、デバッグ</li>
+                            <li><strong>ログ表示：</strong> コンテナのログをVS Code内で表示</li>
+                            <li><strong>イメージ管理：</strong> 不要なイメージを一括削除</li>
+                        </ul>
+                        
+                        <h5>🔧 便利な機能</h5>
+                        <ul>
+                            <li><strong>Dockerfile補完：</strong> Dockerfileの構文を自動補完</li>
+                            <li><strong>docker-compose補完：</strong> docker-compose.ymlの構文を自動補完</li>
+                            <li><strong>イメージビルド：</strong> Dockerfileを右クリック → "Build Image"</li>
+                            <li><strong>コンテナ実行：</strong> イメージを右クリック → "Run"</li>
+                        </ul>
+                        
+                        <h5>💡 Pro Tip</h5>
+                        <p>Docker Desktopを使わずに、VS Code内でDockerの全操作が完結。特にマイクロサービス開発で複数コンテナを管理する際に威力を発揮。</p>
+                    </div>
                 </div>
 
                 <div class="ext-card">
@@ -1836,6 +2268,53 @@ function UserCard({ user }) {
                     <p><strong>概要：</strong> Gitの機能を大幅に強化。コードの変更履歴を視覚的に表示。</p>
                     <p><strong>主な機能：</strong> 行ごとのBlame表示、ファイル履歴、コミット検索、ブランチ比較</p>
                     <p><strong>Pro Tip：</strong> 「誰がいつこのコードを書いたか」が一目でわかる</p>
+                    
+                    <div class="usage-example">
+                        <h5>📖 使い方</h5>
+                        <ol>
+                            <li><strong>インストール：</strong> VS Code拡張機能から「GitLens」を検索してインストール</li>
+                            <li><strong>自動有効化：</strong> インストール後、自動的に有効化される</li>
+                            <li><strong>Blame表示：</strong> コード行にカーソルを合わせると、誰がいつ変更したか表示</li>
+                            <li><strong>ファイル履歴：</strong> サイドバーでファイルの変更履歴を確認</li>
+                        </ol>
+                        
+                        <h5>💡 実践例</h5>
+                        <p><strong>シナリオ：</strong> バグの原因を調査</p>
+                        <pre><code>// バグがあるコード行にカーソルを合わせると...
+const result = data.map(item => item.value);
+// ↑ 「John Doe, 2 months ago: Fix data processing」
+// → 2ヶ月前にJohnさんが変更したことがわかる
+
+// その行をクリックすると...
+// → コミット全体の差分が表示される
+// → 関連する変更も確認できる</code></pre>
+                        
+                        <h5>⚡ 効果的な使い方</h5>
+                        <ul>
+                            <li><strong>Blame表示：</strong> 各行の右側に、最終変更者と日時が表示される</li>
+                            <li><strong>ファイル履歴：</strong> ファイルの全変更履歴を時系列で表示</li>
+                            <li><strong>コミット検索：</strong> コミットメッセージや作者で検索</li>
+                            <li><strong>ブランチ比較：</strong> 2つのブランチの差分を視覚的に比較</li>
+                        </ul>
+                        
+                        <h5>🎯 活用シーン</h5>
+                        <ul>
+                            <li><strong>バグ調査：</strong> 「このバグはいつ混入したか？」を特定</li>
+                            <li><strong>コードレビュー：</strong> 「誰がこのコードを書いたか？」を確認</li>
+                            <li><strong>リファクタリング：</strong> 「このコードの変更履歴は？」を確認</li>
+                            <li><strong>チーム協業：</strong> 「誰に質問すればいいか？」を特定</li>
+                        </ul>
+                        
+                        <h5>💎 Pro版の機能（$10/月）</h5>
+                        <ul>
+                            <li><strong>Visual File History：</strong> ファイル履歴をグラフィカルに表示</li>
+                            <li><strong>Worktrees：</strong> 複数のブランチを同時に作業</li>
+                            <li><strong>Advanced Blame：</strong> より詳細なBlame情報</li>
+                        </ul>
+                        
+                        <h5>💡 Pro Tip</h5>
+                        <p>無料版でも十分強力。特に「誰がいつこのコードを書いたか」を瞬時に確認できる機能は、チーム開発で必須。</p>
+                    </div>
                 </div>
             </div>
 

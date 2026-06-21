@@ -3,13 +3,28 @@
 .glossary-header {
     background: linear-gradient(135deg, #0f62fe 0%, #0043ce 100%);
     color: white;
-    padding: 2rem 0;
+    padding: 2rem;
     text-align: center;
+}
+
+.glossary-header .header-content {
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .glossary-header h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .glossary-header {
+        padding: 1.5rem 1rem;
+    }
+    
+    .glossary-header h1 {
+        font-size: 1.75rem;
+    }
 }
 
 .glossary-nav {
